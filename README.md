@@ -4,8 +4,8 @@ herexamen Projecten 3, groep H4, voor EVA nv met als doel een meanstack beheerde
 
 # Structure
 
-Android/* -> source files van Android.
-Mean/* -> source files voor de MEAN stack beheerderskant.
+* Android/* -> source files van Android.
+* Mean/* -> source files voor de MEAN stack beheerderskant.
 
 # Groep H4
 
