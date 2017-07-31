@@ -58,7 +58,7 @@ public class RestoInfoFragment extends Fragment implements OnMapReadyCallback{
     @BindView(R.id.mapView)
     MapView mapView;
     GoogleMap googleMap;
-    LatLng p1;
+    LatLng latLng;
     //
     private Restaurant resto;
     @BindView(R.id.naamResto)
@@ -95,8 +95,11 @@ public class RestoInfoFragment extends Fragment implements OnMapReadyCallback{
     }
 
 
-    //google maps
-    //elke lifecycle methode van Fragment overschrijven is nodig voor mapview
+    /**
+     * Users of the mapview class must forward all the life cycle methods from the Activity or Fragment containing this view to the corresponding ones in this class.
+     * source : https://developers.google.com/android/reference/com/google/android/gms/maps/MapView
+     */
+
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -153,9 +156,12 @@ public class RestoInfoFragment extends Fragment implements OnMapReadyCallback{
         this.resto = resto;
 
         naam.setText(resto.getNaam());
-        Glide.with(getContext()).load(resto.getFoto()).centerCrop().into(foto);
+        Glide.with(getContext())
+                .load(resto.getFoto())
+                .centerCrop()
+                .into(foto);
         adressResto.setText(resto.getLocation());
-        btnTel.setText("Bel : " + formatTelefoonNr(resto.getTelefoonNr()));
+        btnTel.setText(getString(R.string.bel)+ " " + formatTelefoonNr(resto.getTelefoonNr()));
         omschrijving.setText(resto.getOmschrijving());
 
 
@@ -178,16 +184,16 @@ public class RestoInfoFragment extends Fragment implements OnMapReadyCallback{
     public void onMapReady(GoogleMap map){
         googleMap = map;
 
-            p1 = getLocationFromAddress(resto.getLocation());
+            latLng = getLocationFromAddress(resto.getLocation());
             googleMap.addMarker(new MarkerOptions()
-                    .position(p1)
+                    .position(latLng)
                     .title(resto.getNaam()));
 
             googleMap.getUiSettings().setZoomControlsEnabled(true);
             googleMap.getUiSettings().setMapToolbarEnabled(false);
             MapsInitializer.initialize(this.getActivity());
             LatLngBounds.Builder builder = new LatLngBounds.Builder();
-            builder.include(p1);
+            builder.include(latLng);
             LatLngBounds bounds = builder.build();
             int padding = 0;
             int width = getResources().getDisplayMetrics().widthPixels;
@@ -199,7 +205,11 @@ public class RestoInfoFragment extends Fragment implements OnMapReadyCallback{
 
     }
 
-    //geeft lengte en breedtegraden van een string -> een adress, naam van belangrijk gebouw, stad,...
+    /**
+     * Geeft de coördinaten van een string terug
+     * @param strAddress kan zijn: adres, naam belangrijk gebouw,stad, ...
+     * @return
+     */
     public LatLng getLocationFromAddress( String strAddress) {
 
         Geocoder coder = new Geocoder(getContext());

@@ -29,13 +29,13 @@ public class RestoAdapter extends RecyclerView.Adapter<RestoAdapter.RestoViewHol
         //@BindView(R.id.resto_naam)
         public TextView restoNaam;
        // @BindView(R.id.cardResto)
-        public CardView cv;
+        public CardView cardView;
         public ImageView imvResto;
         public TextView restoOmschrijving;
 
         public RestoViewHolder(View itemView){
             super(itemView);
-            cv = (CardView) itemView.findViewById(R.id.cardResto);
+            cardView = (CardView) itemView.findViewById(R.id.cardResto);
             restoNaam = (TextView) itemView.findViewById(R.id.resto_naam);
             imvResto = (ImageView) itemView.findViewById(R.id.imvResto);
             restoOmschrijving = (TextView) itemView.findViewById(R.id.txvOmschrijving);

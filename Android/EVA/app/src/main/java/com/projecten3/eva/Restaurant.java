@@ -4,10 +4,6 @@ import android.media.Image;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by Desktop Ben on 22/07/2017.
- */
-
 public class Restaurant implements Parcelable {
 
 
@@ -16,7 +12,6 @@ public class Restaurant implements Parcelable {
     private int foto;
     private String omschrijving;
     private String telefoonNr;
-    //aparte klasse met straat,huisnr en stad?
     private String location;
 
 
@@ -28,9 +23,6 @@ public class Restaurant implements Parcelable {
         this.location = location;
     }
 
-
-
-
     public String getTelefoonNr() {
         return telefoonNr;
     }
@@ -38,10 +30,6 @@ public class Restaurant implements Parcelable {
     public void setTelefoonNr(String telefoonNr) {
         this.telefoonNr = telefoonNr;
     }
-
-
-
-
 
     public String getOmschrijving() {
         return omschrijving;
@@ -51,9 +39,6 @@ public class Restaurant implements Parcelable {
         this.omschrijving = omschrijving;
     }
 
-
-
-
     public int getFoto() {
         return foto;
     }
@@ -62,30 +47,24 @@ public class Restaurant implements Parcelable {
         this.foto = foto;
     }
 
+    public String getNaam() { return naam; }
+
+    public void setNaam(String naam) { this.naam = naam; }
+
 
     public Restaurant(String naam, int foto, String omschrijving, String telefoonNr, String location){
-        setNaam(naam);
-        setFoto(foto);
-        setOmschrijving(omschrijving);
-        setTelefoonNr(telefoonNr);
-        setLocation(location);
-
-    }
-
-
-    public String getNaam() {
-        return naam;
-    }
-
-    public void setNaam(String naam) {
         this.naam = naam;
+        this.foto = foto;
+        this.omschrijving = omschrijving;
+        this.telefoonNr = telefoonNr;
+        this.location = location;
+
     }
 
-
-
-
-    //Parcelable gedeelte
-
+    /**
+     * Parcelable methods
+     * @param in
+     */
     public Restaurant(Parcel in){
        naam = in.readString();
        foto = in.readInt();
