@@ -4,4 +4,9 @@
     <string name="fb_login_protocol_scheme">fb492346584450224</string>
 
     <string name="app_name">EVA</string>
+    <string name="login">LOGIN</string>
+    <string name="email">Email</string>
+    <string name="paswoord">Paswoord</string>
+    <string name="registreer">Nog geen account?</string>
+
 </resources>
