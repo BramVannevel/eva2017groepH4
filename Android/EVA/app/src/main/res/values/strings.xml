@@ -7,6 +7,8 @@
     <string name="login">LOGIN</string>
     <string name="email">Email</string>
     <string name="paswoord">Paswoord</string>
-    <string name="registreer">Nog geen account?</string>
+    <string name="repeat_paswoord">Herhaal paswoord</string>
+    <string name="sign_up">Registreer</string>
+    <string name="registreer"><u>Nog geen account?</u></string>
 
 </resources>
