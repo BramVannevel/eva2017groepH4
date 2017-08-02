@@ -1,0 +1,132 @@
+.menuItem {
+    &__create-input {
+        margin: 0 auto 5px;
+        width: 500px;
+    }
+    &__create-button {
+        display: block;
+        margin: 0 auto 20px;
+    }
+    &__create-dropdown {
+        width: 500px;
+        display: block;
+        margin: 0 auto 5px;
+    }
+    &__update-input {
+        margin: 0 auto;
+        width: 330px;
+    }
+    &__update-prijs {
+        width: 100px;
+    }
+    &__taskForm {
+        text-align: center;
+    }
+    &__voegToe-button {
+        display: block;
+        margin: 0 auto;
+        margin-top: 10px;
+        margin-bottom: 15px;
+        width: 250px;
+    }
+    &__checkboxes {
+        padding-top: 15px;
+        margin: 0 auto;
+        width: 700px;
+        text-align: justify;
+    }
+    &__checkbox {
+        margin-right: 10px;
+    }
+    &__dropdown {
+        text-align: center;
+        display: inline;
+        padding-left: 25px;
+    }
+    &__gerechtBeheerInput {
+        text-align: center;
+        display: inline-block;
+    }
+    &__gerechtBeheerpriceInputfield {
+        width: 150px;
+        display: inline-block;
+        margin-left: 25px;
+    }
+    &__filterPrijs{
+      width: 150px;
+    }
+    &__gerechtBeheerNameInputfield {
+        width: 300px;
+        display: inline-block;
+    }
+    &__allergeenCheckbox {
+        display: inline-block;
+        margin-bottom: 1px;
+        padding: 1px;
+    }
+    &__dropdownAllergenen {
+        padding-bottom: 800px;
+    }
+    &__dropdownMenu {
+        text-align: center;
+    }
+    &__categorieCheckbox {
+        text-align: center;
+    }
+    &__dropdownMargin {
+        //margin-right: 25px;
+    }
+    &__dropdownFilter {
+        width: 300px;
+    }
+    &__filterDatum {
+        background-color: #e8e8e8;
+        border-radius: 2px solid;
+    }
+    &__filterCategorie {
+        background-color: #e8e8e8;
+        border-radius: 2px solid;
+    }
+    &____filterAndEraseFilter {
+        margin-bottom: 3px;
+        margin-left: 10px;
+    }
+    &__arrow {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+
+th,
+td {
+    font-size: 20px;
+    text-align: center;
+}
+
+.actionIcons {
+    margin-left: 10px;
+}
+
+.actionIcons:hover {
+    opacity: 0.5;
+}
+
+.allergeen:hover {
+    opacity: 0.6;
+}
+
+.gerechtCheckbox {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    text-align: center;
+    margin-left: 15px;
+}
+
+.bestelbaarAfbeelding {
+    padding-right: 10px;
+}
+
+.bestelbaarAfbeelding:hover {
+    opacity: 0.6;
+}

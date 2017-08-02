@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>EVA Beheer</title>
+</head>
+
+<body ng-controller="AppCtrl">
+
+<!--Vertical navigation-->
+<nav class="main-menu" ng-controller="NavController" ng-show="AuthenticationService.isAuthenticated()">
+            <ul>
+                <li>
+                    <a href="http://justinfarrow.com">
+                        <i class="fa fa-home fa-2x"></i>
+                        <span class="nav-text">
+                            Dashboard
+                        </span>
+                    </a>
+
+                </li>
+                <li class="has-subnav">
+                    <a href="#">
+                        <i class="fa fa-laptop fa-2x"></i>
+                        <span class="nav-text">
+                            UI Components
+                        </span>
+                    </a>
+
+                </li>
+                <li class="has-subnav">
+                    <a href="#">
+                       <i class="fa fa-list fa-2x"></i>
+                        <span class="nav-text">
+                            Forms
+                        </span>
+                    </a>
+
+                </li>
+                <li class="has-subnav">
+                    <a href="#">
+                       <i class="fa fa-folder-open fa-2x"></i>
+                        <span class="nav-text">
+                            Pages
+                        </span>
+                    </a>
+
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-bar-chart-o fa-2x"></i>
+                        <span class="nav-text">
+                            Graphs and Statistics
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-font fa-2x"></i>
+                        <span class="nav-text">
+                            Typography and Icons
+                        </span>
+                    </a>
+                </li>
+                <li>
+                   <a href="#">
+                       <i class="fa fa-table fa-2x"></i>
+                        <span class="nav-text">
+                            Tables
+                        </span>
+                    </a>
+                </li>
+                <li>
+                   <a href="#">
+                        <i class="fa fa-map-marker fa-2x"></i>
+                        <span class="nav-text">
+                            Maps
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                       <i class="fa fa-info fa-2x"></i>
+                        <span class="nav-text">
+                            Documentation
+                        </span>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="logout">
+                <li>
+                   <a href="#">
+                         <i class="fa fa-power-off fa-2x"></i>
+                        <span class="nav-text">
+                            Logout
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+<div class="area">
+
+  <!--Horizontal navigation-->
+  <nav class="navbar navbar-default" ng-controller="NavController">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="/menu">EVA Beheer</a>
+    </div>
+    <!--<div class="container">-->
+      <div class="container-fluid ">
+          <ul class="nav navbar-nav">
+            <!--  <li ng-class="{ active: isActive('/menu')}"><a href="/menu">Menu Lijst</a></li>
+              <li ng-class="{ active: isActive('/bestellingen')}"><a href="/bestellingen">Bestellingen</a></li> -->
+          </ul>
+          <ul class="nav navbar-nav navbar-right" id="nav-items-right">
+              <li class="dropdown">
+                    <!--  <a class="dropdown-toggle" data-toggle="dropdown" href="#">Extra Beheer<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                      <li><a href="/gerechten">Beheer Gerechten</a></li>
+                      <li><a href="/allergenen">Beheer Allergenen</a></li>
+                      <li><a href="/categorieen">Beheer Categorieën</a></li>
+                  </ul> -->
+              </li>
+            <li ng-show="AuthenticationService.isAuthenticated()" ng-click="logout()"><a href="">Log uit</a></li>
+            <li ng-show="!AuthenticationService.isAuthenticated()" ng-click="login()"><a href="/login">Log in</a></li>
+          </ul>
+      </div>
+    <!--</div>-->
+  </nav>
+
+    <div ui-view></div>
+
+</div>
+
+    <script src="bundle.js"></script>
+</body>
+
+</html>

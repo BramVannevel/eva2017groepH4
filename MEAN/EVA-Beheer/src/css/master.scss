@@ -1,0 +1,10 @@
+@import 'menu.scss';
+@import 'login.scss';
+@import 'navbar.scss';
+@import '~angular-material/modules/scss/angular-material.scss';
+@import url("dashboardNavigation.css");
+
+.nav-link {
+    float: right;
+    margin-top: 20px;
+}
