@@ -1,19 +1,12 @@
-package com.projecten3.eva;
+package com.projecten3.eva.Views.Fragments;
 
 
-import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,16 +21,13 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.projecten3.eva.R;
+import com.projecten3.eva.Model.Restaurant;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 import butterknife.BindView;

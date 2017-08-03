@@ -1,19 +1,21 @@
-package com.projecten3.eva;
+package com.projecten3.eva.Views.Fragments;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+
+import com.projecten3.eva.Interfaces.OnFragmentSwitch;
+import com.projecten3.eva.R;
+import com.projecten3.eva.Model.Restaurant;
+import com.projecten3.eva.Adapters.RestoAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +27,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RestoListFragment extends ListFragment {
+public class RestoListFragment extends Fragment {
 
     public static final String TAG = "RestoListFragment";
 
@@ -47,8 +49,6 @@ public class RestoListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-
-
         mainOnClickListener = new MainOnClickListener(getContext());
 
     }
@@ -61,6 +61,15 @@ public class RestoListFragment extends ListFragment {
         ButterKnife.bind(this,v);
         restos = new ArrayList<>();
 
+        mockData();
+        adapter = new RestoAdapter(restos,getContext());
+        rv.setAdapter(adapter);
+        llm = new LinearLayoutManager(getActivity());
+        rv.setLayoutManager(llm);
+        return v;
+    }
+
+    private void mockData(){
         //voorlopige mock data tot we API hebben
         Restaurant r1 = new Restaurant("de gouden fazant",R.drawable.testafbvegan,"","0499280469","aambeeldstraat 10 amsterdam");
         Restaurant r2 = new Restaurant("de zilveren wortel",R.drawable.testafbvegan2,"","053803317","hoofdstraat 15 heijen");
@@ -69,20 +78,6 @@ public class RestoListFragment extends ListFragment {
         restos.add(r1);
         restos.add(r2);
         Log.e(TAG,restos.get(0).getNaam());
-        adapter = new RestoAdapter(restos,getContext());
-        rv.setAdapter(adapter);
-
-
-
-        return v;
-    }
-
-
-    @Override
-    public void onViewCreated(View v, Bundle savedInstanceState){
-
-        llm = new LinearLayoutManager(getActivity());
-        rv.setLayoutManager(llm);
     }
 
     private class MainOnClickListener implements View.OnClickListener {

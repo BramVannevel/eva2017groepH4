@@ -1,6 +1,5 @@
-package com.projecten3.eva;
+package com.projecten3.eva.Model;
 
-import android.media.Image;
 import android.os.Parcel;
 import android.os.Parcelable;
 

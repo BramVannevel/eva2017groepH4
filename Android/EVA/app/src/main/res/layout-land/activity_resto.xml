@@ -8,14 +8,14 @@
     <fragment
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:name="com.projecten3.eva.RestoListFragment"
+        android:name="com.projecten3.eva.Views.Fragments.RestoListFragment"
         android:id="@+id/listFrag"
         android:layout_weight="1"/>
 
     <fragment
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:name="com.projecten3.eva.RestoInfoFragment"
+        android:name="com.projecten3.eva.Views.Fragments.RestoInfoFragment"
         android:id="@+id/infoFrag"
         android:layout_weight="1"/>
 </LinearLayout>

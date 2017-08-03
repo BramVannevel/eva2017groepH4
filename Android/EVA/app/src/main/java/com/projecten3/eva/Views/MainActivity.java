@@ -1,4 +1,4 @@
-package com.projecten3.eva;
+package com.projecten3.eva.Views;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +10,7 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.projecten3.eva.R;
 
 public class MainActivity extends AppCompatActivity {
     private final String TAG = getClass().getSimpleName();
