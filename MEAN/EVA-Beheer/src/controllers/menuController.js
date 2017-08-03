@@ -17,6 +17,9 @@ const menuController = angular.module('app.menuController', [])
     //BIJ OPSTARTEN PAGINA, HAAL ALLE GERECHTEN OP HET MENU OP
     menuFactory.getMenuItems($scope);
 
+    //pagination
+    $scope.currentPage = 1;
+    $scope.pageSize = 5;
 
     //////////////////// CLICK HANDLERS ////////////////////
 
