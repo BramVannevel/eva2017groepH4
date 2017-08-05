@@ -1,7 +1,12 @@
-.menuItem {
+.content {
     &__create-input {
-        margin: 0 auto 5px;
+        margin: 0 auto 2px;
         width: 500px;
+    }
+    &__filter-input {
+      display: inline;
+      margin: 0 auto 2px;
+      width: 200px;
     }
     &__create-button {
         display: block;
@@ -19,15 +24,16 @@
     &__update-prijs {
         width: 100px;
     }
-    &__taskForm {
+    &__centerText {
         text-align: center;
+        margin-bottom: 30px;
     }
     &__voegToe-button {
-        display: block;
+        display: inline-block;
         margin: 0 auto;
-        margin-top: 10px;
-        margin-bottom: 15px;
-        width: 250px;
+        margin-top: 15px;
+        margin-bottom: 5px;
+        width: 150px;
     }
     &__checkboxes {
         padding-top: 15px;

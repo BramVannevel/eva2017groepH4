@@ -1,7 +1,7 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
-import menuFactory from 'factoriesAndServices/menu-factory';
-import menuController from 'controllers/menuController';
+import restaurantsFactory from 'factoriesAndServices/restaurants-factory';
+import restaurantsController from 'controllers/restaurantsController';
 import authServiceEnFactory from 'factoriesAndServices/authService';
 import beheerFactory from 'factoriesAndServices/beheer-factory';
 import authControllers from 'controllers/authControllers';
@@ -9,15 +9,15 @@ import beheerControllers from 'controllers/beheerControllers';
 import bestellingController from 'controllers/bestellingController';
 import bestellingFactory from 'factoriesAndServices/bestelling-factory';
 import paginationFilter from 'filters/paginationFilter';
-import menuModalController from 'controllers/MenuModalController';
+import restaurantModalController from 'controllers/RestaurantModalController';
 import appConstants from 'constants';
 import uiBootstrap from 'angular-ui-bootstrap';
 import ngAnimate from 'angular-animate';
 import material from 'angular-material';
 
 const app = angular.module('app', [ngAnimate, material, uiBootstrap, authServiceEnFactory.name, authControllers.name,
-    beheerFactory.name, beheerControllers.name, appConstants.name, uiRouter, menuController.name, menuFactory.name, bestellingController.name, bestellingFactory.name,
-    paginationFilter.name, menuModalController.name
+    beheerFactory.name, beheerControllers.name, appConstants.name, uiRouter, restaurantsController.name, restaurantsFactory.name, bestellingController.name, bestellingFactory.name,
+    paginationFilter.name, restaurantModalController.name
 ]);
 
 app.config(($stateProvider, $urlRouterProvider, $locationProvider, $mdDateLocaleProvider) => {
@@ -42,7 +42,7 @@ app.config(($stateProvider, $urlRouterProvider, $locationProvider, $mdDateLocale
     }
   };
 
-    $urlRouterProvider.otherwise('/menu');
+    $urlRouterProvider.otherwise('/restaurants');
 
     $locationProvider.html5Mode({
         enabled: true,
@@ -55,10 +55,10 @@ app.config(($stateProvider, $urlRouterProvider, $locationProvider, $mdDateLocale
             template: require('pages/login.html'),
             controller: 'LoginCtrl',
         })
-        .state('menu', {
-            url: '/menu',
-            template: require('pages/menu.html'),
-            controller: 'menuController'
+        .state('restaurants', {
+            url: '/restaurants',
+            template: require('pages/restaurants.html'),
+            controller: 'restaurantsController'
         })
         .state('allergenen', {
             url: '/allergenen',

@@ -1,0 +1,36 @@
+<div class="container">
+    <h4 class="content__centerText">Voeg een restaurant toe</h4>
+    <button class="btn btn-primary" ng-click="openModal()">Voeg Toe</button>
+    <table class="table table-striped">
+    <!--Rij met de filters-->
+        <tr class="content__filterDatum">
+        <td>
+            <input class="form-control content__filter-input" type="text" placeholder="Filter op naam" ng-model="filterNaam" class="content__dropdownFilter">
+            <img src="{{clearFilter}}" ng-click="eraseFilter()" class="actionIcons" />
+        </td>
+        <td></td>
+        <td></td>
+        </tr>
+        <tr>
+        <th>Naam</th>
+        <th>Telefoon</th>
+        <th>Acties</th>
+        </tr>
+        <!--Gesorteerd op datum-->
+        <!--Filter op datum wanneer datum opgegeven werd met de datepicker-->
+        <!--Pagination max items-->
+        <tr ng-repeat="restaurant in restaurants | orderBy:'naam' | filter:filterRestaurants | paginationFilter: (currentPage-1)*pageSize | limitTo: pageSize">
+            <td>
+                {{restaurant.naam}}
+            </td>
+            <td>
+                <span>{{restaurant.telefoon}}</span>
+            </td>
+            <td>
+                <button class="btn btn-default" ng-click="deleteRestaurant(restaurant)"><img ng-src="{{imgDelete}}"/></button>
+            </td>
+        </tr>
+    </table>
+    <!--Pagination-->
+    <ul uib-pagination total-items="restaurants.length" ng-model="currentPage" items-per-page="pageSize"></ul>
+</div>

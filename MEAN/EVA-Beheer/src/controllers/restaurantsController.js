@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import angular from 'angular';
 
-const menuController = angular.module('app.menuController', [])
+const restaurantsController = angular.module('app.restaurantsController', [])
 
-.controller('menuController', function($scope, menuFactory, $uibModal) {
+.controller('restaurantsController', function($scope, restaurantsFactory, $uibModal) {
     //For modal
     var $ctrl = this;
     $ctrl.animationsEnabled = true;
@@ -17,26 +17,28 @@ const menuController = angular.module('app.menuController', [])
         createHasInput: false
     };
 
-    //BIJ OPSTARTEN PAGINA, HAAL ALLE GERECHTEN OP HET MENU OP
-    menuFactory.getMenuItems($scope);
+    //BIJ OPSTARTEN PAGINA, HAAL ALLE RESTAURANTS
+    restaurantsFactory.getRestaurants($scope);
 
     //modal configuration
+    //Door controllerAs '$ctrl' kunnen we in de html van de modal aan de scope van deze controller met $ctrl.
     $scope.openModal = function() {
       var modalInstance = $uibModal.open({
         ariaLabelledBy: 'modal-title',
         ariaDescribedBy: 'modal-body',
-        controller: 'menuModalController',
+        controller: 'restaurantModalController',
         controllerAs: '$ctrl',
-        template: require('../modals/menuModal.html'),
+        //scope: $scope,
+        template: require('../modals/restaurantModal.html'),
         size: 'lg',
         resolve: {
             //pass data to the modal's controller
         }
       });
 
-      //De geretourneerde gegevens van de modal
-      modalInstance.result.then(function() {
-
+      //De geretourneerde gegevens van modal dmv zijn scope doorgeven
+      modalInstance.result.then(function(modalScope) {
+          createRestaurant(modalScope, $scope);
       });
     };
 
@@ -65,31 +67,26 @@ const menuController = angular.module('app.menuController', [])
         }
     };
 
-    //Filter tabel met menu
-    $scope.filterMenu = function(menuItem) {
-        if ($scope.filterDatum) {
-            //Eerst nog eens een Date type van maken, ze zitten zo wel al in databank, maar denk dat ze ergens naar String geparsed worden door angular bij het ophalen.
-            //Daarom kregen we eerst een fout op de getTime functie. Ze werd gecalled op een String en niet op een Date object.
-            let filterdatum = new Date($scope.filterDatum);
-            let menuItemDatum = new Date(menuItem.datum);
-            //kijken of de datum gelijk is aan de gewenste filter datum, zoja return dit item en check het volgende (ng-repeat called deze functie voor alle items)
-            if (menuItemDatum.getTime() == filterdatum.getTime())
-                return menuItem;
+    //Filter tabel met restaurants
+    $scope.filterRestaurants = function(restaurant) {
+        if ($scope.filterNaam) {
+            if (restaurant.naam.includes($scope.filterNaam))
+                return restaurant;
         } else {
-            //indien geen filterdatum opgegeven, return alle items
-            return menuItem;
+            //indien geen restaurantNaam opgegeven, return alle restaurants
+            return restaurant;
         }
     };
     //MAAK FILTER LEEG
     $scope.eraseFilter = () => {
-        $scope.filterDatum = null;
+        $scope.filterNaam = '';
     };
 
     //Table actions
-    const { createMenuItem, deleteMenuItem } = menuFactory;
-    $scope.deleteMenuItem = _.partial(deleteMenuItem, $scope);
-    $scope.createMenuItem = _.partial(createMenuItem, $scope, params);
+    const { createRestaurant, deleteRestaurant } = restaurantsFactory;
+    $scope.deleteRestaurant = _.partial(deleteRestaurant, $scope);
+    $scope.createRestaurant = _.partial(createRestaurant, $scope, params);
 
 });
 
-export default menuController;
+export default restaurantsController;

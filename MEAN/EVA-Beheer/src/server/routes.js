@@ -1,4 +1,4 @@
-var menuRoutes = require('./menu/routes');
+var restaurantRoutes = require('./restaurants/routes');
 var userRoutes = require('./user/routes');
 var allergenenRoutes = require('./allergenen/routes');
 var categorieenRoutes = require('./categorieen/routes');
@@ -16,7 +16,7 @@ module.exports = function routes(app) {
 
 //AANGEVEN WAAR DE ROUTES TE VINDEN ZIJN VOOR ELKE STATE
     app.use('/user', userRoutes);
-    app.use('/menu', menuRoutes);
+    app.use('/restaurants', restaurantRoutes);
     app.use('/allergenen', allergenenRoutes);
     app.use('/allergenen', allergenenRoutes);
     app.use('/categorieen', categorieenRoutes);

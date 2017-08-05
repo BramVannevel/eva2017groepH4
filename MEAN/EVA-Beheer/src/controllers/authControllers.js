@@ -14,7 +14,7 @@ const authControllers = angular.module('app.authControllers', [])
             $scope.responseUser = responseUser;
             console.log('The user trying to access the webapp is: ' + responseUser);
               if(responseUser.role === 'admin') {
-                  $state.go('menu');
+                  $state.go('restaurants');
               } else {
                 console.log({
                   title: 'You are not an admin'
