@@ -1,11 +1,15 @@
 $bgDefault      : #37474F;
-$bgHighlight    : #607D8B;
+$bgHighlight    : #37474F;
 $colDefault     : #ecf0f1;
 $colHighlight   : #ffffff;
 $dropDown       : false;
 .navbar-header {
   background-color: $bgHighlight;
+  color: $colDefault;
   width: 249px; /*Same width as the side navigation*/
+}
+.navbar-brand-EVA {
+  color: #009688;
 }
 .navbar-default {
   border-radius: 0;

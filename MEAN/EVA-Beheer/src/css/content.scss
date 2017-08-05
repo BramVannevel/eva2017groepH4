@@ -101,6 +101,19 @@
         margin-left: 10px;
         margin-right: 10px;
     }
+    &__generalButtonSettings {
+      background-color: #26A69A;
+      color: #ffffff;
+    }
+    &__generalButtonSettings:hover {
+      background-color: #009688;
+      color: #ffffff;
+    }
+    &__generalButtonSettings:focus {
+      background-color: #009688;
+      color: #ffffff;
+      border-color: #00897B;
+    }
 }
 
 th,

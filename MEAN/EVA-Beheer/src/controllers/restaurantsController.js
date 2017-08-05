@@ -69,7 +69,7 @@ const restaurantsController = angular.module('app.restaurantsController', [])
     //Filter tabel met restaurants
     $scope.filterRestaurants = function(restaurant) {
         if ($scope.filterNaam) {
-            if (restaurant.naam.includes($scope.filterNaam))
+            if (restaurant.naam.toLowerCase().includes($scope.filterNaam.toLowerCase()))
                 return restaurant;
         } else {
             //indien geen restaurantNaam opgegeven, return alle restaurants
