@@ -3,7 +3,10 @@ import angular from 'angular';
 
 const menuController = angular.module('app.menuController', [])
 
-.controller('menuController', function($scope, menuFactory) {
+.controller('menuController', function($scope, menuFactory, $uibModal) {
+    //For modal
+    var $ctrl = this;
+    $ctrl.animationsEnabled = true;
 
     //Images
     $scope.imgDelete = require('../img/delete.png');
@@ -16,6 +19,26 @@ const menuController = angular.module('app.menuController', [])
 
     //BIJ OPSTARTEN PAGINA, HAAL ALLE GERECHTEN OP HET MENU OP
     menuFactory.getMenuItems($scope);
+
+    //modal configuration
+    $scope.openModal = function() {
+      var modalInstance = $uibModal.open({
+        ariaLabelledBy: 'modal-title',
+        ariaDescribedBy: 'modal-body',
+        controller: 'menuModalController',
+        controllerAs: '$ctrl',
+        template: require('../modals/menuModal.html'),
+        size: 'lg',
+        resolve: {
+            //pass data to the modal's controller
+        }
+      });
+
+      //De geretourneerde gegevens van de modal
+      modalInstance.result.then(function() {
+
+      });
+    };
 
     //pagination
     $scope.currentPage = 1;
@@ -62,7 +85,7 @@ const menuController = angular.module('app.menuController', [])
         $scope.filterDatum = null;
     };
 
-
+    //Table actions
     const { createMenuItem, deleteMenuItem } = menuFactory;
     $scope.deleteMenuItem = _.partial(deleteMenuItem, $scope);
     $scope.createMenuItem = _.partial(createMenuItem, $scope, params);

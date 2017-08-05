@@ -9,6 +9,7 @@ import beheerControllers from 'controllers/beheerControllers';
 import bestellingController from 'controllers/bestellingController';
 import bestellingFactory from 'factoriesAndServices/bestelling-factory';
 import paginationFilter from 'filters/paginationFilter';
+import menuModalController from 'controllers/MenuModalController';
 import appConstants from 'constants';
 import uiBootstrap from 'angular-ui-bootstrap';
 import ngAnimate from 'angular-animate';
@@ -16,7 +17,7 @@ import material from 'angular-material';
 
 const app = angular.module('app', [ngAnimate, material, uiBootstrap, authServiceEnFactory.name, authControllers.name,
     beheerFactory.name, beheerControllers.name, appConstants.name, uiRouter, menuController.name, menuFactory.name, bestellingController.name, bestellingFactory.name,
-    paginationFilter.name
+    paginationFilter.name, menuModalController.name
 ]);
 
 app.config(($stateProvider, $urlRouterProvider, $locationProvider, $mdDateLocaleProvider) => {

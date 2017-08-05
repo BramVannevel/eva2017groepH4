@@ -1,26 +1,6 @@
 <div class="container">
-    <h4 class="menuItem__taskForm">Voeg een gerecht toe aan het menu</h4>
-    <form ng-submit="createMenuItem()" class="menuItem__dropdown">
-        <div class="menuItem__dropdownMenu">
-            <md-datepicker ng-model="menuItemDatum" md-placeholder="Datum" class="menuItem__dropdownMargin"></md-datepicker>
-            <img src="{{arrow}}" class="menuItem__arrow" />
-            <md-input-container>
-                <label>Filter gerechten op categorie</label>
-                <md-select ng-model="filterCategorie" class="menuItem__dropdown">
-                    <md-option ng-value="categorie.naam" ng-repeat="categorie in categorieen">{{categorie.naam}}</md-option>
-                </md-select>
-            </md-input-container>
-            <img src="{{arrow}}" class="menuItem__arrow" />
-            <md-input-container>
-                <label>Kies gerecht</label>
-                <md-select ng-model="selectedGerecht">
-                    <!--filter op geselecteerde categorie-->
-                    <md-option ng-value="gerecht" ng-repeat="gerecht in gerechten | filter:filterGerechten">{{gerecht.naam}}</md-option>
-                </md-select>
-            </md-input-container>
-        </div>
-        <button class="btn btn-success menuItem__voegToe-button">Voeg Gerecht Toe Aan Menu</button>
-    </form>
+    <h4 class="menuItem__taskForm">Voeg een restaurant toe</h4>
+    <button class="btn btn-primary" ng-click="openModal()">Voeg Toe</button>
     <table class="table table-striped">
     <!--Rij met de filters-->
         <tr class="menuItem__filterDatum">
