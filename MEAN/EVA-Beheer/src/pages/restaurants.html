@@ -1,6 +1,8 @@
 <div class="container">
-    <h4 class="content__centerText">Voeg een restaurant toe</h4>
-    <button class="btn btn-primary" ng-click="openModal()">Voeg Toe</button>
+    <h4 class="content__centerText">Restaurants</h4>
+    <button class="btn btn-primary" ng-click="openModal()">Voeg een restaurant toe</button>
+    <br />
+    <br />
     <table class="table table-striped">
     <!--Rij met de filters-->
         <tr class="content__filterDatum">
@@ -10,9 +12,11 @@
         </td>
         <td></td>
         <td></td>
+        <td></td>
         </tr>
         <tr>
         <th>Naam</th>
+        <th>Stad</th>
         <th>Telefoon</th>
         <th>Acties</th>
         </tr>
@@ -22,6 +26,9 @@
         <tr ng-repeat="restaurant in restaurants | orderBy:'naam' | filter:filterRestaurants | paginationFilter: (currentPage-1)*pageSize | limitTo: pageSize">
             <td>
                 {{restaurant.naam}}
+            </td>
+            <td>
+              {{restaurant.adres.stad}}
             </td>
             <td>
                 <span>{{restaurant.telefoon}}</span>

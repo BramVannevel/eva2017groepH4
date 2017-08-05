@@ -28,7 +28,6 @@ const restaurantsController = angular.module('app.restaurantsController', [])
         ariaDescribedBy: 'modal-body',
         controller: 'restaurantModalController',
         controllerAs: '$ctrl',
-        //scope: $scope,
         template: require('../modals/restaurantModal.html'),
         size: 'lg',
         resolve: {

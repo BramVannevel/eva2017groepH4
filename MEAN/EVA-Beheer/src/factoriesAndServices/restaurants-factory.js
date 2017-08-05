@@ -13,8 +13,6 @@ const restaurantsFactory = angular.module('app.restaurantsFactory', [])
         //VOEG RESTAURANT TOE
         //modalScope bevat de ingevoerde gegevens, $scope bevat de huidige tabel waaraan het restaurant zal toegevoegd worden.
         function createRestaurant(modalScope, $scope, params) {
-            //if (!$scope.menuItemDatum || !$scope.selectedGerecht) { return; } //als inputfield leeg is, niks toevoegen.
-
             $http.post(RESTAURANTS_API_ENDPOINT.url + '/', {
                 naam: modalScope.restaurantNaam,
                 telefoon: modalScope.restaurantTelefoon,

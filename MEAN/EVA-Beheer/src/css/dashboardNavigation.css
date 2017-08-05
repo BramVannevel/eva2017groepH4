@@ -22,7 +22,7 @@ overflow:visible;
 
 .main-menu {
 /*background:#fbfbfb;*/
-background: #232c31;
+background: #37474F;
 border-right:1px solid #e5e5e5;
 position:absolute;
 top:0;
@@ -119,7 +119,7 @@ background-color:#5fa2db;
 }
 .area {
 float: left;
-background: #e2e2e2;
+background: #ECEFF1;
 width: 100%;
 height: 100%;
 }

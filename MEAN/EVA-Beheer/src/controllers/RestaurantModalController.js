@@ -14,6 +14,9 @@ const restaurantModalController = angular.module('app.restaurantModalController'
     console.log("Save clicked in Modal");
     //De scope van de modal doorgeven aan restaurantsController
     console.log("RestaurantModalController, restaurantNaam: " + $scope.restaurantNaam);
+    if(!$scope.restaurantNaam || !$scope.restaurantStad || !$scope.restaurantPostcode)
+        return;
+
     $uibModalInstance.close($scope);
   };
 
