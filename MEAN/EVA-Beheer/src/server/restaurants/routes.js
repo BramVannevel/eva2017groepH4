@@ -29,8 +29,8 @@ router.post('/', passport.authenticate('jwt', { session: false }), function(req,
     var token = getToken(req.headers);
     if (token) {
         var decoded = jwt.decode(token, config.secret);
-    var menu = new Restaurant(req.body);
-    menu.save(function(err) {
+    var restaurant = new Restaurant(req.body);
+    restaurant.save(function(err) {
         if (err) { console.log(err); }
 
         res.send('Restaurant toegevoegd');
@@ -40,6 +40,32 @@ router.post('/', passport.authenticate('jwt', { session: false }), function(req,
     }
 });
 
+//RESTAURANT WIJZIGEN
+router.put('/:id', passport.authenticate('jwt', { session: false }), function(req, res) {
+    var token = getToken(req.headers);
+    if (token) {
+        var decoded = jwt.decode(token, config.secret);
+    var id = req.params.id;
+    Restaurant.update({ _id: mongoose.Types.ObjectId(id) }, {
+        $set: {
+          naam: req.body.naam,
+          adres: {
+            straat: req.body.adres.straat,
+            huisnummer: req.body.adres.huisnummer,
+            stad: req.body.adres.stad,
+            postcode: req.body.adres.postcode
+          },
+          telefoon: req.body.telefoon
+        }
+    }, function(err) {
+        if (err) { console.log(err); }
+
+        res.send('Restaurant updated');
+    });
+    } else {
+        return res.status(403).send({ success: false, msg: 'Geen token meegegeven.' });
+    }
+});
 
 //EEN RESTAURANT VERWIJDEREN
 router.delete('/:id', passport.authenticate('jwt', { session: false }),function(req, res) {

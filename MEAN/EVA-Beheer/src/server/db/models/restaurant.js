@@ -5,11 +5,11 @@ var RestaurantSchema = new Schema({
   naam: String,
 	adres: {
 		straat: String,
-    huisnummer: Number,
+    huisnummer: String,
     stad: String,
-    postcode: Number
+    postcode: String
 	},
-  telefoon: Number
+  telefoon: String
 });
 
 module.exports = mongoose.model('Restaurant', RestaurantSchema);

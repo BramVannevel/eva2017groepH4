@@ -1,6 +1,6 @@
 <div class="container">
     <h4 class="content__centerText">Restaurants</h4>
-    <button class="btn content__generalButtonSettings" ng-click="openModal()">Voeg een restaurant toe</button>
+    <button class="btn content__generalButtonSettings" ng-click="openAddRestaurantModal()">Voeg een restaurant toe</button>
     <br />
     <br />
     <table class="table table-striped">
@@ -34,6 +34,7 @@
                 <span>{{restaurant.telefoon}}</span>
             </td>
             <td>
+                <button class="btn btn-default" ng-click="openRestaurantDetailModal(restaurant)"><img ng-src="{{imgDetail}}"/></button>
                 <button class="btn btn-default" ng-click="deleteRestaurant(restaurant)"><img ng-src="{{imgDelete}}"/></button>
             </td>
         </tr>

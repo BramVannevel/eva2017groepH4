@@ -28,16 +28,21 @@ const restaurantsFactory = angular.module('app.restaurantsFactory', [])
             });
         }
 
-        /*
         //WIJZIG RESTAURANT
-                function updateMenuItem($scope, menuItem) {
-                    $http.put(MENU_API_ENDPOINT.url + `/${menuItem._id}`, { prijs: menuItem.updatedPrijs, omschrijving: menuItem.updatedOmschrijving, allergenen: $scope.selection }).success(response => {
-                        getMenuItems($scope);
-                        menuItem.isEditing = false;
-                        uncheckCheckboxes($scope);
+        function updateRestaurant($scope, updatedRestaurant) {
+                    $http.put(RESTAURANTS_API_ENDPOINT.url + `/${updatedRestaurant._id}`, {
+                       naam: updatedRestaurant.naam,
+                       adres: {
+                     		 straat: updatedRestaurant.adres.straat,
+                         huisnummer: updatedRestaurant.adres.huisnummer,
+                         stad: updatedRestaurant.adres.stad,
+                         postcode: updatedRestaurant.adres.postcode
+                     	},
+                       telefoon: updatedRestaurant.telefoon
+                     }).success(response => {
+                        getRestaurants($scope);
                     });
-                }
-        */
+        }
 
         //VERWIJDER RESTAURANT
         function deleteRestaurant($scope, restaurantToDelete) {
@@ -49,8 +54,8 @@ const restaurantsFactory = angular.module('app.restaurantsFactory', [])
         return {
             getRestaurants,
             createRestaurant,
-            deleteRestaurant
-            //updateMenuItem
+            deleteRestaurant,
+            updateRestaurant
         };
     });
 

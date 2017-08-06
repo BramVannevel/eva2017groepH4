@@ -10,6 +10,7 @@ const restaurantsController = angular.module('app.restaurantsController', [])
 
     //Images
     $scope.imgDelete = require('../img/delete.png');
+    $scope.imgDetail = require('../img/detail.png');
     $scope.arrow = require('../img/arrow.png');
     $scope.clearFilter = require('../img/clearFilter.png');
 
@@ -20,10 +21,10 @@ const restaurantsController = angular.module('app.restaurantsController', [])
     //BIJ OPSTARTEN PAGINA, HAAL ALLE RESTAURANTS
     restaurantsFactory.getRestaurants($scope);
 
-    //modal configuration
+    //modal configuration voor het toevoegen van een restaurant
     //Door controllerAs '$ctrl' kunnen we in de html van de modal aan de scope van deze controller met $ctrl.
-    $scope.openModal = function() {
-      var modalInstance = $uibModal.open({
+    $scope.openAddRestaurantModal = function() {
+      let modalInstance = $uibModal.open({
         ariaLabelledBy: 'modal-title',
         ariaDescribedBy: 'modal-body',
         controller: 'restaurantModalController',
@@ -34,12 +35,31 @@ const restaurantsController = angular.module('app.restaurantsController', [])
             //pass data to the modal's controller
         }
       });
-
       //De geretourneerde gegevens van modal dmv zijn scope doorgeven
       modalInstance.result.then(function(modalScope) {
           createRestaurant(modalScope, $scope);
       });
     };
+
+    $scope.openRestaurantDetailModal = function(restaurant) {
+      let modalInstance = $uibModal.open({
+        ariaLabelledBy: 'modal-title',
+        ariaDescribedBy: 'modal-body',
+        controller: 'restaurantDetailModalController',
+        controllerAs: '$ctrl',
+        template: require('../modals/restaurantDetailModal.html'),
+        size: 'lg',
+        resolve: {
+            //pass data to the modal's controller
+            getChosenRestaurant: function() {
+              return restaurant;
+            }
+        }
+      });
+      modalInstance.result.then(function(updatedRestaurant) {
+          updateRestaurant($scope, updatedRestaurant);
+      });
+    }
 
     //pagination
     $scope.currentPage = 1;
@@ -81,11 +101,11 @@ const restaurantsController = angular.module('app.restaurantsController', [])
         $scope.filterNaam = '';
     };
 
-    //Table actions
-    const { createRestaurant, deleteRestaurant } = restaurantsFactory;
+    // Actions
+    const { createRestaurant, deleteRestaurant, updateRestaurant } = restaurantsFactory;
     $scope.deleteRestaurant = _.partial(deleteRestaurant, $scope);
     $scope.createRestaurant = _.partial(createRestaurant, $scope, params);
-
+    $scope.updateRestaurant = _.partial(updateRestaurant, $scope);
 });
 
 export default restaurantsController;
