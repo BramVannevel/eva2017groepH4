@@ -8,7 +8,7 @@
 <body ng-controller="AppCtrl">
 
 <!--Vertical navigation-->
-<nav class="main-menu" ng-controller="NavController" ng-show="AuthenticationService.userCanAccess() && AuthenticationService.isAuthenticated()">
+<nav class="main-menu" ng-controller="NavController" ng-show="AuthenticationService.isAuthenticated()">
             <ul>
                 <li>
                     <a href="http://justinfarrow.com">
@@ -104,7 +104,7 @@
   <!--Horizontal navigation-->
   <nav class="navbar navbar-default" ng-controller="NavController">
     <div class="navbar-header">
-        <a class="navbar-brand" href="/menu"><span class="navbar-brand-EVA">EVA</span> Beheer</a>
+        <a class="navbar-brand" href="/restaurant"><span class="navbar-brand-EVA">EVA</span> Beheer</a>
     </div>
     <!--<div class="container">-->
       <div class="container-fluid ">

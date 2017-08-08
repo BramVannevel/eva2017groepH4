@@ -6,15 +6,12 @@ const authServiceEnFactory = angular.module('app.authServiceEnFactory', [])
     var LOCAL_TOKEN_KEY = 'yourTokenKey';
     var isAuthenticated = false;
     var authToken;
-    /**
-    * When true, the sidebar is shown.
-    */
-    var userCanAccess = false;
 
     function loadUserCredentials() {
         var token = window.localStorage.getItem(LOCAL_TOKEN_KEY);
         if (token) {
             useCredentials(token);
+            isAuthenticated = true;
         }
     }
 
@@ -24,8 +21,6 @@ const authServiceEnFactory = angular.module('app.authServiceEnFactory', [])
     }
 
     function useCredentials(token) {
-        //Ingelogd blijven on page refresh
-        isAuthenticated = true;
         authToken = token;
 
         //Instellen dat er default een header met het token wordt meegegeven bij HTTP calls uit angular.
@@ -65,10 +60,8 @@ const authServiceEnFactory = angular.module('app.authServiceEnFactory', [])
                     if(responseUser.role === 'admin') {
                       //isAuthenticated true zetten hier zodat nu pas doorgegaan wordt naar de applicatie.
                       isAuthenticated = true;
-                      userCanAccess = true;
                     } else {
                       isAuthenticated = false;
-                      userCanAccess = false;
                       destroyUserCredentials();
                     }
                   });
