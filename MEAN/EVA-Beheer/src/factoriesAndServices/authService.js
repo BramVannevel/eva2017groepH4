@@ -20,7 +20,8 @@ const authServiceEnFactory = angular.module('app.authServiceEnFactory', [])
     }
 
     function useCredentials(token) {
-        //isAuthenticated = true;
+        //Ingelogd blijven on page refresh
+        isAuthenticated = true;
         authToken = token;
 
         //Instellen dat er default een header met het token wordt meegegeven bij HTTP calls uit angular.
@@ -50,18 +51,19 @@ const authServiceEnFactory = angular.module('app.authServiceEnFactory', [])
         return $q(function(resolve, reject) {
             $http.post(USER_API_ENDPOINT.url + '/authenticate', user).then(function(result) {
                 if (result.data.success) {
-                  //Store token
+                  //Store token first so we can retrieve the user's info
                   storeUserCredentials(result.data.token);
                   resolve(result.data.msg);
 
                   //Check if admin and decide if user can get into the application
                   getUserInfo().then(function(responseUser) {
-                    console.log('USER ROLE IS: ' + responseUser.role);
+                      console.log('The user trying to access the webapp is: ' + responseUser.name + ' with role: ' + responseUser.role);
                     if(responseUser.role === 'admin') {
                       //isAuthenticated true zetten hier zodat nu pas doorgegaan wordt naar de applicatie.
                       isAuthenticated = true;
                     } else {
                       isAuthenticated = false;
+                      destroyUserCredentials();
                     }
                   });
                 } else {
