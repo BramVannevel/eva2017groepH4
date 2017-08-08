@@ -1,0 +1,153 @@
+<div class="container">
+    <h4 class="menuItem__taskForm">Voeg een gerecht toe aan de databank</h4>
+    <form ng-submit="createGerecht()" class="menuItem__taskForm">
+    <!--Categorie-->
+        <md-input-container>
+            <label>Selecteer de categorie voor dit gerecht</label>
+            <md-select ng-model="selectedCategorie">
+                <!--ng-value categorie en NIET categorie.naam, we willen het object en niet enkel de String naam van het object anders kunnen we het niet opslaan in ons gerecht (in factory create)-->
+                <md-option ng-repeat="categorie in categorieen" ng-value="categorie">
+                    {{categorie.naam}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <img src="{{arrow}}" class="menuItem__arrow" />
+        <!--Naam-->
+        <input class="form-control menuItem__gerechtBeheerNameInputfield" placeholder="Gerecht Naam" ng-model="gerechtNaam" />
+        <img src="{{arrow}}" class="menuItem__arrow" />
+        <!--Prijs-->
+        <input class="form-control menuItem__gerechtBeheerpriceInputfield" placeholder="Prijs" ng-model="gerechtPrijs" />
+        <img src="{{arrow}}" class="menuItem__arrow" />
+        <!--Bestelbaar-->
+        <label>
+                <!--ng-init zet de default waarde op Nee, wanneer de pagina geladen wordt.-->
+                <!--In config.js stellen we het thema hiervoor in-->
+                <md-input-container>
+                    <md-switch ng-model="gerecht.bestelbaar" ng-init="gerecht.bestelbaar='Nee'" ng-true-value="'Ja'" ng-false-value="'Nee'">Bestelbaar: {{gerecht.bestelbaar}}</md-switch>
+              </md-input-container>
+            </label>
+        <br>
+        <h5 class="menuItem__taskForm">Selecteer de allergenen die dit gerecht bevat:</h5>
+        <!--Allergenen Checkboxes-->
+        <div class="allergenen menuItem__checkboxes">
+            <label ng-repeat="allergeen in allergenen" class="menuItem__checkbox">
+            <input
+                type="checkbox"
+                name="selectedAllergenen[]"
+                value="allergeen"
+                ng-model="allergeen.selected"
+                >
+               <img ng-src="{{loadImage(allergeen.naam)}}" class="allergeen" />
+            </label>
+        </div>
+        <!-- {{selection}}-->
+        <!--Allergenen
+            <md-input-container>
+                <label>Welke allergenen bevat dit gerecht?</label>
+                <md-select ng-model="selectedAllergenen" multiple>
+                    ng-value allergeen en NIET allergeen.naam, we willen het object en niet enkel de String naam van het object anders kunnen we het niet opslaan in ons gerecht (in factory create)
+                    <md-option ng-value="allergeen" ng-repeat="allergeen in allergenen">{{allergeen.naam}}</md-option>
+                </md-select>
+            </md-input-container>
+            -->
+        <br>
+        <button class="btn btn-success menuItem__voegToe-button">Voeg Gerecht Toe</button>
+    </form>
+    <table class="table table-striped">
+  <!--Rij met filters-->
+    <tr class="menuItem__filterCategorie">
+    <td>
+        <!--FILTER CATEGORIE-->
+        <md-input-container class="menuItem__filterAndEraseFilter">
+            <label>Filter categorie</label>
+            <md-select ng-model="filterCategorie">
+                <!--ng-value categorie en NIET categorie.naam, we willen het object en niet enkel de String naam van het object anders kunnen we het niet opslaan in ons gerecht (in factory create)-->
+                <md-option ng-repeat="categorie in categorieen" ng-value="categorie.naam">
+                    {{categorie.naam}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <img src="{{clearFilter}}" ng-click="eraseFilter()" class="actionIcons" />
+        </td>
+        <!--FILTER NAAM-->
+        <td>
+          <md-input-container class="menuItem__filterAndEraseFilter">
+            <label>Filter naam</label>
+            <md-select ng-model="filterNaam">
+                  <md-option ng-repeat="gerecht in gerechten" ng-value="gerecht.naam">
+                    {{gerecht.naam}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <img src="{{clearFilter}}" ng-click="eraseFilter()" class="actionIcons" />
+      </td>
+          <td>
+        </td>
+        <!--FILTER PRIJS-->
+        <td>
+
+        </td>
+        <td></td>
+        <td></td>
+        </tr>
+        <tr>
+            <th>Categorie</th>
+            <th>Naam</th>
+            <th>Allergenen</th>
+            <th>Prijs</th>
+            <th>Bestelbaar</th>
+            <th>Acties</th>
+        </tr>
+        <!--Filterbaar-->
+        <tr ng-repeat="gerecht in gerechten | orderBy:'categorie.naam' | filter:filterGerechten">
+             <td>
+                <span>{{gerecht.categorie.naam}}</span>
+            </td>
+            <td>
+                <span ng-if="!gerecht.isEditing">{{gerecht.naam}}</span>
+              <form ng-submit="updateGerecht(gerecht) ">
+                  <input ng-if="gerecht.isEditing " class="form-control " ng-value="gerecht.naam " ng-model="gerecht.updatedNaam ">
+              </form>
+            </td>
+            <td>
+                <div ng-if="!gerecht.isEditing ">
+                    <button class="btn btn-default " ng-show="!isCollapsed" ng-click="isCollapsed = !isCollapsed ">+</button>
+                    <button class="btn btn-default " ng-show="isCollapsed" ng-click="isCollapsed = !isCollapsed ">-</button>
+                    <div uib-collapse="!isCollapsed " ng-repeat="allergeen in gerecht.allergenen ">
+                        <div>
+                            <hr>{{allergeen.naam}}
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <form ng-submit="updateGerecht(gerecht) " ng-if="gerecht.isEditing ">
+                        <md-select md-selected-text="Leeg" ng-model="gerecht.updatedAllergenen " multiple>
+                            <md-option ng-value="allergeen " ng-selected="geselecteerd(allergeen.naam, gerecht)" ng-repeat="allergeen in allergenen">{{allergeen.naam}}</md-option>
+                        </md-select>
+                </form>
+            </td>
+            <td>
+                <span ng-if="!gerecht.isEditing ">{{ gerecht.prijs | currency:"€ " : 2}}</span>
+
+                <form ng-submit="updateGerecht(gerecht) ">
+                    <input ng-if="gerecht.isEditing " class="form-control menuItem__update-prijs" ng-value="gerecht.prijs " ng-model="gerecht.updatedPrijs ">
+                </form>
+            </td>
+
+
+            <td>
+              <span ng-if="!gerecht.isEditing ">{{gerecht.bestelbaar}}</span>
+
+              <form ng-if="gerecht.isEditing" ng-submit="updateGerecht(gerecht) ">
+                    <md-switch ng-model="gerecht.updatedBestelbaar" ng-init="gerecht.bestelbaar" ng-true-value="'Ja'" ng-false-value="'Nee'">{{gerecht.updatedBestelbaar}}</md-switch>
+              </form>
+            </td>
+            <td>
+                <button ng-if="!gerecht.isEditing " class="btn btn-default " ng-click="onEditClick(gerecht) "><img ng-src="{{imgEdit}}"/></button>
+                <button ng-if="!gerecht.isEditing " class="btn btn-default " ng-click="deleteGerecht(gerecht) "><img ng-src="{{imgDelete}}"/></button>
+                <button ng-if="gerecht.isEditing " class="btn btn-default " ng-click="updateGerecht(gerecht) "><img ng-src="{{imgSave}}"/></button>
+                <button ng-if="gerecht.isEditing " class="btn btn-default " ng-click="onCancelClick(gerecht) "><img ng-src="{{imgCancel}}"/></button>
+            </td>
+        </tr>
+    </table>
+</div>
