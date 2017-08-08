@@ -6,6 +6,10 @@ const authServiceEnFactory = angular.module('app.authServiceEnFactory', [])
     var LOCAL_TOKEN_KEY = 'yourTokenKey';
     var isAuthenticated = false;
     var authToken;
+    /**
+    * When true, the sidebar is shown.
+    */
+    var userCanAccess = false;
 
     function loadUserCredentials() {
         var token = window.localStorage.getItem(LOCAL_TOKEN_KEY);
@@ -61,8 +65,10 @@ const authServiceEnFactory = angular.module('app.authServiceEnFactory', [])
                     if(responseUser.role === 'admin') {
                       //isAuthenticated true zetten hier zodat nu pas doorgegaan wordt naar de applicatie.
                       isAuthenticated = true;
+                      userCanAccess = true;
                     } else {
                       isAuthenticated = false;
+                      userCanAccess = false;
                       destroyUserCredentials();
                     }
                   });
@@ -97,6 +103,7 @@ const authServiceEnFactory = angular.module('app.authServiceEnFactory', [])
         register: register,
         logout: logout,
         isAuthenticated: function() { return isAuthenticated; },
+        userCanAccess: function() { return userCanAccess; },
         getUserInfo: getUserInfo
     };
 })
