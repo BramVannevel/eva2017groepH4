@@ -8,7 +8,7 @@
 <body ng-controller="AppCtrl">
 
 <!--Vertical navigation-->
-<nav class="main-menu" ng-controller="NavController" ng-show="AuthenticationService.userCanAccess()">
+<nav class="main-menu" ng-controller="NavController" ng-show="AuthenticationService.userCanAccess() && AuthenticationService.isAuthenticated()">
             <ul>
                 <li>
                     <a href="http://justinfarrow.com">
