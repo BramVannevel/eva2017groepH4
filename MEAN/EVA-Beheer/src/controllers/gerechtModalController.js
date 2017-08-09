@@ -22,10 +22,12 @@ const gerechtModalController = angular.module('app.gerechtModalController', [])
   }, true);
 
   $scope.cancelModal = function() {
+    console.log('Vauit modalcontroller ' + $scope.categorieen);
     $uibModalInstance.dismiss('Cancel');
   };
 
   $scope.ok = function() {
+      if (!$scope.gerechtNaam || !$scope.selectedCategorie) { return; }
       $uibModalInstance.close($scope);
   };
 

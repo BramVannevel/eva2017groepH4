@@ -43,6 +43,7 @@ const beheerControllers = angular.module('app.beheerControllers', [])
     $scope.clearFilter = require('../img/clearFilter.png');
 
     beheerFactory.getGerechten($scope);
+    beheerFactory.getCategorieen($scope);
 
     var $ctrl = this;
     $ctrl.animationsEnabled = true;
@@ -57,7 +58,7 @@ const beheerControllers = angular.module('app.beheerControllers', [])
         size: 'lg',
         resolve: {
           getCategorieen: function() {
-            return beheerFactory.getCategorieen($scope);
+            return $scope.categorieen;
           }
         }
       });

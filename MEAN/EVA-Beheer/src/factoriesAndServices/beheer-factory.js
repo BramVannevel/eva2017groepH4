@@ -43,7 +43,6 @@ const beheerFactory = angular.module('app.beheerFactory', [])
     }
     //POST
     function createGerecht(modalScope, $scope) {
-        if (!modalScope.gerechtNaam ) { return; }
         $http.post(GERECHTEN_API_ENDPOINT.url + '/', {
             naam: modalScope.gerechtNaam,
             categorie: modalScope.selectedCategorie,
