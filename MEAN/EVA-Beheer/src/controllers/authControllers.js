@@ -12,7 +12,6 @@ const authControllers = angular.module('app.authControllers', [])
           // CHECK VOOR ADMIN ROLE
           AuthService.getUserInfo($scope).then(function(responseUser) {
             $scope.responseUser = responseUser;
-            console.log('The user trying to access the webapp is: ' + responseUser);
               if(responseUser.role === 'admin') {
                   $state.go('restaurants');
               } else {
