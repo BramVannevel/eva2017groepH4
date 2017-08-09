@@ -15,6 +15,7 @@
     &__create-dropdown {
         width: 500px;
         display: block;
+        margin-top: 15px;
         margin: 0 auto 5px;
     }
     &__update-input {
@@ -27,6 +28,9 @@
     &__centerText {
         text-align: center;
         margin-bottom: 30px;
+    }
+    &__centerSubtitle {
+      text-align: center;
     }
     &__voegToe-button {
         display: inline-block;
