@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -68,11 +69,11 @@ public class RestoInfoFragment extends Fragment implements OnMapReadyCallback{
     @BindView(R.id.adressResto)
     TextView adressResto;
     @BindView(R.id.tel)
-    Button btnTel;
+    ImageButton btnTel;
     @BindView(R.id.omschrijving)
     TextView omschrijving;
     @BindView(R.id.routeBeschrijving)
-    Button routeBeschrijving;
+    ImageButton routeBeschrijving;
 
 
     public RestoInfoFragment() {
@@ -161,7 +162,7 @@ public class RestoInfoFragment extends Fragment implements OnMapReadyCallback{
                 .centerCrop()
                 .into(foto);
         adressResto.setText(resto.getLocation());
-        btnTel.setText(getString(R.string.bel)+ " " + formatTelefoonNr(resto.getTelefoonNr()));
+       // btnTel.setText(getString(R.string.bel)+ " " + formatTelefoonNr(resto.getTelefoonNr()));
         omschrijving.setText(resto.getOmschrijving());
 
 
