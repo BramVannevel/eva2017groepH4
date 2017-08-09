@@ -11,7 +11,6 @@ const restaurantsController = angular.module('app.restaurantsController', [])
     //Images
     $scope.imgDelete = require('../img/delete.png');
     $scope.imgDetail = require('../img/detail.png');
-    $scope.arrow = require('../img/arrow.png');
     $scope.clearFilter = require('../img/clearFilter.png');
 
     let params = {

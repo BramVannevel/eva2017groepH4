@@ -18,10 +18,6 @@ const appConstants = angular.module('app.appConstants', [])
     url: serverUrl + '/restaurants'
 })
 
-.constant('ALLERGENEN_API_ENDPOINT', {
-    url: serverUrl + '/allergenen'
-})
-
 .constant('CATEGORIEEN_API_ENDPOINT', {
         url: serverUrl + '/categorieen'
 })

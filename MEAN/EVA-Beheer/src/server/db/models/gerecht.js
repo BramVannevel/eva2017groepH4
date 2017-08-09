@@ -3,11 +3,9 @@ var Schema = mongoose.Schema;
 
 var GerechtSchema = new Schema({
     naam: String,
-    prijs: Number,
     categorie: {
         naam: String
     },
-    bestelbaar: String,
     allergenen: [{
         naam: String,
         selected: Boolean
