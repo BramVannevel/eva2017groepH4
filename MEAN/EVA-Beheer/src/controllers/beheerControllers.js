@@ -4,11 +4,29 @@ const beheerControllers = angular.module('app.beheerControllers', [])
 
 ////////////////////////// CATEGORIE CONTROLLER //////////////////////////
 
-.controller('categorieController', function($scope, beheerFactory) {
+.controller('categorieController', function($scope, beheerFactory, $uibModal) {
     //IMAGES
     $scope.imgDelete = require('../img/delete.png');
+    var $ctrl = this;
+    $ctrl.animationsEnabled = true;
 
     beheerFactory.getCategorieen($scope);
+
+    $scope.openAddCategorieModal = function() {
+      let modalInstance = $uibModal.open({
+        ariaLabelledBy: 'modal-title',
+        ariaDescribedBy: 'modal-body',
+        controller: 'categorieModalController',
+        controllerAs: '$ctrl',
+        template: require('../modals/categorieModal.html'),
+        size: 'lg',
+        resolve: {
+        }
+      });
+      modalInstance.result.then(function(modalScope) {
+          createCategorie(modalScope, $scope);
+      });
+    };
 
     const { createCategorie, deleteCategorie } = beheerFactory;
 

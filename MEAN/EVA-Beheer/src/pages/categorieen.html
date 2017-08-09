@@ -1,12 +1,6 @@
 <div class="container">
-    <h4 class="menuItem__taskForm">Voeg een categorie toe aan de databank</h4>
-    <form ng-submit="createCategorie()" name="categorieForm">
-        <input class="form-control menuItem__create-input" placeholder="Naam" ng-model="categorieNaam" />
-        <br>
-
-        <button class="btn btn-success menuItem__voegToe-button">Voeg Categorie Toe</button>
-    </form>
-
+  <h4 class="content__centerText">Categorieën voor gerechten</h4>
+  <button class="btn content__generalButtonSettings" ng-click="openAddCategorieModal()">Voeg een categorie toe</button>
     <table class="table table-striped">
         <tr>
             <th>Naam</th>

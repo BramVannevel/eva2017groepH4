@@ -14,14 +14,13 @@ const beheerFactory = angular.module('app.beheerFactory', [])
         });
     }
     //POST
-    function createCategorie($scope) {
-        if (!$scope.categorieNaam) { return; }
+    function createCategorie(modalScope, $scope) {
+        if (!modalScope.categorieNaam) { return; }
 
         $http.post(CATEGORIEEN_API_ENDPOINT.url + '/', {
-            naam: $scope.categorieNaam,
+            naam: modalScope.categorieNaam,
         }).success(response => {
             getCategorieen($scope);
-            $scope.categorieNaam = '';
         });
     }
     //DEL
