@@ -1,0 +1,24 @@
+@import 'content.scss';
+@import 'login.scss';
+@import 'navbar.scss';
+@import '~angular-material/modules/scss/angular-material.scss';
+@import url("dashboardNavigation.css");
+
+.nav-link {
+    float: right;
+    margin-top: 20px;
+}
+
+/*Pagination color*/
+.pagination>li.active>a {
+  background: #26A69A;
+}
+.pagination>li.active>a:hover {
+  background: #009688;
+}
+
+/*Input focus border-color*/
+.form-control:focus {
+  border-color: #009688;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 6px rgba(0, 150, 136, 0.6);
+}

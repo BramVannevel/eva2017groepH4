@@ -1,0 +1,29 @@
+<div>
+   <h4 class="content__centerText">Details</h4>
+
+   <form class="content__centerContent">
+     <div class="form-group content__centerContent">
+       <input type="text" class="form-control content__create-input" placeholder="Naam*" ng-value="restaurant.naam" ng-model="updatedRestaurant.naam">
+     </div>
+     <div class="form-group content__centerContent">
+       <input type="text" class="form-control content__create-input" placeholder="Telefoon" ng-value="restaurant.telefoon" ng-model="updatedRestaurant.telefoon">
+     </div>
+     <div class="form-group content__centerContent">
+       <input type="text" class="form-control content__create-input" placeholder="Straat" ng-value="restaurant.adres.straat" ng-model="updatedRestaurant.adres.straat">
+     </div>
+     <div class="form-group content__centerContent">
+       <input type="text" class="form-control content__create-input" placeholder="Huisnummer" ng-value="restaurant.adres.huisnummer" ng-model="updatedRestaurant.adres.huisnummer">
+     </div>
+     <div class="form-group content__centerContent">
+       <input type="text" class="form-control content__create-input" placeholder="Stad*" ng-value="restaurant.adres.stad" ng-model="updatedRestaurant.adres.stad">
+     </div>
+     <div class="form-group content__centerContent">
+       <input type="text" class="form-control content__create-input" placeholder="Postcode*" ng-value="restaurant.adres.postcode" ng-model="updatedRestaurant.adres.postcode">
+     </div>
+   </form>
+
+   <div class="content__centerText">
+     <button class="btn btn-default content__voegToe-button" ng-click="cancelModal()">Annuleer</button>
+     <button class="btn content__generalButtonSettings content__voegToe-button" ng-click="ok(updatedRestaurant)">Opslaan</button>
+   </div>
+ </div>
