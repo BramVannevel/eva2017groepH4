@@ -2,12 +2,17 @@ import angular from 'angular';
 
 const gerechtModalController = angular.module('app.gerechtModalController', [])
 
-.controller('gerechtModalController', function($scope, $uibModalInstance, getCategorieen) {
+.controller('gerechtModalController', function($scope, $uibModalInstance, getCategorieen, $window, $mdSelect) {
   $scope.allergenen = [{naam: 'Gluten'}, {naam: 'Ei'}, {naam: 'Lupine'}, {naam: 'Melk'},
    {naam: 'Mosterd'}, {naam: 'Noten'}, {naam: 'Pinda\'s'}, {naam: 'Schaaldieren'}, {naam: 'Selderij'},
     {naam: 'Sesamzaad'}, {naam: 'Soja'}, {naam: 'Vis'}, {naam: 'Weekdieren'}, {naam: 'Zwaveldioxide'}];
 
   $scope.categorieen = getCategorieen;
+
+  //Hide mdSelect on double click (won't close otherwise because we work inside a modal)
+  $window.addEventListener('dblclick', function() {
+      $mdSelect.hide();
+  });
 
   // geselecteerde allergenen
   $scope.selection = [];

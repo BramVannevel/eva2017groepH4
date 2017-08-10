@@ -15,20 +15,14 @@
      </md-input-container>
      <br />
      <h5 class="content__taskForm content__centerSubtitle">Selecteer de allergenen die dit gerecht bevat:</h5>
-     <div class="allergenen content__checkboxes">
-            <label ng-repeat="allergeen in allergenen" class="content__checkbox">
-            <input
-                type="checkbox"
-                name="selectedAllergenen[]"
-                value="allergeen"
-                ng-model="allergeen.selected"
-                >
-               <span>{{allergeen.naam}}</span>
-            </label>
-        </div>
+     <div class="content__create-dropdown">
+         <md-select md-selected-text="Leeg" ng-model="selection" multiple>
+                    <md-option ng-value="allergeen" ng-repeat="allergeen in allergenen">
+                        {{allergeen.naam}}
+                    </md-option>
+          </md-select>
+      </div>
    </form>
-   <br />
-   <br />
    <div class="content__centerText">
      <button class="btn btn-default content__voegToe-button" ng-click="cancelModal()">Annuleer</button>
      <button class="btn content__generalButtonSettings content__voegToe-button" ng-click="ok()">Opslaan</button>

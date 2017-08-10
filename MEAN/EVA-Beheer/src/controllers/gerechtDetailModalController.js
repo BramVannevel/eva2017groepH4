@@ -11,21 +11,10 @@ const gerechtDetailModalController = angular.module('app.gerechtDetailModalContr
   $scope.gerecht = getChosenGerecht;
   var updatedSelectedAllergens = [];
 
+  //Hide mdSelect on double click (won't close otherwise because we work inside a modal)
   $window.addEventListener('dblclick', function() {
       $mdSelect.hide();
   });
-
-  // geselecteerde allergenen
-  $scope.selection = [];
-  // de allergenen opvolgen voor verandering
-  //if toegevoegd, fout TypeError: Cannot read property nv of undefined is verdwenen, ons object moet eerst bestaan voor er gewatched wordt.
-  $scope.$watch('allergenen|filter:{selected:true}', function(nv) {
-      if (nv) {
-          $scope.selection = nv.map(function(allergeen) {
-              return allergeen;
-          });
-      }
-  }, true);
 
   //OM BIJ EDIT DE VOORHEEN GESELECTEERDE ALLERGENEN VAN EEN GERECHT IN TE LADEN
   $scope.checkAlreadySelectedAllergens = (allergeen, gerecht) => {
