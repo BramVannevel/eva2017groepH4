@@ -7,12 +7,14 @@ import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.CameraUpdate;
@@ -39,8 +41,7 @@ import butterknife.OnClick;
  * A simple {@link Fragment} subclass.
  */
 public class RestoInfoFragment extends Fragment implements OnMapReadyCallback{
-
-
+    private static final String TAG = "RestoInfoFragment";
     private final static String KEY_RESTO = "resto";
 
 
@@ -64,9 +65,10 @@ public class RestoInfoFragment extends Fragment implements OnMapReadyCallback{
     @BindView(R.id.routeBeschrijving)
     Button routeBeschrijving;
 
-
+    /**
+     * required empty constructor for fragments
+     */
     public RestoInfoFragment() {
-        // Required empty public constructor
     }
 
 
@@ -127,7 +129,6 @@ public class RestoInfoFragment extends Fragment implements OnMapReadyCallback{
         super.onStop();
 
     }
-    //
 
     @Override
     public void onStart(){
@@ -136,6 +137,7 @@ public class RestoInfoFragment extends Fragment implements OnMapReadyCallback{
         Bundle args = getArguments();
         if(args != null && args.containsKey("resto")){
         setContent((Restaurant)args.getParcelable("resto"));
+            Log.i(TAG,"resto has: " + resto.getNaam() + "\nwith location: " + resto.getLocation() + "\nand description: " + resto.getOmschrijving());
         }
     }
 
@@ -175,6 +177,8 @@ public class RestoInfoFragment extends Fragment implements OnMapReadyCallback{
         googleMap = map;
 
             latLng = getLocationFromAddress(resto.getLocation());
+        try {
+            Log.i(TAG, "latlng = " + latLng);
             googleMap.addMarker(new MarkerOptions()
                     .position(latLng)
                     .title(resto.getNaam()));
@@ -189,9 +193,12 @@ public class RestoInfoFragment extends Fragment implements OnMapReadyCallback{
             int width = getResources().getDisplayMetrics().widthPixels;
             int height = getResources().getDisplayMetrics().heightPixels;
 
-            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds,width,height,padding);
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding);
             googleMap.moveCamera(cameraUpdate);
-            googleMap.animateCamera(CameraUpdateFactory.zoomTo(    15.0f));
+            googleMap.animateCamera(CameraUpdateFactory.zoomTo(15.0f));
+        } catch (Exception e) {
+            Toast.makeText(getContext(),R.string.google_maps_error,Toast.LENGTH_SHORT).show();
+        }
 
     }
 
@@ -200,14 +207,12 @@ public class RestoInfoFragment extends Fragment implements OnMapReadyCallback{
      * @param strAddress kan zijn: adres, naam belangrijk gebouw,stad, ...
      * @return
      */
-    public LatLng getLocationFromAddress( String strAddress) {
-
+    public LatLng getLocationFromAddress(String strAddress) {
         Geocoder coder = new Geocoder(getContext());
         List<Address> address;
         LatLng p1 = null;
 
         try {
-            // May throw an IOException
             address = coder.getFromLocationName(strAddress, 5);
 
             if (address == null) {
