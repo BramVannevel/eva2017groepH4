@@ -59,15 +59,13 @@ const beheerFactory = angular.module('app.beheerFactory', [])
         });
     }
     //UPDATE
-    function updateGerecht($scope, gerecht) {
-            $http.put(GERECHTEN_API_ENDPOINT.url + `/${gerecht._id}`, {
-                prijs: gerecht.updatedPrijs,
-                naam: gerecht.updatedNaam,
-                allergenen: gerecht.updatedAllergenen,
-                bestelbaar: gerecht.updatedBestelbaar
+    function updateGerecht($scope, updatedGerecht) {
+            $http.put(GERECHTEN_API_ENDPOINT.url + `/${updatedGerecht._id}`, {
+                naam: updatedGerecht.naam,
+                categorie: updatedGerecht.categorie,
+                allergenen: updatedGerecht.allergenen
             }).success(response => {
                 getGerechten($scope);
-                gerecht.isEditing = false;
             });
     }
 

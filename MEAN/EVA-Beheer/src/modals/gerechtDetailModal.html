@@ -1,0 +1,31 @@
+<div>
+   <h4 class="content__centerText">Details</h4>
+
+   <form class="content__centerContent">
+     <div class="form-group content__centerContent">
+       <input type="text" class="form-control content__create-input" placeholder="Naam*" ng-value="gerecht.naam" ng-model="updatedGerecht.naam">
+     </div>
+     <md-input-container class="content__create-dropdown">
+            <label ng-show="!updatedGerecht.categorie">{{gerecht.categorie.naam}}</label>
+            <md-select ng-value="gerecht.categorie"ng-model="updatedGerecht.categorie">
+                <md-option ng-repeat="categorie in categorieen" ng-value="categorie">
+                    {{categorie.naam}}
+                </md-option>
+            </md-select>
+     </md-input-container>
+     <br />
+     <h5 class="content__taskForm content__centerSubtitle">Wijzig de allergenen die dit gerecht bevat:</h5>
+     <div class="content__create-dropdown">
+         <md-select md-selected-text="Leeg" ng-model="updatedGerecht.allergenen" multiple>
+                    <md-option ng-value="allergeen" ng-selected="checkAlreadySelectedAllergens(allergeen, gerecht)" ng-repeat="allergeen in allergenen">
+                        {{allergeen.naam}}
+                    </md-option>
+          </md-select>
+      </div>
+   </form>
+
+   <div class="content__centerText">
+     <button class="btn btn-default content__voegToe-button" ng-click="cancelModal()">Annuleer</button>
+     <button class="btn content__generalButtonSettings content__voegToe-button" ng-click="ok(updatedGerecht)">Opslaan</button>
+   </div>
+ </div>

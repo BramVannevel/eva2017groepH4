@@ -68,7 +68,7 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), function(re
         var decoded = jwt.decode(token, config.secret);
     var id = req.params.id;
     Gerecht.update({ _id: mongoose.Types.ObjectId(id) }, {
-        $set: { prijs: req.body.prijs, allergenen: req.body.allergenen, naam: req.body.naam, bestelbaar: req.body.bestelbaar }
+        $set: { naam: req.body.naam, categorie: req.body.categorie, allergenen: req.body.allergenen }
     }, function(err) {
         if (err) { console.log(err); }
 
