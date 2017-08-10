@@ -31,20 +31,21 @@ const gerechtDetailModalController = angular.module('app.gerechtDetailModalContr
   };
 
   $scope.ok = function(updatedGerecht) {
+    if(updatedGerecht !== undefined) {
+        updatedGerecht._id = $scope.gerecht._id;
+        if(!updatedGerecht.naam)
+          updatedGerecht.naam = $scope.gerecht.naam;
+        if(!updatedGerecht.categorie)
+          updatedGerecht.categorie = $scope.gerecht.categorie;
+        if(!updatedGerecht.allergenen)
+          updatedGerecht.allergenen = $scope.gerecht.allergenen;
+        if(!updatedGerecht.omschrijving)
+          updatedGerecht.omschrijving = $scope.gerecht.omschrijving;
 
-  if(updatedGerecht !== undefined) {
-      updatedGerecht._id = $scope.gerecht._id;
-      if(!updatedGerecht.naam)
-        updatedGerecht.naam = $scope.gerecht.naam;
-      if(!updatedGerecht.categorie)
-        updatedGerecht.categorie = $scope.gerecht.categorie;
-      if(!updatedGerecht.allergenen)
-        updatedGerecht.allergenen = $scope.gerecht.allergenen;
-
-      $uibModalInstance.close(updatedGerecht);
-    } else {
-      return;
-    }
+        $uibModalInstance.close(updatedGerecht);
+      } else {
+        return;
+      }
   };
 });
 

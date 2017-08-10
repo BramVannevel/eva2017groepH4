@@ -41,10 +41,12 @@ const beheerFactory = angular.module('app.beheerFactory', [])
             $scope.categorieen = response.categorieen;
         });
     }
+
     //POST
     function createGerecht(modalScope, $scope) {
         $http.post(GERECHTEN_API_ENDPOINT.url + '/', {
             naam: modalScope.gerechtNaam,
+            omschrijving: modalScope.gerechtOmschrijving,
             categorie: modalScope.selectedCategorie,
             allergenen: modalScope.selection
         }).success(response => {
@@ -62,6 +64,7 @@ const beheerFactory = angular.module('app.beheerFactory', [])
     function updateGerecht($scope, updatedGerecht) {
             $http.put(GERECHTEN_API_ENDPOINT.url + `/${updatedGerecht._id}`, {
                 naam: updatedGerecht.naam,
+                omschrijving: updatedGerecht.omschrijving,
                 categorie: updatedGerecht.categorie,
                 allergenen: updatedGerecht.allergenen
             }).success(response => {

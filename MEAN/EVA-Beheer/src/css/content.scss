@@ -28,6 +28,12 @@
         margin: 0 auto;
         width: 330px;
     }
+    &__inputArea {
+      display: block;
+      margin: 0 auto;
+      width: 500px;
+      min-height: 150px;
+    }
     &__update-prijs {
         width: 100px;
     }
