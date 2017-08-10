@@ -87,25 +87,31 @@ const beheerControllers = angular.module('app.beheerControllers', [])
       modalInstance.result.then(function(updatedGerecht) {
           updateGerecht($scope, updatedGerecht);
       });
-    }
+    };
 
-        $scope.filterGerechten = function(gerecht) {
-            if ($scope.filterCategorie) {
-                return gerecht.categorie.naam === $scope.filterCategorie;
-            }else if($scope.filterNaam){
-              return gerecht.naam === $scope.filterNaam;
-            }else{
+    $scope.filterGerechtenOpNaam = function(gerecht) {
+        if ($scope.filterNaam) {
+            if (gerecht.naam.toLowerCase().includes($scope.filterNaam.toLowerCase()))
                 return gerecht;
-            }
-        };
-        //MAAK FILTER LEEG
-        $scope.eraseFilter = () => {
-            $scope.filterCategorie = '';
-            $scope.filterNaam = '';
+        } else {
+            return gerecht;
         }
+    };
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    $scope.filterGerechtenOpCategorie = function(gerecht) {
+        if ($scope.filterCategorie) {
+            return gerecht.categorie.naam === $scope.filterCategorie;
+        }else if($scope.filterNaam){
+          return gerecht.naam === $scope.filterNaam;
+        }else{
+            return gerecht;
+        }
+    };
 
+    $scope.eraseFilter = () => {
+        $scope.filterCategorie = '';
+        $scope.filterNaam = '';
+    }
 
     const { createGerecht, deleteGerecht, updateGerecht } = beheerFactory;
 

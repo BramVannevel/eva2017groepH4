@@ -7,9 +7,8 @@
     <td>
         <!--FILTER CATEGORIE-->
         <md-input-container class="menuItem__filterAndEraseFilter">
-            <label>Filter categorie</label>
+            <label ng-show="!filterCategorie">Filter categorie</label>
             <md-select ng-model="filterCategorie">
-                <!--ng-value categorie en NIET categorie.naam, we willen het object en niet enkel de String naam van het object anders kunnen we het niet opslaan in ons gerecht (in factory create)-->
                 <md-option ng-repeat="categorie in categorieen" ng-value="categorie.naam">
                     {{categorie.naam}}
                 </md-option>
@@ -19,16 +18,9 @@
         </td>
         <!--FILTER NAAM-->
         <td>
-          <md-input-container class="menuItem__filterAndEraseFilter">
-            <label>Filter naam</label>
-            <md-select ng-model="filterNaam">
-                  <md-option ng-repeat="gerecht in gerechten" ng-value="gerecht.naam">
-                    {{gerecht.naam}}
-                </md-option>
-            </md-select>
-        </md-input-container>
-        <img src="{{clearFilter}}" ng-click="eraseFilter()" class="actionIcons" />
-      </td>
+          <input class="form-control content__filter-input" type="text" placeholder="Filter op naam" ng-model="filterNaam" class="content__dropdownFilter">
+          <img src="{{clearFilter}}" ng-click="eraseFilter()" class="actionIcons" />
+        </td>
         <td></td>
         <td></td>
         </tr>
@@ -39,7 +31,7 @@
             <th>Acties</th>
         </tr>
         <!--Filterbaar-->
-        <tr ng-repeat="gerecht in gerechten | orderBy:'categorie.naam' | filter:filterGerechten">
+        <tr ng-repeat="gerecht in gerechten | orderBy:'categorie.naam' | filter:filterGerechtenOpNaam | filter:filterGerechtenOpCategorie">
              <td>
                 <span>{{gerecht.categorie.naam}}</span>
             </td>
