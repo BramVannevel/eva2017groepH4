@@ -7,7 +7,7 @@
     <td>
         <!--FILTER CATEGORIE-->
         <md-input-container class="menuItem__filterAndEraseFilter">
-            <label ng-show="!filterCategorie">Filter categorie</label>
+            <label ng-show="!filterCategorie">Filter op categorie</label>
             <md-select ng-model="filterCategorie">
                 <md-option ng-repeat="categorie in categorieen" ng-value="categorie.naam">
                     {{categorie.naam}}
@@ -31,7 +31,7 @@
             <th>Acties</th>
         </tr>
         <!--Filterbaar-->
-        <tr ng-repeat="gerecht in gerechten | orderBy:'categorie.naam' | filter:filterGerechtenOpNaam | filter:filterGerechtenOpCategorie">
+        <tr ng-repeat="gerecht in gerechten | orderBy:'categorie.naam' | filter:filterGerechtenOpNaam | filter:filterGerechtenOpCategorie | paginationFilter: (currentPage-1)*pageSize | limitTo: pageSize"">
              <td>
                 <span>{{gerecht.categorie.naam}}</span>
             </td>
@@ -56,4 +56,6 @@
             </td>
         </tr>
     </table>
+    <!--Pagination-->
+    <ul uib-pagination total-items="gerechten.length" ng-model="currentPage" items-per-page="pageSize"></ul>
 </div>

@@ -7,6 +7,8 @@ const beheerControllers = angular.module('app.beheerControllers', [])
 .controller('categorieController', function($scope, beheerFactory, $uibModal) {
     //IMAGES
     $scope.imgDelete = require('../img/delete.png');
+    $scope.clearFilter = require('../img/clearFilter.png');
+    
     var $ctrl = this;
     $ctrl.animationsEnabled = true;
 
@@ -28,6 +30,19 @@ const beheerControllers = angular.module('app.beheerControllers', [])
       });
     };
 
+    $scope.filterCategorieenOpNaam = function(categorie) {
+        if ($scope.filterNaam) {
+            if (categorie.naam.toLowerCase().includes($scope.filterNaam.toLowerCase()))
+                return categorie;
+        } else {
+            return categorie;
+        }
+    };
+
+    $scope.eraseFilter = () => {
+        $scope.filterNaam = '';
+    }
+
     const { createCategorie, deleteCategorie } = beheerFactory;
 
     $scope.createCategorie = _.partial(createCategorie, $scope);
@@ -44,6 +59,10 @@ const beheerControllers = angular.module('app.beheerControllers', [])
 
     beheerFactory.getGerechten($scope);
     beheerFactory.getCategorieen($scope);
+
+    //pagination
+    $scope.currentPage = 1;
+    $scope.pageSize = 5;
 
     var $ctrl = this;
     $ctrl.animationsEnabled = true;
