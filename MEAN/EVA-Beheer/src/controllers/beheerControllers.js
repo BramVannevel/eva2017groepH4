@@ -8,7 +8,11 @@ const beheerControllers = angular.module('app.beheerControllers', [])
     //IMAGES
     $scope.imgDelete = require('../img/delete.png');
     $scope.clearFilter = require('../img/clearFilter.png');
-    
+
+    //pagination
+    $scope.currentPage = 1;
+    $scope.pageSize = 5;
+
     var $ctrl = this;
     $ctrl.animationsEnabled = true;
 

@@ -15,7 +15,7 @@
             <th>Naam</th>
             <th>Acties</th>
         </tr>
-        <tr ng-repeat="categorie in categorieen | filter:filterCategorieenOpNaam">
+        <tr ng-repeat="categorie in categorieen | filter:filterCategorieenOpNaam | paginationFilter: (currentPage-1)*pageSize | limitTo: pageSize">
             <td>
                 {{categorie.naam}}
             </td>
@@ -24,4 +24,6 @@
             </td>
         </tr>
     </table>
+    <!--Pagination-->
+    <ul uib-pagination total-items="categorieen.length" ng-model="currentPage" items-per-page="pageSize"></ul>
 </div>
