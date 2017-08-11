@@ -2,12 +2,16 @@ import angular from 'angular';
 
 const challengeController = angular.module('app.challengeController', [])
 
-.controller('challengeController', function($scope, challengeFactory, $uibModal, $q) {
+.controller('challengeController', function($scope, challengeFactory, beheerFactory, restaurantsFactory, $uibModal, $q) {
     //IMAGES
     $scope.imgDelete = require('../img/delete.png');
     $scope.imgDetail = require('../img/detail.png');
 
     challengeFactory.getChallenges($scope);
+
+    //Ophalen zodat $scope.restaurants en $scope.gerechten bestaan om mee te geven aan modal
+    restaurantsFactory.getRestaurants($scope);
+    beheerFactory.getGerechten($scope);
 
     var $ctrl = this;
     $ctrl.animationsEnabled = true;
