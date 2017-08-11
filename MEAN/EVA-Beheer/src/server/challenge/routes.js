@@ -50,7 +50,7 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), function(re
           dag: req.body.dag,
           restaurant: req.body.restaurant,
           gerecht: req.body.gerecht,
-          rewared: req.body.reward
+          reward: req.body.reward
         }
     }, function(err) {
         if (err) { console.log(err); }

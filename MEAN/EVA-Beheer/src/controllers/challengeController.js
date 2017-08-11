@@ -38,6 +38,31 @@ const challengeController = angular.module('app.challengeController', [])
       });
     };
 
+    $scope.openChallengeDetailModal = function(challenge) {
+      let modalInstance = $uibModal.open({
+        ariaLabelledBy: 'modal-title',
+        ariaDescribedBy: 'modal-body',
+        controller: 'challengeDetailModalController',
+        controllerAs: '$ctrl',
+        template: require('../modals/challengeDetailModal.html'),
+        size: 'lg',
+        resolve: {
+          getChosenChallenge: function() {
+            return challenge;
+          },
+          getGerechten: function() {
+            return $scope.gerechten;
+          },
+          getRestaurants: function() {
+            return $scope.restaurants;
+          }
+        }
+      });
+      modalInstance.result.then(function(updatedChallenge) {
+          updateChallenge($scope, updatedChallenge);
+      });
+    }
+
     const { deleteChallenge, getChallenges, updateChallenge, createChallenge } = challengeFactory;
 
     $scope.deleteChallenge = _.partial(deleteChallenge, $scope);

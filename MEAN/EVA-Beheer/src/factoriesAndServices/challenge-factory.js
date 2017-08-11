@@ -34,14 +34,14 @@ const challengeFactory = angular.module('app.challengeFactory', [])
       gerecht: updatedChallenge.gerecht,
       reward: updatedChallenge.reward
     }).success(response => {
-      getRestaurants($scope);
+      getChallenges($scope);
     });
   }
 
   //DEL
   function deleteChallenge($scope, challenge) {
     $http.delete(CHALLENGES_API_ENDPOINT.url + `/${challenge._id}`).success(response => {
-      getBestellingen($scope);
+      getChallenges($scope);
     });
   }
 

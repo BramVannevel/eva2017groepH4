@@ -1,0 +1,61 @@
+<div>
+  <h4 class="content__centerText">Wijzig deze challenge</h4>
+
+  <form class="content__centerContent">
+    <div class="form-group content__centerContent">
+      <input type="text" class="form-control content__create-input" placeholder="Titel*" ng-value="challenge.titel" ng-model="updatedChallenge.titel">
+    </div>
+    <h5 class="content__taskForm content__centerSubtitle">Geef een omschrijving aan deze challenge*</h5>
+    <textarea class="content__inputArea" placeholder="Omschrijving..." ng-model="updatedChallenge.omschrijving" ng-init="updatedChallenge.omschrijving=challenge.omschrijving"></textarea>
+    <br />
+<h5 class="content__taskForm content__centerSubtitle">Dag van de challenge*</h5>
+    <md-input-container class="content__centerMdSelect">
+        <md-select ng-model="updatedChallenge.dag" md-selected-text="getSelectedDay()">
+          <md-optgroup label="Dagen">
+            <md-option ng-value="dag" ng-repeat="dag in dagen">Dag {{dag}}</md-option>
+          </md-optgroup>
+        </md-select>
+      </md-input-container>
+
+    <md-autocomplete class="content__autocomplete"
+                md-min-length="0"
+                md-selected-item="updatedChallenge.restaurant"
+                md-search-text-change="searchTextChange(filterRestaurantNaam)"
+                md-search-text="filterRestaurantNaam"
+                md-selected-item-change="selectedItemChange(restaurant)"
+                md-items="restaurant in restaurantSearch(filterRestaurantNaam)"
+                md-item-text="restaurant.naam"
+                md-floating-label="Naam van het restaurant voor deze challenge"
+                md-menu-class="autocomplete-custom-template"
+                ng-init="updatedChallenge.restaurant=challenge.restaurant">
+          <md-item-template>
+              <span md-highlight-text="filterRestaurantNaam" class="item-title" md-hightlight-flags="^i">{{ restaurant.naam }}</span>
+              <span class="autocomplete-metadata" class="item-metadata">
+                <span>Stad: <strong>{{restaurant.adres.stad}}</strong></span>
+              </span>
+          </md-item-template>
+        </md-autocomplete>
+
+        <md-autocomplete class="content__autocomplete"
+                    md-min-length="0"
+                    md-selected-item="updatedChallenge.gerecht"
+                    md-search-text-change="searchTextChange(filterGerechtNaam)"
+                    md-search-text="filterGerechtNaam"
+                    md-selected-item-change="selectedItemChange(gerecht)"
+                    md-items="gerecht in gerechtSearch(filterGerechtNaam)"
+                    md-item-text="gerecht.naam"
+                    md-floating-label="Naam van het gerecht voor deze challenge"
+                    ng-init="updatedChallenge.gerecht=challenge.gerecht">
+              <md-item-template>
+                  <span md-highlight-text="filterGerechtNaam" md-hightlight-flags="^i">{{ gerecht.naam }}</span>
+              </md-item-template>
+            </md-autocomplete>
+
+  <h5 class="content__taskForm content__centerSubtitle">De reward(s) voor het voltooien van deze challenge.</h5>
+    <textarea class="content__inputArea" placeholder="Omschrijving..." ng-model="updatedChallenge.reward" ng-init="updatedChallenge.reward=challenge.reward"></textarea>
+
+  <div class="content__centerText">
+    <button class="btn btn-default content__voegToe-button" ng-click="cancelModal()">Annuleer</button>
+    <button class="btn content__generalButtonSettings content__voegToe-button" ng-click="ok(updatedChallenge)">Opslaan</button>
+  </div>
+</div>
