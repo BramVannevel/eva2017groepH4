@@ -11,7 +11,6 @@ const restaurantsController = angular.module('app.restaurantsController', [])
     //Images
     $scope.imgDelete = require('../img/delete.png');
     $scope.imgDetail = require('../img/detail.png');
-    $scope.arrow = require('../img/arrow.png');
     $scope.clearFilter = require('../img/clearFilter.png');
 
     let params = {
@@ -73,19 +72,6 @@ const restaurantsController = angular.module('app.restaurantsController', [])
     };
 
     //////////////////// FILTERS ////////////////////
-
-    //Filter gerechten
-    //filterCategorie bevat de naam van de geselecteerde categorie
-    //In de ng-repeat overlopen we alle gerechten en filteren met deze methode zodat we enkel die gerechten tonen met een categorie gelijk aan de geselecteerde categorie.
-    //indien niks geselecteerd is in de dropdown om te filteren returnen we gewoon alle gerechten aan de gebruiker.
-    $scope.filterGerechten = function(gerecht) {
-        if ($scope.filterCategorie) {
-            return gerecht.categorie.naam === $scope.filterCategorie;
-        } else {
-            return gerecht;
-        }
-    };
-
     //Filter tabel met restaurants
     $scope.filterRestaurants = function(restaurant) {
         if ($scope.filterNaam) {

@@ -2,29 +2,50 @@ import angular from 'angular';
 
 const beheerControllers = angular.module('app.beheerControllers', [])
 
-
-////////////////////////// ALLERGEEN CONTROLLER //////////////////////////
-
-.controller('allergeenController', function($scope, beheerFactory) {
-    //IMAGES
-    $scope.imgDelete = require('../img/delete.png');
-
-    //haalt de allergenenlijst op bij het opstarten van de pagina
-    beheerFactory.getAllergenen($scope);
-
-    const { createAllergeen, deleteAllergeen, getAllergenen } = beheerFactory;
-
-    $scope.createAllergeen = _.partial(createAllergeen, $scope);
-    $scope.deleteAllergeen = _.partial(deleteAllergeen, $scope);
-})
-
 ////////////////////////// CATEGORIE CONTROLLER //////////////////////////
 
-.controller('categorieController', function($scope, beheerFactory) {
+.controller('categorieController', function($scope, beheerFactory, $uibModal) {
     //IMAGES
     $scope.imgDelete = require('../img/delete.png');
+    $scope.clearFilter = require('../img/clearFilter.png');
+
+    //pagination
+    $scope.currentPage = 1;
+    $scope.pageSize = 5;
+
+    var $ctrl = this;
+    $ctrl.animationsEnabled = true;
 
     beheerFactory.getCategorieen($scope);
+
+    $scope.openAddCategorieModal = function() {
+      let modalInstance = $uibModal.open({
+        ariaLabelledBy: 'modal-title',
+        ariaDescribedBy: 'modal-body',
+        controller: 'categorieModalController',
+        controllerAs: '$ctrl',
+        template: require('../modals/categorieModal.html'),
+        size: 'lg',
+        resolve: {
+        }
+      });
+      modalInstance.result.then(function(modalScope) {
+          createCategorie(modalScope, $scope);
+      });
+    };
+
+    $scope.filterCategorieenOpNaam = function(categorie) {
+        if ($scope.filterNaam) {
+            if (categorie.naam.toLowerCase().includes($scope.filterNaam.toLowerCase()))
+                return categorie;
+        } else {
+            return categorie;
+        }
+    };
+
+    $scope.eraseFilter = () => {
+        $scope.filterNaam = '';
+    }
 
     const { createCategorie, deleteCategorie } = beheerFactory;
 
@@ -34,91 +55,86 @@ const beheerControllers = angular.module('app.beheerControllers', [])
 
 ////////////////////////// GERECHTEN CONTROLLER //////////////////////////
 
-.controller('gerechtController', function($scope, beheerFactory) {
+.controller('gerechtController', function($scope, beheerFactory, $uibModal) {
     //IMAGES
     $scope.imgDelete = require('../img/delete.png');
-    $scope.imgSave = require('../img/save.png');
-    $scope.imgEdit = require('../img/edit.png');
-    $scope.imgCancel = require('../img/cancel.png');
-
-    beheerFactory.getGerechten($scope);
-
-    //afbeelding inladen
-    $scope.afbeeldingBestelbaar = require('../img/categorie/bestelbaar.png');
-    //Afbeelding pijl inladen
-    $scope.arrow = require('../img/arrow.png');
+    $scope.imgDetail = require('../img/detail.png');
     $scope.clearFilter = require('../img/clearFilter.png');
 
+    beheerFactory.getGerechten($scope);
+    beheerFactory.getCategorieen($scope);
 
+    //pagination
+    $scope.currentPage = 1;
+    $scope.pageSize = 5;
 
-    //FILTER
-        $scope.filterGerechten = function(gerecht) {
-            if ($scope.filterCategorie) {
-                return gerecht.categorie.naam === $scope.filterCategorie;
-            }else if($scope.filterNaam){
-              return gerecht.naam === $scope.filterNaam;
-            }else{
-                return gerecht;
-            }
-        };
-        //MAAK FILTER LEEG
-        $scope.eraseFilter = () => {
-            $scope.filterCategorie = '';
-            $scope.filterNaam = '';
+    var $ctrl = this;
+    $ctrl.animationsEnabled = true;
+
+    $scope.openAddGerechtModal = function() {
+      let modalInstance = $uibModal.open({
+        ariaLabelledBy: 'modal-title',
+        ariaDescribedBy: 'modal-body',
+        controller: 'gerechtModalController',
+        controllerAs: '$ctrl',
+        template: require('../modals/gerechtModal.html'),
+        size: 'lg',
+        resolve: {
+          getCategorieen: function() {
+            return $scope.categorieen;
+          }
         }
-
-
-    //////CLICK HANDLERS//////
-    //Edit
-    $scope.onEditClick = (gerecht) => {
-        gerecht.isEditing = true;
-        gerecht.updatedPrijs = gerecht.prijs;
-        gerecht.updatedNaam = gerecht.naam;
-        gerecht.updatedBestelbaar = gerecht.bestelbaar;
-        //gerecht.updatedAllergenen = gerecht.allergenen;
-
-    }
-    //OM BIJ EDIT DE VOORHEEN GESELECTEERDE ALLERGENEN VAN EEN GERECHT IN TE LADEN
-    $scope.geselecteerd = (allergeenNaam, gerecht) => {
-      var isVoorheenGeselecteerd=false;
-      angular.forEach(gerecht.allergenen, function(item,key){
-        if(allergeenNaam == item.naam)
-          isVoorheenGeselecteerd = true;
       });
-      return isVoorheenGeselecteerd;
-}
-
-    //Cancel
-    $scope.onCancelClick = (menuItem) => {
-        menuItem.isEditing = false;
+      modalInstance.result.then(function(modalScope) {
+          createGerecht(modalScope, $scope);
+      });
     };
 
-    ////////// ALLERGENEN ZONDER DROPDOWN, MAAR MET IMAGES, MET DROPDOWN IS ONDERSTAANDE CODE NIET NODIG //////////
-    // geselecteerde allergenen
-    $scope.selection = [];
-
-
-    // helper method om selected allergenen te krijgen
-    $scope.selectedAllergenen = function selectedAllergenen() {
-        return filterFilter($scope.allergenen, { selected: true });
-    };
-
-    // de allergenen opvolgen voor verandering
-    //if toegevoegd, fout TypeError: Cannot read property nv of undefined is verdwenen, ons object moet eerst bestaan voor er gewatched wordt.
-    $scope.$watch('allergenen|filter:{selected:true}', function(nv) {
-        if (nv) {
-            $scope.selection = nv.map(function(allergeen) {
-                return allergeen;
-            });
+    $scope.openGerechtDetailModal = function(gerecht) {
+      let modalInstance = $uibModal.open({
+        ariaLabelledBy: 'modal-title',
+        ariaDescribedBy: 'modal-body',
+        controller: 'gerechtDetailModalController',
+        controllerAs: '$ctrl',
+        template: require('../modals/gerechtDetailModal.html'),
+        size: 'lg',
+        resolve: {
+          getCategorieen: function() {
+            return $scope.categorieen;
+          },
+          getChosenGerecht: function() {
+            return gerecht;
+          }
         }
-    }, true);
-
-    //IMAGES REQUIRING ZODAT WEBPACK KAN RESOLVEN
-    $scope.loadImage = function(image) {
-        return require('../img/allergenen/' + image + '.png');
+      });
+      modalInstance.result.then(function(updatedGerecht) {
+          updateGerecht($scope, updatedGerecht);
+      });
     };
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    $scope.filterGerechtenOpNaam = function(gerecht) {
+        if ($scope.filterNaam) {
+            if (gerecht.naam.toLowerCase().includes($scope.filterNaam.toLowerCase()))
+                return gerecht;
+        } else {
+            return gerecht;
+        }
+    };
+
+    $scope.filterGerechtenOpCategorie = function(gerecht) {
+        if ($scope.filterCategorie) {
+            return gerecht.categorie.naam === $scope.filterCategorie;
+        }else if($scope.filterNaam){
+          return gerecht.naam === $scope.filterNaam;
+        }else{
+            return gerecht;
+        }
+    };
+
+    $scope.eraseFilter = () => {
+        $scope.filterCategorie = '';
+        $scope.filterNaam = '';
+    }
 
     const { createGerecht, deleteGerecht, updateGerecht } = beheerFactory;
 

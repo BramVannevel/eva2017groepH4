@@ -1,18 +1,21 @@
 <div class="container">
-    <h4 class="menuItem__taskForm">Voeg een categorie toe aan de databank</h4>
-    <form ng-submit="createCategorie()" name="categorieForm">
-        <input class="form-control menuItem__create-input" placeholder="Naam" ng-model="categorieNaam" />
-        <br>
-
-        <button class="btn btn-success menuItem__voegToe-button">Voeg Categorie Toe</button>
-    </form>
-
+  <h4 class="content__centerText">Categorieën voor gerechten</h4>
+  <button class="btn content__generalButtonSettings" ng-click="openAddCategorieModal()">Voeg een categorie toe</button>
     <table class="table table-striped">
+      <!--Rij met filters-->
+        <tr class="menuItem__filterCategorie">
+            <!--FILTER NAAM-->
+            <td>
+              <input class="form-control content__filter-input-no-margin" type="text" placeholder="Filter op naam" ng-model="filterNaam" class="content__dropdownFilter">
+              <img src="{{clearFilter}}" ng-click="eraseFilter()" class="actionIcons" />
+            </td>
+            <td></td>
+            </tr>
         <tr>
             <th>Naam</th>
             <th>Acties</th>
         </tr>
-        <tr ng-repeat="categorie in categorieen">
+        <tr ng-repeat="categorie in categorieen | filter:filterCategorieenOpNaam | paginationFilter: (currentPage-1)*pageSize | limitTo: pageSize">
             <td>
                 {{categorie.naam}}
             </td>
@@ -21,4 +24,6 @@
             </td>
         </tr>
     </table>
+    <!--Pagination-->
+    <ul uib-pagination total-items="categorieen.length" ng-model="currentPage" items-per-page="pageSize"></ul>
 </div>
