@@ -14,6 +14,14 @@ const challengeModalController = angular.module('app.challengeModalController', 
     $scope.dagen.push(lowEnd++);
  }
 
+    $scope.getSelectedDay = function() {
+      if ($scope.dag !== undefined) {
+        return "Dag " + $scope.dag;
+      } else {
+        return "Selecteer een dag";
+      }
+    }
+
     //Hide mdSelect on double click (won't close otherwise because we work inside a modal)
     $window.addEventListener('dblclick', function() {
         $mdSelect.hide();
