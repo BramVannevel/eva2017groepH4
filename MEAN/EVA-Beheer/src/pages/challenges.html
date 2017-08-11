@@ -1,0 +1,23 @@
+<div class="container">
+  <h4 class="content__centerText">Challenges</h4>
+  <button class="btn content__generalButtonSettings" ng-click="openAddChallengeModal()">Voeg een challenge toe</button>
+    <table class="table table-striped">
+        <tr>
+          <th>Titel</th>
+          <th>Dag</th>
+          <th>Acties</th>
+        </tr>
+        <tr ng-repeat="challenge in challenges">
+            <td>
+                {{challenge.titel}}
+            </td>
+            <td>
+              {{challenge.dag}}
+            </td>
+            <td>
+                <button class="btn btn-default" ng-click="openChallengeDetailModal(challenge)"><img ng-src="{{imgDetail}}"/></button>
+                <button class="btn btn-default" ng-click="deleteChallenge(challenge)"><img ng-src="{{imgDelete}}"/></button>
+            </td>
+        </tr>
+    </table>
+</div>
