@@ -19,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:id="@+id/imvFoto"
+            android:scaleType="centerCrop"
             />
 
     <LinearLayout
@@ -55,8 +56,8 @@
         android:layout_below="@id/llt"
         android:layout_margin="@dimen/resto_margin"
         android:orientation="horizontal"
-        android:paddingRight="50dp"
-        android:paddingLeft="50dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
         >
 
         <ImageButton
@@ -64,33 +65,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:layout_weight="1"
+            android:layout_weight="0.5"
             android:src="@drawable/ic_phone"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
             />
 
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/routeBeschrijving"
-            android:layout_weight="1"
-            android:src="@drawable/ic_phone"
-            android:background="@android:color/transparent"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/website"
-            android:layout_weight="1"
-            android:src="@drawable/ic_direction"
+            android:src="@drawable/ic_web"
+            android:layout_weight="0.5"
             android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
             android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
             />
 
     </LinearLayout>
