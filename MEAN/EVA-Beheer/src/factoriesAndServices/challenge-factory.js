@@ -20,7 +20,7 @@ const challengeFactory = angular.module('app.challengeFactory', [])
       reward: modalScope.reward
     }).success(response => {
       console.log(response);
-      getRestaurants($scope);
+      getChallenges($scope);
     });
   }
 

@@ -2,7 +2,7 @@ import angular from 'angular';
 
 const challengeController = angular.module('app.challengeController', [])
 
-.controller('challengeController', function($scope, challengeFactory, beheerFactory, restaurantsFactory, $uibModal, $q) {
+.controller('challengeController', function($scope, challengeFactory, beheerFactory, restaurantsFactory, $uibModal) {
     //IMAGES
     $scope.imgDelete = require('../img/delete.png');
     $scope.imgDetail = require('../img/detail.png');
