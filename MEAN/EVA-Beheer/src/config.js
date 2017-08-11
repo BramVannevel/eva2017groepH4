@@ -14,6 +14,7 @@ import restaurantDetailModalController from 'controllers/restaurantDetailModalCo
 import gerechtModalController from 'controllers/gerechtModalController';
 import gerechtDetailModalController from 'controllers/gerechtDetailModalController';
 import categorieModalController from 'controllers/categorieModalController';
+import challengeModalController from 'controllers/challengeModalController';
 import appConstants from 'constants';
 import uiBootstrap from 'angular-ui-bootstrap';
 import ngAnimate from 'angular-animate';
@@ -21,7 +22,8 @@ import material from 'angular-material';
 
 const app = angular.module('app', [ngAnimate, material, uiBootstrap, authServiceEnFactory.name, authControllers.name,
     beheerFactory.name, beheerControllers.name, appConstants.name, uiRouter, restaurantsController.name, restaurantsFactory.name, challengeController.name, challengeFactory.name,
-    paginationFilter.name, restaurantModalController.name, restaurantDetailModalController.name, gerechtModalController.name, categorieModalController.name, gerechtDetailModalController.name
+    paginationFilter.name, restaurantModalController.name, restaurantDetailModalController.name, gerechtModalController.name, categorieModalController.name, gerechtDetailModalController.name,
+    challengeModalController.name
 ]);
 
 app.config(($stateProvider, $urlRouterProvider, $locationProvider, $mdDateLocaleProvider) => {
