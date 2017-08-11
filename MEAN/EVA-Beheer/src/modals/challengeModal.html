@@ -1,18 +1,31 @@
 <div>
-   <h4 class="content__centerText">Nieuwe challenge</h4>
+  <h4 class="content__centerText">Nieuwe challenge</h4>
 
-   <form class="content__centerContent">
-     <div class="form-group content__centerContent">
-       <input type="text" class="form-control content__create-input" placeholder="Titel*" ng-model="titel">
-     </div>
-     <h5 class="content__taskForm content__centerSubtitle">Geef een omschrijving aan deze challenge.</h5>
-     <textarea class="content__inputArea" placeholder="Omschrijving..." ng-model="omshrijving"></textarea>
+  <form class="content__centerContent">
+    <div class="form-group content__centerContent">
+      <input type="text" class="form-control content__create-input" placeholder="Titel*" ng-model="titel">
+    </div>
+    <h5 class="content__taskForm content__centerSubtitle">Geef een omschrijving aan deze challenge.</h5>
+    <textarea class="content__inputArea" placeholder="Omschrijving..." ng-model="omshrijving"></textarea>
+<h5 class="content__taskForm content__centerSubtitle">De reward(s) voor het voltooien van deze challenge.</h5>
+  <textarea class="content__inputArea" placeholder="Omschrijving..." ng-model="reward"></textarea>
 
+  <md-autocomplete class="content__create-input"
+              md-min-length="0"
+              md-selected-item="selectedItem"
+              md-search-text-change="searchTextChange(filterNaam)"
+              md-search-text="filterNaam"
+              md-selected-item-change="selectedItemChange(restaurant)"
+              md-items="restaurant in querySearch(filterNaam)"
+              md-item-text="restaurant.naam"
+              md-floating-label="Naam van het restaurant voor deze challenge">
+        <md-item-template>
+            <span md-highlight-text="filterNaam" md-hightlight-flags="^i">{{ restaurant.naam }}</span>
+        </md-item-template>
+      </md-autocomplete>
 
-     <h5 class="content__taskForm content__centerSubtitle">De reward(s) voor het voltooien van deze challenge.</h5>
-     <textarea class="content__inputArea" placeholder="Omschrijving..." ng-model="reward"></textarea>
-   <div class="content__centerText">
-     <button class="btn btn-default content__voegToe-button" ng-click="cancelModal()">Annuleer</button>
-     <button class="btn content__generalButtonSettings content__voegToe-button" ng-click="ok()">Opslaan</button>
-   </div>
- </div>
+  <div class="content__centerText">
+    <button class="btn btn-default content__voegToe-button" ng-click="cancelModal()">Annuleer</button>
+    <button class="btn content__generalButtonSettings content__voegToe-button" ng-click="ok()">Opslaan</button>
+  </div>
+</div>

@@ -27,3 +27,8 @@
 .md-select-menu-container {
         z-index: 9999;
 }
+
+/*Display the md-autocomplete-suggestions-container on top of the modal*/
+.md-autocomplete-suggestions-container{
+   z-index:100000 !important; /* any number of choice > 1050*/
+  }
