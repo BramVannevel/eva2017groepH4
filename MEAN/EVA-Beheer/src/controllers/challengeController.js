@@ -6,8 +6,13 @@ const challengeController = angular.module('app.challengeController', [])
     //IMAGES
     $scope.imgDelete = require('../img/delete.png');
     $scope.imgDetail = require('../img/detail.png');
+    $scope.clearFilter = require('../img/clearFilter.png');
 
     challengeFactory.getChallenges($scope);
+
+    //pagination
+    $scope.currentPage = 1;
+    $scope.pageSize = 5;
 
     //Ophalen zodat $scope.restaurants en $scope.gerechten bestaan om mee te geven aan modal
     restaurantsFactory.getRestaurants($scope);
@@ -61,6 +66,31 @@ const challengeController = angular.module('app.challengeController', [])
       modalInstance.result.then(function(updatedChallenge) {
           updateChallenge($scope, updatedChallenge);
       });
+    }
+
+    $scope.filterChallengesOpTitel = function(challenge) {
+        if ($scope.filterTitel) {
+            if (challenge.titel.toLowerCase().includes($scope.filterTitel.toLowerCase()))
+                return challenge;
+        } else {
+            return challenge;
+        }
+    };
+
+    $scope.filterChallengesOpDag = function(challenge) {
+        if ($scope.filterDag) {
+          console.log($scope.filterDag);
+          console.log(challenge.dag.toString());
+            if (challenge.dag.toString() == $scope.filterDag);
+                return challenge;
+        } else {
+            return challenge;
+        }
+    };
+
+    $scope.eraseFilter = () => {
+        $scope.filterTitel = '';
+        $scope.filterDag = '';
     }
 
     const { deleteChallenge, getChallenges, updateChallenge, createChallenge } = challengeFactory;

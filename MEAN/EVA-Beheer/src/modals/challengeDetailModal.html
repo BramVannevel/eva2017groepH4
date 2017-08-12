@@ -45,7 +45,7 @@
                     md-items="gerecht in gerechtSearch(filterGerechtNaam)"
                     md-item-text="gerecht.naam"
                     md-floating-label="Naam van het gerecht voor deze challenge"
-                    ng-init="updatedChallenge.gerecht=challenge.gerecht">
+                    ng-init="challengeGerechtInit()">
               <md-item-template>
                   <span md-highlight-text="filterGerechtNaam" md-hightlight-flags="^i">{{ gerecht.naam }}</span>
               </md-item-template>

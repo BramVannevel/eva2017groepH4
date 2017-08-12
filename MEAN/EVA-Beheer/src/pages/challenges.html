@@ -2,12 +2,22 @@
   <h4 class="content__centerText">Challenges</h4>
   <button class="btn content__generalButtonSettings" ng-click="openAddChallengeModal()">Voeg een challenge toe</button>
     <table class="table table-striped">
+      <tr class="content__filterCategorie">
+          <!--FILTER NAAM-->
+          <td>
+            <input class="form-control content__filter-input-no-margin" type="text" placeholder="Filter op titel" ng-model="filterTitel" class="content__dropdownFilter">
+            <img src="{{clearFilter}}" ng-click="eraseFilter()" class="actionIcons" />
+          </td>
+          <td><input class="form-control content__filter-input-no-margin" type="text" placeholder="Filter op dag" ng-model="filterDag" class="content__dropdownFilter">
+          <img src="{{clearFilter}}" ng-click="eraseFilter()" class="actionIcons" /></td>
+          <td></td>
+          </tr>
         <tr>
           <th>Titel</th>
           <th>Dag</th>
           <th>Acties</th>
         </tr>
-        <tr ng-repeat="challenge in challenges">
+        <tr ng-repeat="challenge in challenges | filter:filterChallengesOpTitel | filter: filterChallengesOpDag | paginationFilter: (currentPage-1)*pageSize | limitTo: pageSize">
             <td>
                 {{challenge.titel}}
             </td>
@@ -20,4 +30,6 @@
             </td>
         </tr>
     </table>
+    <!--Pagination-->
+    <ul uib-pagination total-items="challenges.length" ng-model="currentPage" items-per-page="pageSize"></ul>
 </div>
