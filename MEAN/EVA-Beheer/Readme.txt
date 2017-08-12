@@ -1,81 +1,61 @@
 DE APPLICATIE RUNNEN:
 
-- Start MongoDB
-commando: mongod
+Nodige software:
+- NodeJS 4.6.0
+- MongoDB: 3.4.6 2008R2Plus SSL (64 bit)
+- Webbrowser
 
-- Start de applicatie
-commando: npm run dev
+1. Start MongoDB
+commando: mongod (indien een PATH variabele werd ingesteld)
 
+2. Start de applicatie
+- Open een terminal en navigeer naar de projectfolder
+- Voer éénmaal onderstaand commando uit om de dependencies van het project te installeren:
+  npm install --> er wordt een map node_modules aangemaakt
+- Voer onderstaand commando uit om de applicatie uit te voeren
+  npm run dev (Voor development, npm-start wordt gebruikt door de builder van heroku.com)
+
+--> De webapplicatie is nu zichtbaar op http://localhost:8080
 
 DE APPLICATIE DEPLOYEN
 - Genereer de static resources van de applicatie
-commando: npm run build
+  commando: npm run build
 
-- push naar de gewenste server
+- Push naar de gewenste server (Bv. Heroku)
+  De server build met het commando npm start
 
+=========== REST ROUTES ===========
 
-=========== REST ROUTES VOOR EXTERNE APPLICATIES ===========
+ONDERSTAANDE ROUTES RETURNEN JSON EN ZIJN BESCHIKBAAR VOOR IN DE APP GEREGISTREERDE USERS:
 
-ONDERSTAANDE ROUTES RETURNEN JSON:
+!! Verplichte header bij alle HTTP calls (behalve registreren en inloggen) !!
+Key: Authorization Value: JWT "HetVerkregenToken"
 
-HAAL CATEGORIEEN OP:
-https://restobeheerapp.herokuapp.com/categorieen/categorieList
+Het token kan je verkrijgen door een call te doen naar het endpoint om in te loggen
 
---------------------------------------------------------------
+REGISTREREN [POST]
+https://evabeheer.herokuapp.com/user/signup
+Body: x-www-form-urlencoded
+name: JeUsername
+password: JePaswoord
 
-HAAL ALLERGENEN OP:
-https://restobeheerapp.herokuapp.com/allergenen/allergeenList
+INLOGGEN [POST]
+https://evabeheer.herokuapp.com/user/authenticate
+Body: x-www-form-urlencoded
+name: JeUsername
+password: JePaswoord
 
---------------------------------------------------------------
+HAAL RESTAURANTS OP [GET]
+https://evabeheer.herokuapp.com/restaurants/list
 
-HAAL GERECHTEN OP:
-https://restobeheerapp.herokuapp.com/gerechten/gerechtList
+HAAL GERECHTEN OP [GET]
+https://evabeheer.herokuapp.com/gerechten/list
 
---------------------------------------------------------------
+HAAL CATEGORIEEN OP [GET]
+https://evabeheer.herokuapp.com/categorieen/list
 
-HAAL ALLE GERECHTEN DIE OP HET MENU STAAN OP:
-https://restobeheerapp.herokuapp.com/menu/menuList
-
---------------------------------------------------------------
-BESTELLINGEN:
-
-VOEG BESTELLING TOE (POST)
-https://restobeheerapp.herokuapp.com/bestellingen/
-
-JSON structuur voor post:
-{
-  datum: Date,
-  gebruiker: String,
-	gerechten:
-  	[
-      		{
-			      naam: String,
-        		prijs: Number
-      		}
-  	]
-}
-
-Bijvoorbeeld:
-{
-  "datum": "2016-12-13T02:15:12.356Z",
-  "gebruiker": "Dennis",
-  "gerechten":
-  	[
-      	{
-		      "naam": "Cola",
-        	"prijs": 0.60
-      	},
-      	{
-      		"naam": "Broodje Kaas",
-      		"prijs": 1.20
-      	}
-  	]
-}
-
-HAAL BESTELLINGEN OP VAN EEN GEBRUIKER VAN DE EXTERNE APPLICATIE (GET)
-Bijvoorbeeld:
-https://restobeheerapp.herokuapp.com/bestellingen/bestellingList/dennis.noens@telenet.be
---------------------------------------------------------------
+HAAL CHALLENGES OP [GET]
+https://evabeheer.herokuapp.com/challenges/list
 
 
 ========================== EINDE ==========================

@@ -31,7 +31,7 @@
             <th>Acties</th>
         </tr>
         <!--Filterbaar-->
-        <tr ng-repeat="gerecht in gerechten | orderBy:'categorie.naam' | filter:filterGerechtenOpNaam | filter:filterGerechtenOpCategorie | paginationFilter: (currentPage-1)*pageSize | limitTo: pageSize"">
+        <tr ng-repeat="gerecht in gerechten | orderBy:'categorie.naam' | filter:filterGerechtenOpNaam | filter:filterGerechtenOpCategorie | paginationFilter: (currentPage-1)*pageSize | limitTo: pageSize">
              <td>
                 <span>{{gerecht.categorie.naam}}</span>
             </td>

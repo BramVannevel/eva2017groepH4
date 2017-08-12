@@ -139,6 +139,11 @@
       color: #ffffff;
       border-color: #00897B;
     }
+    &__errorMessage {
+      color: #77ffe8;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
 }
 
 th,
