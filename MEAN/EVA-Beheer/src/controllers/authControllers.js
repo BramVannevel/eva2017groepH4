@@ -15,12 +15,25 @@ const authControllers = angular.module('app.authControllers', [])
               if(responseUser.role === 'admin') {
                   $state.go('restaurants');
               } else {
+                $scope.userNotFoundMessage = false;
+                $scope.wrongPasswordMessage = false;
+                $scope.noAdminMessage = true;
                 console.log({
                   title: 'You are not an admin'
                 });
               }
           });
         }, function(errMsg) {
+          if(errMsg.includes("User not found")) {
+                $scope.noAdminMessage = false;
+                $scope.wrongPasswordMessage = false;
+                $scope.userNotFoundMessage = true;
+          }
+          if(errMsg.includes("Wrong password")) {
+                $scope.noAdminMessage = false
+                $scope.userNotFoundMessage = false;
+                $scope.wrongPasswordMessage = true;
+          }
             console.log({
                 title: 'Login failed!',
                 template: errMsg

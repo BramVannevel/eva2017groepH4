@@ -10,7 +10,9 @@ commando: mongod (indien een PATH variabele werd ingesteld)
 
 2. Start de applicatie
 - Open een terminal en navigeer naar de projectfolder
-- Voer onderstaand commando uit
+- Voer éénmaal onderstaand commando uit om de dependencies van het project te installeren:
+  npm install --> er wordt een map node_modules aangemaakt
+- Voer onderstaand commando uit om de applicatie uit te voeren
   npm run dev (Voor development, npm-start wordt gebruikt door de builder van heroku.com)
 
 --> De webapplicatie is nu zichtbaar op http://localhost:8080
@@ -34,13 +36,13 @@ Het token kan je verkrijgen door een call te doen naar het endpoint om in te log
 REGISTREREN [POST]
 https://evabeheer.herokuapp.com/user/signup
 Body: x-www-form-urlencoded
-name: JeUserName
+name: JeUsername
 password: JePaswoord
 
 INLOGGEN [POST]
 https://evabeheer.herokuapp.com/user/authenticate
 Body: x-www-form-urlencoded
-name: JeUserName
+name: JeUsername
 password: JePaswoord
 
 HAAL RESTAURANTS OP [GET]
