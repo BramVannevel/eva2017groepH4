@@ -2,109 +2,106 @@
 <html>
 
 <head>
-    <title>EVA Beheer</title>
+  <title>EVA Beheer</title>
 </head>
 
 <body ng-controller="AppCtrl">
 
-<!--Vertical navigation-->
-<nav class="main-menu" ng-controller="NavController" ng-show="AuthenticationService.isAuthenticated()">
-            <ul>
-                <li>
-                    <a href="">
-                        <i class="fa fa-home fa-2x"></i>
-                        <span class="nav-text">
-                            Dashboard
-                        </span>
-                    </a>
-                </li>
-                <li class="has-subnav">
-                    <a href="/restaurants">
-                        <i class="fa fa-cutlery" fa-2x"></i>
-                        <span class="nav-text">
-                            Restaurants
-                        </span>
-                    </a>
-                </li>
-                <li class="has-subnav">
-                    <a href="/gerechten">
-                       <i class="fa fa-book fa-2x"></i>
-                        <span class="nav-text">
-                            Gerechten
-                        </span>
-                    </a>
-                </li>
-                <li class="has-subnav">
-                    <a href="/categorieen">
-                       <i class="fa fa-tags fa-2x"></i>
-                        <span class="nav-text">
-                            Categorieën voor gerechten
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/challenges">
-                        <i class="fa fa-trophy fa-2x"></i>
-                        <span class="nav-text">
-                            Challenges
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <i class="fa fa-users fa-2x"></i>
-                        <span class="nav-text">
-                            Workshops
-                        </span>
-                    </a>
-                </li>
-            </ul>
+  <!--Vertical navigation-->
+  <nav class="main-menu" ng-controller="NavController" ng-show="AuthenticationService.isAuthenticated()">
+    <ul>
+      <li>
+        <a href="">
+          <i class="fa fa-home fa-2x"></i>
+          <span class="nav-text">
+            Dashboard
+          </span>
+        </a>
+      </li>
+      <li class="has-subnav">
+        <a href="/restaurants">
+          <i class="fa fa-cutlery fa-2x"></i>
+          <span class="nav-text">
+            Restaurants
+          </span>
+        </a>
+      </li>
+      <li class="has-subnav">
+        <a href="/gerechten">
+          <i class="fa fa-book fa-2x"></i>
+          <span class="nav-text">
+            Gerechten
+          </span>
+        </a>
+      </li>
+      <li class="has-subnav">
+        <a href="/categorieen">
+          <i class="fa fa-tags fa-2x"></i>
+          <span class="nav-text">
+            Categorieën voor gerechten
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="/challenges">
+          <i class="fa fa-trophy fa-2x"></i>
+          <span class="nav-text">
+            Challenges
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="">
+          <i class="fa fa-users fa-2x"></i>
+          <span class="nav-text">
+            Workshops
+          </span>
+        </a>
+      </li>
+    </ul>
 
-            <ul class="logout">
-                <li ng-click="logout()">
-                   <a href="">
-                         <i class="fa fa-power-off fa-2x"></i>
-                        <span class="nav-text">
-                            Logout
-                        </span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-<div class="area">
+    <ul class="logout">
+      <li ng-click="logout()">
+        <a href="">
+          <i class="fa fa-power-off fa-2x"></i>
+          <span class="nav-text">
+            Logout
+          </span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div class="area">
 
-  <!--Horizontal navigation-->
-  <nav class="navbar navbar-default" ng-controller="NavController">
-    <div class="navbar-header">
+    <!--Horizontal navigation-->
+    <nav class="navbar navbar-default" ng-controller="NavController">
+      <div class="navbar-header">
         <a class="navbar-brand" href="{{AuthenticationService.isAuthenticated() ? '/restaurants' : '/login'}}"><span class="navbar-brand-EVA">EVA</span> Beheer</a>
-    </div>
-    <!--<div class="container">-->
-      <div class="container-fluid ">
-          <ul class="nav navbar-nav">
-            <!--  <li ng-class="{ active: isActive('/menu')}"><a href="/menu">Menu Lijst</a></li>
-              <li ng-class="{ active: isActive('/bestellingen')}"><a href="/bestellingen">Bestellingen</a></li> -->
-          </ul>
-          <ul class="nav navbar-nav navbar-right" id="nav-items-right">
-              <li class="dropdown">
-                    <!--  <a class="dropdown-toggle" data-toggle="dropdown" href="#">Extra Beheer<span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                      <li><a href="/gerechten">Beheer Gerechten</a></li>
-                      <li><a href="/allergenen">Beheer Allergenen</a></li>
-                      <li><a href="/categorieen">Beheer Categorieën</a></li>
-                  </ul> -->
-              </li>
-            <li ng-show="AuthenticationService.isAuthenticated()" ng-click="logout()"><a href="">Log uit</a></li>
-            <li ng-show="!AuthenticationService.isAuthenticated()" ng-click="login()"><a href="/login">Log in</a></li>
-          </ul>
       </div>
+      <!--<div class="container">-->
+      <div class="container-fluid ">
+        <ul class="nav navbar-nav">
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right" id="nav-items-right">
+          <li class="dropdown">
+            <!--  <a class="dropdown-toggle" data-toggle="dropdown" href="#">Extra Beheer<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+            
+          </ul> -->
+        </li>
+        <li ng-show="AuthenticationService.isAuthenticated()" ng-click="logout()"><a href="">Log uit</a></li>
+        <li ng-show="!AuthenticationService.isAuthenticated()" ng-click="login()"><a href="/login">Log in</a></li>
+      </ul>
+    </div>
     <!--</div>-->
   </nav>
 
-    <div ui-view></div>
+  <div ui-view></div>
 
 </div>
 
-    <script src="bundle.js"></script>
+<script src="bundle.js"></script>
 </body>
 
 </html>
