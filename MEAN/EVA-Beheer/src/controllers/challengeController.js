@@ -81,7 +81,7 @@ const challengeController = angular.module('app.challengeController', [])
         if ($scope.filterDag) {
           console.log($scope.filterDag);
           console.log(challenge.dag.toString());
-            if (challenge.dag.toString() == $scope.filterDag);
+            if (challenge.dag.toString().includes($scope.filterDag))
                 return challenge;
         } else {
             return challenge;
