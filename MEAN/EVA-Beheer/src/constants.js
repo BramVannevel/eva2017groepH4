@@ -26,8 +26,8 @@ const appConstants = angular.module('app.appConstants', [])
         url: serverUrl + '/gerechten'
 })
 
-.constant('BESTELLINGEN_API_ENDPOINT',{
-  url: serverUrl + '/bestellingen'
+.constant('CHALLENGES_API_ENDPOINT',{
+  url: serverUrl + '/challenges'
 });
 
 export default appConstants;

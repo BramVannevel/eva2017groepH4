@@ -3,6 +3,10 @@
         margin: 0 auto 2px;
         width: 500px;
     }
+    &__autocomplete {
+      margin: 0 auto 2px;
+      width: 500px;
+    }
     &__filter-input {
       display: inline;
       margin: 0 auto 2px;
@@ -40,6 +44,11 @@
     &__centerText {
         text-align: center;
         margin-bottom: 30px;
+    }
+    &__centerMdSelect {
+      margin: 0 auto;
+      width: 200px;
+      display: block;
     }
     &__centerSubtitle {
       text-align: center;

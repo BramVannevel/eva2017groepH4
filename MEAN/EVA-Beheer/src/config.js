@@ -6,22 +6,25 @@ import authServiceEnFactory from 'factoriesAndServices/authService';
 import beheerFactory from 'factoriesAndServices/beheer-factory';
 import authControllers from 'controllers/authControllers';
 import beheerControllers from 'controllers/beheerControllers';
-import bestellingController from 'controllers/bestellingController';
-import bestellingFactory from 'factoriesAndServices/bestelling-factory';
+import challengeController from 'controllers/challengeController';
+import challengeFactory from 'factoriesAndServices/challenge-factory';
 import paginationFilter from 'filters/paginationFilter';
 import restaurantModalController from 'controllers/RestaurantModalController';
 import restaurantDetailModalController from 'controllers/restaurantDetailModalController';
 import gerechtModalController from 'controllers/gerechtModalController';
 import gerechtDetailModalController from 'controllers/gerechtDetailModalController';
 import categorieModalController from 'controllers/categorieModalController';
+import challengeModalController from 'controllers/challengeModalController';
+import challengeDetailModalController from 'controllers/challengeDetailModalController';
 import appConstants from 'constants';
 import uiBootstrap from 'angular-ui-bootstrap';
 import ngAnimate from 'angular-animate';
 import material from 'angular-material';
 
 const app = angular.module('app', [ngAnimate, material, uiBootstrap, authServiceEnFactory.name, authControllers.name,
-    beheerFactory.name, beheerControllers.name, appConstants.name, uiRouter, restaurantsController.name, restaurantsFactory.name, bestellingController.name, bestellingFactory.name,
-    paginationFilter.name, restaurantModalController.name, restaurantDetailModalController.name, gerechtModalController.name, categorieModalController.name, gerechtDetailModalController.name
+    beheerFactory.name, beheerControllers.name, appConstants.name, uiRouter, restaurantsController.name, restaurantsFactory.name, challengeController.name, challengeFactory.name,
+    paginationFilter.name, restaurantModalController.name, restaurantDetailModalController.name, gerechtModalController.name, categorieModalController.name, gerechtDetailModalController.name,
+    challengeModalController.name, challengeDetailModalController.name
 ]);
 
 app.config(($stateProvider, $urlRouterProvider, $locationProvider, $mdDateLocaleProvider) => {
@@ -79,10 +82,10 @@ app.config(($stateProvider, $urlRouterProvider, $locationProvider, $mdDateLocale
             template: require('pages/gerechtBeheer.html'),
             controller: 'gerechtController'
         })
-        .state('bestellingen', {
-            url: '/bestellingen',
-            template: require('pages/bestellingen.html'),
-            controller: 'bestellingController'
+        .state('challenges', {
+            url: '/challenges',
+            template: require('pages/challenges.html'),
+            controller: 'challengeController'
         });
 
     app.run(function($rootScope, $state, AuthService, AUTH_EVENTS) {
