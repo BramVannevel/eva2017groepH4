@@ -124,9 +124,7 @@ const beheerControllers = angular.module('app.beheerControllers', [])
     $scope.filterGerechtenOpCategorie = function(gerecht) {
         if ($scope.filterCategorie) {
             return gerecht.categorie.naam === $scope.filterCategorie;
-        }else if($scope.filterNaam){
-          return gerecht.naam === $scope.filterNaam;
-        }else{
+        }else {
             return gerecht;
         }
     };
