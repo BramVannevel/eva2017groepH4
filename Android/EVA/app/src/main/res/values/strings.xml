@@ -27,6 +27,12 @@
     <string name="saturday">Za</string>
     <string name="sunday">Zo</string>
 
+    <!--Core buttons-->
+    <string name="todays_challenge">Todays\' challenge</string>
+    <string name="vegagram">Vegagram</string>
+    <string name="tips_and_tricks">Tips and Tricks</string>
+    <string name="nearby_restaurants">Nearby restaurants</string>
+
     <!--ERROR MESSAGES-->
     <string name="google_maps_error">Google maps couldn\'t load that adress :(</string>
 </resources>
