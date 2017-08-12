@@ -72,8 +72,8 @@ const restaurantsController = angular.module('app.restaurantsController', [])
     };
 
     //////////////////// FILTERS ////////////////////
-    //Filter tabel met restaurants
-    $scope.filterRestaurants = function(restaurant) {
+
+    $scope.filterRestaurantsOpNaam = function(restaurant) {
         if ($scope.filterNaam) {
             if (restaurant.naam.toLowerCase().includes($scope.filterNaam.toLowerCase()))
                 return restaurant;
@@ -82,9 +82,30 @@ const restaurantsController = angular.module('app.restaurantsController', [])
             return restaurant;
         }
     };
+
+    $scope.filterRestaurantsOpNaam = function(restaurant) {
+        if ($scope.filterNaam) {
+            if (restaurant.naam.toLowerCase().includes($scope.filterNaam.toLowerCase()))
+                return restaurant;
+        } else {
+            //indien geen restaurantNaam opgegeven, return alle restaurants
+            return restaurant;
+        }
+    };
+
+    $scope.filterRestaurantsOpStad = function(restaurant) {
+      if ($scope.filterStad) {
+          if (restaurant.adres.stad.toLowerCase().includes($scope.filterStad.toLowerCase()))
+              return restaurant;
+      } else {
+              return restaurant;
+      }
+    }
+
     //MAAK FILTER LEEG
     $scope.eraseFilter = () => {
         $scope.filterNaam = '';
+        $scope.filterStad = '';
     };
 
     // Actions

@@ -1,6 +1,6 @@
 import angular from 'angular';
 const serverUrl = 'http://127.0.0.1:8080'; //voor Development
-//const serverUrl = 'https://restobeheerapp.herokuapp.com'; // voor Productie
+//const serverUrl = 'https://evabeheer.herokuapp.com'; // voor Productie
 
 const appConstants = angular.module('app.appConstants', [])
 
