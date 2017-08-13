@@ -9,6 +9,8 @@ herexamen Projecten 3, groep H4, voor EVA nv met als doel een meanstack beheerde
 
 # Info rondom de MEAN app
 * MEAN/EVA-Beheer/Readme.txt
+* Applicatie: https://evabeheer.herokuapp.com/restaurants 
+* Login gegevens: Username: admin, paswoord: admin
 
 # Groep H4
 
