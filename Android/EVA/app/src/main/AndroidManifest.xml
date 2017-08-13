@@ -47,7 +47,8 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".Views.RestoActivity">
+        <activity android:name=".Views.RestoActivity"
+            android:parentActivityName=".Views.MainActivity" >
         </activity>
     </application>
 

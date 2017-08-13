@@ -1,29 +1,23 @@
 package com.projecten3.eva.Views.Fragments;
 
-import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.projecten3.eva.Adapters.ChallengeDaysAdapter;
 import com.projecten3.eva.Adapters.CoreAdapter;
 import com.projecten3.eva.Helpers.CreateCoreButtons;
+import com.projecten3.eva.Interfaces.OnCoreButtonCLickedInterface;
 import com.projecten3.eva.Model.CoreButtons;
-import com.projecten3.eva.Model.Day;
 import com.projecten3.eva.R;
-
-import org.junit.Test;
+import com.projecten3.eva.Views.RestoActivity;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -62,14 +56,39 @@ public class CoreFragment extends Fragment {
 
     /**
      * init of the recyclerview with core buttons.
+     * I've decided to delegate the position via the listener from the adapter to the activity because it's his responsibility
+     * the adapter is solely there for initing the UI and retrieving the positions. it shouldn't know/care about other
+     * activities, methods, ...
      */
     private void initCoreButtonsUI() {
         gridLayoutManager = new GridLayoutManager(getContext(), 2);
         buttonList = initCoreButtons();
-        coreAdapter = new CoreAdapter(buttonList);
+        coreAdapter = new CoreAdapter(buttonList, new OnCoreButtonCLickedInterface() {
+            @Override
+            public void itemClickListener(int position) {
+                handleCoreButtonClick(position);
+            }
+        });
         buttons.setHasFixedSize(true);
         buttons.setLayoutManager(gridLayoutManager);
         buttons.setAdapter(coreAdapter);
+    }
+
+    private void handleCoreButtonClick(int pos) {
+        switch(pos) {
+            case 0 :
+                Log.i(TAG,"NOT YET IMPLEMENTED, clicked on 1");
+                break;
+            case 1 :
+                Log.i(TAG,"NOT YET IMPLEMENTED, clicked on 2");
+                break;
+            case 2 :
+                Log.i(TAG,"NOT YET IMPLEMENTED, clicked on 3");
+                break;
+            case 3 :
+                startActivity(new Intent(this.getActivity(), RestoActivity.class));
+                break;
+        }
     }
 
     /**
