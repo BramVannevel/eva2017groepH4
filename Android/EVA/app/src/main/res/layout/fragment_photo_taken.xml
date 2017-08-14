@@ -4,15 +4,27 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.projecten3.eva.Views.Fragments.VegagramPhotoFragment">
+    tools:context="com.projecten3.eva.Views.Fragments.VegagramPhotoFragment"
+    android:background="@color/colorPrimary">
 
-    <ImageView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:id="@+id/photograph_taken"/>
+        android:layout_height="200dp"
+        android:layout_margin="10dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/photograph_taken"
+            android:layout_gravity="center_vertical"
+            android:scaleType="centerCrop"
+            android:elevation="5dp"/>
+    </LinearLayout>
+
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -24,11 +36,11 @@
                 <CheckBox
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:id="@+id/public_check"/>
+                    android:id="@+id/vegagram_check"/>
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="30dp"
-                    android:text="@string/share_public"
+                    android:text="@string/share_vegagram"
                     android:layout_weight="50"/>
                 <TextView
                     android:layout_width="fill_parent"
@@ -41,13 +53,27 @@
                     android:layout_height="30dp"
                     android:id="@+id/link_challenge_check"/>
             </LinearLayout>
-            <Button
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp">
+                <CheckBox
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/facebook_check"/>
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="30dp"
+                    android:text="@string/share_facebook"
+                    android:layout_weight="50"/>
+            </LinearLayout>
+            <!--<Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
                 android:text="@string/save"
-                android:onClick="saveImage"/>
+                android:onClick="saveImage"
+                android:background="@color/colorPrimary" />-->
         </LinearLayout>
     </FrameLayout>
 </LinearLayout>

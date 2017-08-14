@@ -20,6 +20,11 @@
 
     <string name="take_picture">Neem foto</string>
     <string name="link_challenge">Link challenge</string>
-    <string name="share_public">Share publicly</string>
+    <string name="share_vegagram">Share on Vegagram</string>
+    <string name="share_facebook">Share on Facebook</string>
     <string name="save">Save</string>
+
+    <string name="show_public">Public posts</string>
+    <string name="show_private">Private posts</string>
+    <string name="delete_post">Delete post</string>
 </resources>

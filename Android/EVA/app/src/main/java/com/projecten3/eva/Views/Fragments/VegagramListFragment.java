@@ -13,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,6 +63,7 @@ public class VegagramListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_vegagram_list,container,false);
+        setHasOptionsMenu(true);
 
         ButterKnife.bind(this,v);
         posts = new ArrayList<>();
@@ -82,6 +84,12 @@ public class VegagramListFragment extends Fragment {
         llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);
         return v;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.vegagram_list_filter_menu, menu);
+        return;
     }
 
     private void mockData(){
