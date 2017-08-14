@@ -11,6 +11,7 @@ import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -53,6 +54,7 @@ public class RestoInfoFragment extends Fragment {
 
 
     private final static String KEY_RESTO = "resto";
+    private String imageURL = "https://maps.googleapis.com/maps/api/streetview?size=600x300&location=strijmeers101,vlierzele&pitch=-0.76&key=AIzaSyBy1W27MKbrzbn54k1s49s5wfGku_hhV5w";
 
 
     private Restaurant resto;
@@ -66,6 +68,8 @@ public class RestoInfoFragment extends Fragment {
     ImageButton btnTel;
     @BindView(R.id.omschrijving)
     TextView omschrijving;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
 
 
 
@@ -104,10 +108,11 @@ public class RestoInfoFragment extends Fragment {
 
         this.resto = resto;
 
+        System.out.println(getString(R.string.streetview_api_url));
         naam.setText(resto.getNaam());
+
         Glide.with(getContext())
-                .load(resto.getFoto())
-                .centerCrop()
+                .load(getString(R.string.streetview_api_url,resto.getLocation().replace(" ","")))
                 .into(foto);
         adressResto.setText(resto.getLocation());
 
@@ -116,16 +121,18 @@ public class RestoInfoFragment extends Fragment {
 
     }
 
-
-
     @OnClick(R.id.tel)
     public void belRestaurent(){
         Intent intent = new Intent(Intent.ACTION_DIAL);
         intent.setData(Uri.parse("tel:"+resto.getTelefoonNr()));
         startActivity(intent);
+    }
 
-
-
+    @OnClick(R.id.fab)
+    public void openRoute(){
+        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                Uri.parse("https://www.google.com/maps/dir/?api=1&destination="+resto.getLocation()));
+        startActivity(intent);
 
     }
 
