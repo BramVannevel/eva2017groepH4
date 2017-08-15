@@ -3,6 +3,9 @@ var Schema = mongoose.Schema;
 
 var VegagramPostSchema = new Schema({
     imageName: String,
+    posted: Date,
+    likes: Number,
+    isPublic: Boolean,
     user: {
        ref: 'User',
        type: Schema.Types.ObjectId

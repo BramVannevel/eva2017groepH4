@@ -26,10 +26,16 @@ router.post('/', passport.authenticate('jwt', { session: false }), multer({ dest
     var decoded = jwt.decode(token, config.secret);
     var userId = decoded._id;
 
-    var vegagramPost = new VegagramPost({imageName: req.file.filename, user: userId});
+    var vegagramPost = new VegagramPost({
+      imageName: req.file.filename,
+      posted: req.body.posted,
+      likes: req.body.likes,
+      isPublic: req.body.isPublic,
+      user: userId
+    });
+
     vegagramPost.save(function(err) {
       if (err) { console.log(err); }
-
       res.send('Post saved, image name: ' + req.file.filename);
     });
   } else {
@@ -42,7 +48,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), multer({ dest
 * Hieruit kunnen onder andere de ids van de uploaded images verzamelt worden en vervolgens
 * kan daarmee een call gemaakt worden om de binaries terug te krijgen via het endpoint /uploads/:id
 */
-router.get('/useruploads', passport.authenticate('jwt', { session: false }), function(req, res){
+router.get('/useruploads', passport.authenticate('jwt', { session: false }), function(req, res) {
   var token = getToken(req.headers);
   if (token) {
     var decoded = jwt.decode(token, config.secret);
@@ -58,14 +64,14 @@ router.get('/useruploads', passport.authenticate('jwt', { session: false }), fun
 });
 
 /**
-* Returned alle vegagramPosts van alle users
+* Returned alle public vegagramPosts van alle users
 */
 router.get('/uploads', passport.authenticate('jwt', { session: false }), function(req, res) {
   var token = getToken(req.headers);
   if (token) {
     var decoded = jwt.decode(token, config.secret);
 
-    VegagramPost.find(function(err, results) {
+    VegagramPost.find({isPublic: {$eq: true}}).exec(function(err, results) {
       if (err) { console.log(err); }
 
       res.send({ posts: results });
@@ -79,10 +85,16 @@ router.get('/uploads', passport.authenticate('jwt', { session: false }), functio
 * Haal een afbeelding van een VegagramPost op aan de hand van de naam ervan (die multer eraan gaf (id))
 * Geeft een binary terug. Append .jpg om de file te kunnen openen.
 */
-router.get('/uploads/:id', function(req, res){
-  var id = req.params.id;
-  console.log(id);
-  res.sendFile('./uploads/'+ id, { root : __dirname});
+router.get('/uploads/:id', passport.authenticate('jwt', { session: false }), function(req, res){
+  var token = getToken(req.headers);
+  if (token) {
+    var decoded = jwt.decode(token, config.secret);
+    var id = req.params.id;
+    console.log(id);
+    res.sendFile('./uploads/'+ id, { root : __dirname});
+  } else {
+    return res.status(403).send({ success: false, msg: 'No token provided.' });
+  }
 });
 
 module.exports = router;
