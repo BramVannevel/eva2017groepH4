@@ -57,5 +57,25 @@ https://evabeheer.herokuapp.com/categorieen/list
 HAAL CHALLENGES OP [GET]
 https://evabeheer.herokuapp.com/challenges/list
 
+EEN VEGAGRAM POST DOOR EEN GEBRUIKER LATEN TOEVOEGEN [POST]
+https://evabeheer.herokuapp.com/vegagram/
+Body: Multipart form-data
+fileToUpload -> Binair bestand (bv. .jpg)
+isPublic -> true/false
+likes -> geheel getal
+posted -> date
+
+ALLE VEGAGRAM POSTS OPHALEN VAN DE AUTHENTICATED GEBRUIKER [GET] **
+https://evabeheer.herokuapp.com/vegagram/useruploads
+
+ALLE PUBLIC VEGAGRAM POSTS OPHALEN VAN ALLE GEBRUIKERS [GET] **
+https://evabeheer.herokuapp.com/uploads
+
+**een vegagram post bevat onder andere de image naam, deze kan gebruikt worden om het binaire bestand op te halen
+
+AFBEELDING VAN EEN VEGAGRAM POST OPHALEN AAN DE HAND VAN DE VERKREGEN NAAM EVAN DE IMAGE [GET]
+https://evabeheer.herokuapp.com/uploads/naamVanDeImage
+
+
 
 ========================== EINDE ==========================
