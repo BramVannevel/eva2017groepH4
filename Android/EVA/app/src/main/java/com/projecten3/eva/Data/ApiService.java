@@ -1,6 +1,7 @@
 package com.projecten3.eva.Data;
 
 import com.projecten3.eva.Model.Authenticate;
+import com.projecten3.eva.Model.Challenges;
 import com.projecten3.eva.Model.Restaurant;
 
 import java.util.ArrayList;
@@ -36,6 +37,6 @@ public interface ApiService {
     /**
      * get challenges from the backend
      */
-    /*@GET("/challenges/list")
-    Observable<>*/
+    @GET("/challenges/list")
+    Observable<Challenges> getChallenges();
 }

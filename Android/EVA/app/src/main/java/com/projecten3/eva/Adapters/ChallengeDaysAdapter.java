@@ -52,7 +52,5 @@ public class ChallengeDaysAdapter extends RecyclerView.Adapter<ChallengeDaysAdap
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
-
-
     }
 }

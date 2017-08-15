@@ -12,7 +12,7 @@ public class DaysOfWeekFactory {
             case 5: return R.string.thursday;
             case 6: return R.string.friday;
             case 7: return R.string.saturday;
-            default: return R.string.saturday;
+            default: return R.string.not_found;
         }
     }
 }

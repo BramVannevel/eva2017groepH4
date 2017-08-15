@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.projecten3.eva.Adapters.CoreAdapter;
+import com.projecten3.eva.Views.ChallengeActivity;
 import com.projecten3.eva.Helpers.CreateCoreButtons;
 import com.projecten3.eva.Interfaces.OnCoreButtonCLickedInterface;
 import com.projecten3.eva.Model.CoreButtons;
@@ -56,7 +57,7 @@ public class CoreFragment extends Fragment {
 
     /**
      * init of the recyclerview with core buttons.
-     * I've decided to delegate the position via the listener from the adapter to the activity because it's his responsibility
+     * I've decided to delegate the position via the listener from the adapter to the fragment because it's his responsibility
      * the adapter is solely there for initing the UI and retrieving the positions. it shouldn't know/care about other
      * activities, methods, ...
      */
@@ -77,7 +78,7 @@ public class CoreFragment extends Fragment {
     private void handleCoreButtonClick(int pos) {
         switch(pos) {
             case 0 :
-                Log.i(TAG,"NOT YET IMPLEMENTED, clicked on 1");
+                startActivity(new Intent(this.getActivity(), ChallengeActivity.class));
                 break;
             case 1 :
                 Log.i(TAG,"NOT YET IMPLEMENTED, clicked on 2");
