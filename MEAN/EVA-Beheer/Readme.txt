@@ -1,4 +1,4 @@
-DE APPLICATIE RUNNEN:
+﻿DE APPLICATIE RUNNEN:
 
 Nodige software:
 - NodeJS 4.6.0
@@ -63,13 +63,13 @@ Body: Multipart form-data
 fileToUpload -> Binair bestand (bv. .jpg)
 isPublic -> true/false
 likes -> geheel getal
-posted -> date
+posted -> date (format: yyyy/mm/dd)
 
 ALLE VEGAGRAM POSTS OPHALEN VAN DE AUTHENTICATED GEBRUIKER [GET] **
 https://evabeheer.herokuapp.com/vegagram/useruploads
 
 ALLE PUBLIC VEGAGRAM POSTS OPHALEN VAN ALLE GEBRUIKERS [GET] **
-https://evabeheer.herokuapp.com/uploads
+https://evabeheer.herokuapp.com/vegagram/uploads
 
 **een vegagram post bevat onder andere de image naam, deze kan gebruikt worden om het binaire bestand op te halen
 
