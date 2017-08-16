@@ -76,6 +76,8 @@ https://evabeheer.herokuapp.com/uploads
 AFBEELDING VAN EEN VEGAGRAM POST OPHALEN AAN DE HAND VAN DE VERKREGEN NAAM EVAN DE IMAGE [GET]
 https://evabeheer.herokuapp.com/uploads/naamVanDeImage
 
+EEN VEGAGRAM POST VERWIJDEREN [DEL] (bijhorende image wordt ook van server verwijderd)
+https://evabeheer.herokuapp.com/idVanDePost
 
 
 ========================== EINDE ==========================
