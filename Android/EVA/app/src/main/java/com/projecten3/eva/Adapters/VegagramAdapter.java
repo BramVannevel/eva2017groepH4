@@ -59,7 +59,7 @@ public class VegagramAdapter extends RecyclerView.Adapter<VegagramAdapter.Vegagr
                 .into(restoViewHolder.imvResto);*/
         //DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
 
-        String formatted_date = (String) android.text.format.DateFormat.format("yyyy-MM-dd hh:mm:ss a", posts.get(position).getPosted());
+        String formatted_date = (String) android.text.format.DateFormat.format("yyyy-MM-dd HH:mm", posts.get(position).getPosted());
 
         holder.date_posted.setText(formatted_date);
         holder.likes.setText(String.valueOf(posts.get(position).getLikes()));
@@ -132,7 +132,10 @@ public class VegagramAdapter extends RecyclerView.Adapter<VegagramAdapter.Vegagr
         public boolean onMenuItemClick(MenuItem menuItem) {
             switch (menuItem.getItemId()) {
 
-                case R.id.item_share:
+                case R.id.item_share_facebook:
+                    //share code
+                    return true;
+                case R.id.item_share_vegagram:
                     //share code
                     return true;
                 case R.id.delete_photo:

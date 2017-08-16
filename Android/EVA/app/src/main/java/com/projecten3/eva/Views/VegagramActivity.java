@@ -18,14 +18,19 @@ import com.projecten3.eva.Views.Fragments.VegagramPhotoFragment;
 
 import java.io.ByteArrayOutputStream;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 public class VegagramActivity extends AppCompatActivity {
 
     public static final String TAG = "VegagramListActivity";
     static final int REQUEST_IMAGE_CAPTURE = 1;
+    private Unbinder unbinder;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vegagram);
+        unbinder = ButterKnife.bind(this);
 
         if (findViewById(R.id.fragment_vegagram) != null){
             if(savedInstanceState != null){
@@ -55,5 +60,13 @@ public class VegagramActivity extends AppCompatActivity {
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(unbinder != null){
+            unbinder.unbind();
+        }
     }
 }

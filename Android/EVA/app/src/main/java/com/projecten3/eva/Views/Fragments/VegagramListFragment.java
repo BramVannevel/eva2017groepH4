@@ -15,6 +15,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -90,6 +91,19 @@ public class VegagramListFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.vegagram_list_filter_menu, menu);
         return;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch((item.getItemId())){
+            case R.id.public_photos:
+
+                return true;
+            case R.id.private_photos:
+
+                return true;
+            default: return super.onOptionsItemSelected(item);
+        }
     }
 
     private void mockData(){
