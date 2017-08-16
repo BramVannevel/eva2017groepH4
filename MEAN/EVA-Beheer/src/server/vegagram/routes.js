@@ -10,6 +10,7 @@ var VegagramPost = require('../db/models/vegagramPost');
 var multer = require('multer'),
 bodyParser = require('body-parser'),
 path = require('path');
+fs = require('fs');
 
 var router = express.Router();
 
@@ -94,6 +95,28 @@ router.get('/uploads/:id', passport.authenticate('jwt', { session: false }), fun
     res.sendFile('./uploads/'+ id, { root : __dirname});
   } else {
     return res.status(403).send({ success: false, msg: 'No token provided.' });
+  }
+});
+
+/**
+* Verwijderd een vegagramPost samen met de bijhorende afbeelding op de server in de 'uploads' folder
+*/
+router.delete('/:id', passport.authenticate('jwt', { session: false }),function(req, res) {
+  var token = getToken(req.headers);
+  if (token) {
+    var decoded = jwt.decode(token, config.secret);
+      var id = req.params.id;
+
+      VegagramPost.findOne({_id: mongoose.Types.ObjectId(id)}, function(err, post) {
+        if(err) {return;}
+        fs.unlink('./src/server/vegagram/uploads/' + post.imageName, function(err) {
+          if(err) throw err;
+          post.remove(function (err) {});
+          res.send('Post deleted and image deleted from server');
+        });
+      });
+  } else {
+    return res.status(403).send({ success: false, msg: 'Geen token meegegeven.' });
   }
 });
 
