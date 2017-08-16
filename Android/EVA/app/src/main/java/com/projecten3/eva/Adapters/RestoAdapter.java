@@ -39,13 +39,13 @@ public class RestoAdapter extends RecyclerView.Adapter<RestoAdapter.RestoViewHol
 
     @Override
     public void onBindViewHolder(RestoViewHolder restoViewHolder, int i){
-        Glide.with(context)
+       /* Glide.with(context)
                 .load(restos.get(i).getFoto())
                 .centerCrop()
-                .into(restoViewHolder.imvResto);
+                .into(restoViewHolder.imvResto);*/
 
         restoViewHolder.restoNaam.setText(restos.get(i).getNaam());
-        restoViewHolder.restoOmschrijving.setText(restos.get(i).getOmschrijving());
+        restoViewHolder.restoOmschrijving.setText(R.string.veganistisch_eten);
 
     }
 

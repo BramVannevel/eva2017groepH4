@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/colorPrimaryDark">
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:marginTop="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:background="@color/colorPrimaryDark"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            tools:context="com.example.sanderbrugge.testapp.TestActivity"
+            android:background="@color/colorPrimary">
+
+            <ImageView
+                android:id="@+id/ivChallengeTime"
+                android:background="@drawable/ic_access_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="qdfq"
+                android:layout_marginStart="45dp"
+                android:layout_marginBottom="48dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="parent"
+                app:layout_constraintHorizontal_chainStyle="spread" />
+
+            <TextView
+                android:gravity="center"
+                android:id="@+id/challengeTitle"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="24u"
+                app:layout_constraintTop_toBottomOf="@id/ivChallengeTime"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="sans-serif"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="#FFF"
+                android:textSize="20sp"
+                app:layout_constraintLeft_toRightOf="parent"
+                android:layout_marginStart="17dp"/>
+
+
+
+            <ImageView
+                android:id="@+id/challenge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="32dp"
+                android:gravity="center"
+                android:background="@drawable/ic_assignment"
+                android:textColor="#FFF"
+                app:layout_constraintHorizontal_chainStyle="spread"/>
+
+            <TextView
+                android:id="@+id/todaysChallenge"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="64dp"
+                android:gravity="center"
+                android:text="Uitdaging"
+                android:textColor="#FFF"
+                android:textSize="24sp"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                />
+            <ImageView
+                android:id="@+id/ivChallengeLevel"
+                android:background="@drawable/ic_grade"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="qdfq"
+                android:layout_marginStart="32dp"
+                android:layout_marginBottom="48dp"
+                android:layout_marginEnd="45dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_chainStyle="spread" />
+
+            <TextView
+                android:gravity="center"
+                android:id="@+id/challengeLevel"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="moeilijk"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="6dp"
+                android:fontFamily="sans-serif"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="#FFF"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@id/ivChallengeLevel"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_chainStyle="spread"/>
+
+        </android.support.constraint.ConstraintLayout>
+
+        <TextView
+            android:layout_marginTop="32dp"
+            android:id="@+id/info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:text="DETAILS"
+            android:gravity="center"/>
+
+        <android.support.v7.widget.CardView
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_height="175dp"
+            app:cardCornerRadius="2dp"
+            android:background="@color/colorPrimary">
+            <TextView
+                android:id="@+id/dayInChallanges"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="Je zit al aan dag 7, niet opgeven!"
+                android:gravity="center"
+                android:background="@color/primaryAccent"
+                android:textColor="@color/white"
+                />
+
+            <include layout="@layout/challenge"/>
+        </android.support.v7.widget.CardView>
+
+
+        <TextView
+            android:layout_marginTop="32dp"
+            android:id="@+id/beloning"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="BELONING"
+            android:textColor="@color/white"
+            android:gravity="center"/>
+
+        <android.support.v7.widget.CardView
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_height="80dp"
+            app:cardCornerRadius="2dp"
+            android:background="@color/colorPrimary"
+            app:cardBackgroundColor="@color/colorPrimary">
+            <TextView
+                android:id="@+id/dayTillReward"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="Aantal dagen tot beloning"
+                android:gravity="center"
+                android:background="@color/primaryAccent"
+                android:textColor="@color/white"
+                />
+
+        <LinearLayout
+            android:id="@+id/daysTillRewardLayout"
+            android:background="@color/colorPrimary"
+            android:layout_marginTop="45dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"/>
+
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:layout_marginTop="32dp"
+            android:id="@+id/acties"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="ACTIES"
+            android:textColor="@color/white"
+            android:gravity="center"/>
+
+        <android.support.v7.widget.CardView
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_height="100dp"
+            app:cardCornerRadius="2dp"
+            android:layout_marginBottom="8dp"
+            app:cardBackgroundColor="@color/colorPrimary">
+            <TextView
+                android:id="@+id/availableActions"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="Beschikbare acties voor de uitdaging"
+                android:gravity="center"
+                android:background="@color/primaryAccent"
+                android:textColor="@color/white"
+                />
+
+            <Button
+                android:id="@+id/reroll"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="38dp"
+                android:layout_width="120dp"
+                android:layout_height="50dp"
+                android:text="Andere uitdaging"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="#FFF"/>
+
+            <Button
+                android:visibility="gone"
+                android:id="@+id/finishChallenge"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="38dp"
+                android:layout_width="120dp"
+                android:layout_height="50dp"
+                android:text="inleveren"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="#FFF"/>
+
+            <Button
+                android:id="@+id/hulp"
+                android:layout_marginLeft="160dp"
+                android:layout_marginTop="38dp"
+                android:layout_width="75dp"
+                android:layout_height="50dp"
+                android:text="Hulp"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="#FFF"/>
+
+
+            <Button
+                android:visibility="gone"
+                android:id="@+id/giveUp"
+                android:layout_marginLeft="160dp"
+                android:layout_marginTop="38dp"
+                android:layout_width="85dp"
+                android:layout_height="50dp"
+                android:text="Opgeven"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="#FFF"/>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+</ScrollView>
