@@ -97,14 +97,22 @@ public class MainActivity extends AppCompatActivity {
      */
     private ArrayList<Day> initChallengeDays(){
         ArrayList<Day> days = new ArrayList<>();
-        for(int i = 0; i < 21; i++){
+        for(int i = 1; i < 21; i++){
             Calendar c = Calendar.getInstance();
             c.setTime(new Date());
-            c.add(Calendar.DATE, i);
+            Log.e("currentDayInitChall",String.valueOf(currentDay));
+            c.add(Calendar.DAY_OF_YEAR, i-currentDay);
             int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-            Log.e("day of week", String.valueOf(dayOfWeek));
-            days.add(new Day(getShortenedDayOfWeek(dayOfWeek),currentDay,false));
-            currentDay+=1;
+            Log.e("dayOfweek---",String.valueOf(dayOfWeek));
+            days.add(new Day(getShortenedDayOfWeek(dayOfWeek),i,false));
+            for(Day d : days){
+                if(d.getWhichDayOfTheChallenge()<currentDay){
+                    Log.e("dayofchallengeKl",d.getDayOfTheWeek() + String.valueOf(d.getWhichDayOfTheChallenge()) + "completed");
+                    //image van d vervangen door een checkmark
+
+                }
+            }
+
         }
         return days;
     }
@@ -133,12 +141,14 @@ public class MainActivity extends AppCompatActivity {
             currentDay +=1;
             sharedPreferences.edit().putInt("daysDate",today).commit();
             sharedPreferences.edit().putInt("daysInRow",currentDay).commit();
+
         } else if(lastDay == today){
             //niks doen, nog dezelfde dag
         }else {
             currentDay = 1;
             sharedPreferences.edit().putInt("daysDate",today).commit();
             sharedPreferences.edit().putInt("daysInRow",currentDay).commit();
+
         }
     }
     @Override
