@@ -207,11 +207,6 @@ public class ChallengeActivity extends AppCompatActivity {
 
     }
 
-    @OnClick(R.id.reroll)
-    public void rerolChallenge(){
-
-    }
-
     private void createDialogForReward() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.reward_dialog)
