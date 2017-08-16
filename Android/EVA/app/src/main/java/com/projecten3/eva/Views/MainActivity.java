@@ -1,6 +1,8 @@
 package com.projecten3.eva.Views;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private ChallengeDaysAdapter adapter;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private Unbinder unbinder;
+    private int currentDay;
 
     @BindView(R.id.rv_core_layout)
     RecyclerView rvDays;
@@ -74,7 +77,10 @@ public class MainActivity extends AppCompatActivity {
                 Log.i(TAG, "onerror");
             }
         });*/
+
         unbinder = ButterKnife.bind(this);
+
+        checkDaysLoggedInRow();
         initMainUI();
     }
 
@@ -96,7 +102,9 @@ public class MainActivity extends AppCompatActivity {
             c.setTime(new Date());
             c.add(Calendar.DATE, i);
             int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-            days.add(new Day(getShortenedDayOfWeek(dayOfWeek),i+1,false));
+            Log.e("day of week", String.valueOf(dayOfWeek));
+            days.add(new Day(getShortenedDayOfWeek(dayOfWeek),currentDay,false));
+            currentDay+=1;
         }
         return days;
     }
@@ -111,6 +119,28 @@ public class MainActivity extends AppCompatActivity {
         return getResources().getString(factory.getShortNameFromDayOfWeek(day));
     }
 
+    private void checkDaysLoggedInRow(){
+
+        SharedPreferences sharedPreferences = getSharedPreferences("days", Context.MODE_PRIVATE);
+
+
+        Calendar c = Calendar.getInstance();
+        int today = c.get(Calendar.DAY_OF_YEAR);
+        int lastDay = sharedPreferences.getInt("daysDate",0);
+        currentDay = sharedPreferences.getInt("daysInRow",0);
+
+        if (lastDay == today -1){
+            currentDay +=1;
+            sharedPreferences.edit().putInt("daysDate",today).commit();
+            sharedPreferences.edit().putInt("daysInRow",currentDay).commit();
+        } else if(lastDay == today){
+            //niks doen, nog dezelfde dag
+        }else {
+            currentDay = 1;
+            sharedPreferences.edit().putInt("daysDate",today).commit();
+            sharedPreferences.edit().putInt("daysInRow",currentDay).commit();
+        }
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();

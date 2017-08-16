@@ -1,7 +1,7 @@
 package com.projecten3.eva.Model;
 
 public class Challenge {
-    public String id;
+    public String _id;
     public String titel;
     public String omschrijving;
     public int dag;
@@ -10,7 +10,7 @@ public class Challenge {
     public Restaurant restaurant;
 
     public Challenge(String id, String titel, String omschrijving, int dag, String reward, Gerechten gerecht, Restaurant restaurant) {
-        this.id = id;
+        this._id = id;
         this.titel = titel;
         this.omschrijving = omschrijving;
         this.dag = dag;
@@ -20,7 +20,7 @@ public class Challenge {
     }
 
     public String getId() {
-        return id;
+        return _id;
     }
 
     public String getTitel() {

@@ -1,6 +1,8 @@
 package com.projecten3.eva.Views;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -15,11 +17,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.projecten3.eva.Data.ApiService;
+import com.projecten3.eva.Data.DbHelper;
 import com.projecten3.eva.Data.EvaApiBuilder;
 import com.projecten3.eva.Factory.ChallengeLevelFactory;
 import com.projecten3.eva.Helpers.FilterChallengesForToday;
 import com.projecten3.eva.Model.Challenge;
 import com.projecten3.eva.Model.Challenges;
+import com.projecten3.eva.Model.DatabaseEntry;
 import com.projecten3.eva.R;
 
 import java.util.ArrayList;
@@ -44,10 +48,11 @@ public class ChallengeActivity extends AppCompatActivity {
     private ArrayList<Challenge> todayAvailableChallenges;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private Unbinder unbinder;
-    private int currentDay = 5;
+    private int currentDay;
     private Challenge challengeOfTheDay;
     private ChallengeLevelFactory levelFactory = new ChallengeLevelFactory();
     private boolean hasCompletedChallengeToday = false;
+    private DbHelper dbHelper;
 
     @BindView(R.id.challengeTitleInCard)
     TextView challengeTitle;
@@ -75,9 +80,17 @@ public class ChallengeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge);
         unbinder = ButterKnife.bind(this);
+
         getChallenges();
         updateUI();
         setDaysTillReward();
+        setDaysLoggedInRow();
+
+
+
+
+        dbHelper = new DbHelper(this);
+
     }
 
     /**
@@ -88,6 +101,8 @@ public class ChallengeActivity extends AppCompatActivity {
             setTodaysChallenge(todayAvailableChallenges.get(0));
         }
         challengeLevel.setText(getResources().getString(levelFactory.getChallengeLevelString(currentDay)));
+
+
     }
 
     /**
@@ -103,10 +118,25 @@ public class ChallengeActivity extends AppCompatActivity {
         }
     }
 
+    private void setDaysLoggedInRow() {
+
+        SharedPreferences sharedPreferences = getSharedPreferences("days", Context.MODE_PRIVATE);
+        currentDay = sharedPreferences.getInt("daysInRow",0);
+    }
+
     private void setTodaysChallenge(Challenge challenge) {
         challengeOfTheDay = challenge;
         challengeTitle.setText(challenge.getTitel());
         challengeDescription.setText(challenge.getOmschrijving());
+
+        //check challengeAlreadyStarted
+        /*
+        ArrayList<DatabaseEntry> al = dbHelper.getAll();
+        for (DatabaseEntry d : al){
+            if (d.challenge.equals(String.valueOf(challengeOfTheDay.getId())) && d.state.equals("started") || d.state.equals("finished")){
+                Log.e("already started","challenge aleady started or finished");
+            }
+        }*/
     }
 
     private void setDaysTillReward() {
@@ -135,6 +165,20 @@ public class ChallengeActivity extends AppCompatActivity {
         reroll.setVisibility(View.GONE);
         giveUp.setVisibility(View.VISIBLE);
         finishChallenge.setVisibility(View.VISIBLE);
+
+        //challenge started
+        Log.e("challengeoftheday---",String.valueOf(challengeOfTheDay.getId()));
+        if(dbHelper.getData(String.valueOf(challengeOfTheDay.getId())).getCount() == 0){
+            if(dbHelper.insertProgress(String.valueOf(challengeOfTheDay.getId()),String.valueOf(currentDay),"started")){
+                Log.e("challengeAct","insertProgress");
+                Toast.makeText(getApplicationContext(), "done",
+                        Toast.LENGTH_SHORT).show();
+            } else{
+                Toast.makeText(getApplicationContext(), "not done",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+
     }
 
     private long getHoursUntillMidnight() {
@@ -157,8 +201,15 @@ public class ChallengeActivity extends AppCompatActivity {
         countdownTimer.setTextSize(15);
         countdownTimer.setText(sb.toString());
         hasCompletedChallengeToday=true;
+        dbHelper.updateProgress(String.valueOf(challengeOfTheDay.getId()),String.valueOf(currentDay),"finished");
         if(challengeOfTheDay.getReward() != null)
             createDialogForReward();
+
+    }
+
+    @OnClick(R.id.reroll)
+    public void rerolChallenge(){
+
     }
 
     private void createDialogForReward() {
