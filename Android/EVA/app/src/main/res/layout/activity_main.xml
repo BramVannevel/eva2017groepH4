@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.projecten3.eva.Views.MainActivity">
-    <com.facebook.login.widget.LoginButton
+    <!--<com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp" />
-</android.support.constraint.ConstraintLayout>
+        android:layout_marginBottom="30dp" />-->
+
+    <android.support.v7.widget.RecyclerView
+        android:background="@drawable/day_cardview_background"
+        android:id="@+id/rv_core_layout"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"/>
+
+    <fragment android:name="com.projecten3.eva.Views.Fragments.CoreFragment"
+        android:id="@+id/core_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

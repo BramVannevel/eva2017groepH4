@@ -4,60 +4,36 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Restaurant implements Parcelable {
+    public String id;
+    public String naam;
+    public String telefoon;
+    public Adres adres;
 
-
-
-    private String naam;
-    private int foto;
-    private String omschrijving;
-    private String telefoonNr;
-    private String location;
-
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getTelefoonNr() {
-        return telefoonNr;
-    }
-
-    public void setTelefoonNr(String telefoonNr) {
-        this.telefoonNr = telefoonNr;
-    }
-
-    public String getOmschrijving() {
-        return omschrijving;
-    }
-
-    public void setOmschrijving(String omschrijving) {
-        this.omschrijving = omschrijving;
-    }
-
-    public int getFoto() {
-        return foto;
-    }
-
-    public void setFoto(int foto) {
-        this.foto = foto;
-    }
-
-    public String getNaam() { return naam; }
-
-    public void setNaam(String naam) { this.naam = naam; }
-
-
-    public Restaurant(String naam, int foto, String omschrijving, String telefoonNr, String location){
+    public Restaurant(String id, String naam, String telefoon, Adres adres) {
+        this.id = id;
         this.naam = naam;
-        this.foto = foto;
-        this.omschrijving = omschrijving;
-        this.telefoonNr = telefoonNr;
-        this.location = location;
+        this.telefoon = telefoon;
+        this.adres = adres;
+    }
 
+    public String getId() {
+        return id;
+    }
+
+    public String getNaam() {
+        return naam;
+    }
+
+    public String getTelefoon() {
+        return telefoon;
+    }
+
+    public Adres getAdres() {
+        return adres;
+    }
+
+    public static Creator<Restaurant> getCREATOR() {
+        return CREATOR;
     }
 
     /**
@@ -66,10 +42,9 @@ public class Restaurant implements Parcelable {
      */
     public Restaurant(Parcel in){
        naam = in.readString();
-       foto = in.readInt();
-       omschrijving = in.readString();
-       telefoonNr = in.readString();
-       location = in.readString();
+       id = in.readString();
+       telefoon = in.readString();
+       //adres = in.readString();
     }
 
     @Override
@@ -80,10 +55,8 @@ public class Restaurant implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int flags){
         parcel.writeString(naam);
-        parcel.writeInt(foto);
-        parcel.writeString(omschrijving);
-        parcel.writeString(telefoonNr);
-        parcel.writeString(location);
+        parcel.writeString(id);
+        parcel.writeString(telefoon);
     }
 
     public static final Parcelable.Creator<Restaurant> CREATOR = new Parcelable.Creator<Restaurant>(){

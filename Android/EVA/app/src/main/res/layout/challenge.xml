@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="30dp"
+    android:id="@+id/constraintLyt"
+    android:background="@color/colorPrimary">
+
+    <TextView
+        android:id="@+id/uitdagingvddag"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="Uitdaging van vandaag:"
+        android:textColor="@color/white"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <View
+        android:layout_marginTop="8dp"
+        android:id="@+id/topLine"
+        android:layout_width="250dp"
+        android:layout_height="1dp"
+        android:background="#E0E0E0"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/uitdagingvddag" />
+
+    <TextView
+        android:id="@+id/challengeTitleInCard"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/loading"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/topLine"
+        app:layout_constraintLeft_toRightOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintVertical_chainStyle="spread"/>
+
+    <TextView
+        android:id="@+id/challengeDesc"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:text="@string/loading"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/white"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/challengeTitleInCard"
+        android:layout_marginStart="8dp"
+        app:layout_constraintVertical_chainStyle="spread"/>
+
+
+    <View
+        android:id="@+id/rightLine"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#E0E0E0"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/topLine"
+        app:layout_constraintVertical_chainStyle="spread"/>
+
+    <Button
+        android:id="@+id/startButton"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/ic_play_arrow"
+        app:layout_constraintRight_toLeftOf="parent"
+        android:layout_marginRight="25dp"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/countDownTimer"
+        android:layout_width="70dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="24dp"
+        android:maxLines="4"
+        android:lines="4"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        app:layout_constraintRight_toLeftOf="parent"
+        android:layout_marginRight="40dp"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>
