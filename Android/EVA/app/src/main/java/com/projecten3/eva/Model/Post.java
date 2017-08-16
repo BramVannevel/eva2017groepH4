@@ -6,21 +6,17 @@ import android.os.Parcelable;
 
 import java.util.Date;
 
-/**
- * Created by Bram on 10/08/2017.
- */
-
 public class Post{
 
-    private Image image;
+    private String image;
     private Date posted;
     //private User poster;
     private int likes;
     private boolean is_public;
 
-    public Image getImage() { return image; }
+    public String getImage() { return image; }
 
-    public void setImage(Image image) { this.image = image; }
+    public void setImage(String image) { this.image = image; }
 
     public Date getPosted() { return posted; }
 
@@ -34,7 +30,7 @@ public class Post{
 
     public void setIs_public(boolean is_public) { this.is_public = is_public; }
 
-    public Post(Image image, Date posted, int likes, boolean is_public) {
+    public Post(String image, Date posted, int likes, boolean is_public) {
         this.image = image;
         this.posted = posted;
         this.likes = likes;

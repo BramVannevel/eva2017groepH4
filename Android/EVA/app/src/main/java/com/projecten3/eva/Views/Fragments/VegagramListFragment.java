@@ -3,12 +3,16 @@ package com.projecten3.eva.Views.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -20,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.Manifest;
 
 import com.projecten3.eva.Adapters.VegagramAdapter;
 import com.projecten3.eva.Model.Post;
@@ -35,15 +40,11 @@ import butterknife.ButterKnife;
 
 import static android.app.Activity.RESULT_OK;
 
-
-/**
- * Created by Bram on 8/08/2017.
- */
-
 public class VegagramListFragment extends Fragment {
 
     public static final String TAG = "VegagramListFragment";
     static final int REQUEST_IMAGE_CAPTURE = 1;
+    public static final int PERMISSION_REQUEST = 200;
 
     private List<Post> posts;
     private VegagramAdapter adapter;
@@ -72,9 +73,8 @@ public class VegagramListFragment extends Fragment {
         photo_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                if(checkCameraPermission()){
+                    takePicture();
                 }
             }
         });
@@ -120,12 +120,54 @@ public class VegagramListFragment extends Fragment {
         posts.add(post5);
     }
 
+    public void takePicture(){
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             ((VegagramActivity)getActivity()).createPhotoTakenFragement(imageBitmap);
+        }
+    }
+
+    private boolean checkCameraPermission(){
+        if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST);
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch(requestCode){
+            case PERMISSION_REQUEST:  {
+                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                   return;
+                }
+            }
+        }
+    }
+
+    private class likedOnClickListener implements View.OnClickListener{
+        private final Context context;
+
+        public likedOnClickListener(Context context){
+            this.context = context;
+        }
+
+        @Override
+        public void onClick(View view) {
+            int position = rv.getChildAdapterPosition(view);
+
+            posts.get(position).addLike();
         }
     }
 }

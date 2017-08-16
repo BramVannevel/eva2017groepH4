@@ -27,12 +27,10 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
-
-/**
- * Created by Bram on 10/08/2017.
- */
+import static com.facebook.FacebookSdk.getClientToken;
 
 public class VegagramAdapter extends RecyclerView.Adapter<VegagramAdapter.VegagramViewHolder>{
 
@@ -99,6 +97,10 @@ public class VegagramAdapter extends RecyclerView.Adapter<VegagramAdapter.Vegagr
         notifyDataSetChanged();
     }
 
+    public void likePost(int position){
+        posts.get(position).addLike();
+        notifyDataSetChanged();
+    }
 
     public static class VegagramViewHolder extends RecyclerView.ViewHolder {
 
@@ -139,7 +141,7 @@ public class VegagramAdapter extends RecyclerView.Adapter<VegagramAdapter.Vegagr
                     //share code
                     return true;
                 case R.id.delete_photo:
-                    //delete photo code
+
                     return true;
                 default:
             }

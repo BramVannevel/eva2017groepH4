@@ -18,64 +18,63 @@
             android:id="@+id/photograph_taken"
             android:layout_gravity="center_vertical"
             android:scaleType="centerCrop"
-            android:elevation="5dp"/>
+            android:elevation="10dp"/>
     </LinearLayout>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:orientation="vertical"
         android:layout_marginTop="20dp">
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp">
-
-                <CheckBox
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:id="@+id/vegagram_check"/>
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="30dp"
-                    android:text="@string/share_vegagram"
-                    android:layout_weight="50"/>
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="30dp"
-                    android:text="@string/link_challenge"
-                    android:layout_weight="50"
-                    android:gravity="right"/>
-                <CheckBox
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:id="@+id/link_challenge_check"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp">
-                <CheckBox
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:id="@+id/facebook_check"/>
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="30dp"
-                    android:text="@string/share_facebook"
-                    android:layout_weight="50"/>
-            </LinearLayout>
-            <!--<Button
+            android:layout_height="30dp">
+            <CheckBox
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/vegagram_check"/>
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:text="@string/save"
-                android:onClick="saveImage"
-                android:background="@color/colorPrimary" />-->
-        </LinearLayout>
-    </FrameLayout>
+                android:layout_height="30dp"
+                android:text="@string/share_vegagram"
+                android:gravity="left|center"
+                android:layout_marginLeft="35dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="@string/link_challenge"
+                android:gravity="right|center"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="35dp"/>
+            <CheckBox
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/link_challenge_check"
+                android:layout_alignParentRight="true" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp">
+            <CheckBox
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/facebook_check"/>
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="30dp"
+                android:text="@string/share_facebook"
+                android:layout_marginLeft="35dp"
+                android:gravity="left|center"/>
+        </RelativeLayout>
+        <!--<Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:text="@string/save"
+            android:onClick="saveImage"
+            android:background="@color/colorPrimary" />-->
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp">

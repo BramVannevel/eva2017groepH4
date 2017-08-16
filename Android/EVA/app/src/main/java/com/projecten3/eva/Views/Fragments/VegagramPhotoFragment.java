@@ -20,12 +20,9 @@ import com.projecten3.eva.Views.VegagramActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static android.app.Activity.RESULT_OK;
-
-/**
- * Created by Bram on 11/08/2017.
- */
 
 public class VegagramPhotoFragment extends Fragment {
 
@@ -58,17 +55,15 @@ public class VegagramPhotoFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_photo_taken, container, false);
         ButterKnife.bind(this,v);
 
-        btnRetakePhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-                }
-            }
-        });
-
         return v;
+    }
+
+    @OnClick(R.id.retake_photo)
+    public void onRetakeClicked(){
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
     }
 
     public void setContent(Bitmap imgBitmap){
