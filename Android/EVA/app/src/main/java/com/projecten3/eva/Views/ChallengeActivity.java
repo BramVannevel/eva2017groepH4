@@ -90,6 +90,10 @@ public class ChallengeActivity extends AppCompatActivity {
 
 
         dbHelper = new DbHelper(this);
+        ArrayList<DatabaseEntry> al = dbHelper.getAll();
+        for (DatabaseEntry d : al){
+            Log.e("entry ---", d.challenge + "---" + d.state + "---" + d.day);
+        }
 
     }
 
@@ -201,6 +205,7 @@ public class ChallengeActivity extends AppCompatActivity {
         countdownTimer.setTextSize(15);
         countdownTimer.setText(sb.toString());
         hasCompletedChallengeToday=true;
+
         dbHelper.updateProgress(String.valueOf(challengeOfTheDay.getId()),String.valueOf(currentDay),"finished");
         if(challengeOfTheDay.getReward() != null)
             createDialogForReward();

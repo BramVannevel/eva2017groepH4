@@ -16,8 +16,10 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.projecten3.eva.Adapters.ChallengeDaysAdapter;
 import com.projecten3.eva.Data.ApiService;
+import com.projecten3.eva.Data.DbHelper;
 import com.projecten3.eva.Data.EvaApiBuilder;
 import com.projecten3.eva.Factory.DaysOfWeekFactory;
+import com.projecten3.eva.Model.DatabaseEntry;
 import com.projecten3.eva.Model.Day;
 import com.projecten3.eva.Model.Restaurant;
 import com.projecten3.eva.R;
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private Unbinder unbinder;
     private int currentDay;
+    private DbHelper dbHelper;
 
     @BindView(R.id.rv_core_layout)
     RecyclerView rvDays;
@@ -74,10 +77,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onError(FacebookException exception) {
                 // App code
-                Log.i(TAG, "onerror");
+                Log.i(TAG, "onerror"
             }
         });*/
 
+        dbHelper = new DbHelper(this);
         unbinder = ButterKnife.bind(this);
 
         checkDaysLoggedInRow();
@@ -105,17 +109,40 @@ public class MainActivity extends AppCompatActivity {
             int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
             Log.e("dayOfweek---",String.valueOf(dayOfWeek));
             days.add(new Day(getShortenedDayOfWeek(dayOfWeek),i,false));
-            for(Day d : days){
-                if(d.getWhichDayOfTheChallenge()<currentDay){
+          /*for(Day d : days){
+                if(d.getWhichDayOfTheChallenge()<currentDay && dbHelper.getDataByDay(String.valueOf(currentDay)).contains(d.getWhichDayOfTheChallenge())){
                     Log.e("dayofchallengeKl",d.getDayOfTheWeek() + String.valueOf(d.getWhichDayOfTheChallenge()) + "completed");
                     //image van d vervangen door een checkmark
 
                 }
-            }
+            }*/
+            ArrayList<String> test = dbHelper.getDataByDay(String.valueOf(currentDay));
+          for (Day d : days){
+            //  Log.i("dayweek",String.valueOf(d.getWhichDayOfTheChallenge()));
+              if (test.contains(String.valueOf(d.getWhichDayOfTheChallenge()))){
+                  Log.e("day of the challenge ",String.valueOf(d.getWhichDayOfTheChallenge() + " completed"));
+                  
+              }
+          }
 
+
+
+/*
+          ArrayList<DatabaseEntry> test = dbHelper.getAll();
+            for (DatabaseEntry t : test){
+                if (t.day.equals(String.valueOf(currentDay)) && t.state.equals("finished")){
+                    Log.e("completed for ", getShortenedDayOfWeek(Integer.valueOf(t.day)));
+                }
+            }*/
+            /*
+          ArrayList<DatabaseEntry> dbe = dbHelper.getDataByDay(String.valueOf(currentDay));
+            for (DatabaseEntry e : dbe){
+                Log.e("dag",e.day);
+            }*/
         }
         return days;
     }
+
 
     /**
      * retrieve shortened day names in the correct language trough string resources via a factory.

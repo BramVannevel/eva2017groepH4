@@ -22,7 +22,7 @@ public class DbHelper extends SQLiteOpenHelper {
     private String[] allColumns = {COLUMN_CHALLENGE,COLUMN_STATE,COLUMN_DAY};
     private SQLiteDatabase db;
     // If you change the database schema, you must increment the database version.
-    public static final int DATABASE_VERSION = 7;
+    public static final int DATABASE_VERSION = 10;
     public static final String DATABASE_NAME = "progress.db";
 
     public static final String TABLE_PROGRESS = "progress";
@@ -127,6 +127,21 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res =  db.rawQuery( "select * from progress where challenge = '" + id + "';", null );
         return res;
+    }
+
+    public ArrayList<String> getDataByDay(String currentday){
+        ArrayList<String> arrayList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from progress where day <= '" + currentday + "' AND state = '" + "finished" + "';", null);
+
+        res.moveToFirst();
+
+        while(res.isAfterLast() == false){
+            DatabaseEntry post = cursorToData(res);
+            arrayList.add(post.day);
+            res.moveToNext();
+        }
+        return arrayList;
     }
 
 }
