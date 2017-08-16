@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
             //  Log.i("dayweek",String.valueOf(d.getWhichDayOfTheChallenge()));
               if (test.contains(String.valueOf(d.getWhichDayOfTheChallenge()))){
                   Log.e("day of the challenge ",String.valueOf(d.getWhichDayOfTheChallenge() + " completed"));
-                  
+
               }
           }
 
