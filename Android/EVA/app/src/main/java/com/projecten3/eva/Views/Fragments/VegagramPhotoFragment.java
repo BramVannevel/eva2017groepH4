@@ -13,12 +13,21 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.share.Sharer;
+import com.facebook.share.model.SharePhoto;
+import com.facebook.share.model.SharePhotoContent;
+import com.facebook.share.widget.ShareDialog;
 import com.projecten3.eva.Data.EvaApiBuilder;
 import com.projecten3.eva.R;
 import com.projecten3.eva.Views.VegagramActivity;
@@ -45,15 +54,19 @@ import static android.app.Activity.RESULT_OK;
 
 public class VegagramPhotoFragment extends Fragment {
 
+    private boolean post_facebook = false;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private Bitmap image;
     File file;
+
+    ShareDialog shareDialog;
+    CallbackManager callbackManager;
 
     @BindView(R.id.vegagram_check)
     CheckBox cbVegagram_checkbox;
 
     @BindView(R.id.facebook_check)
-    CheckBox cvFacebook_checkbox;
+    CheckBox cbFacebook_checkbox;
 
     @BindView(R.id.photograph_taken)
     ImageView imvPhotograph_taken;
@@ -72,7 +85,38 @@ public class VegagramPhotoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_photo_taken, container, false);
         ButterKnife.bind(this,v);
+        callbackManager = CallbackManager.Factory.create();
+        shareDialog = new ShareDialog(this);
+        shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
+            @Override
+            public void onSuccess(Sharer.Result result) {
 
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+
+            }
+        });
+
+       /* cbFacebook_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    btnSavePhoto.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            onSaveClicked();
+                        }
+                    });
+                }
+            }
+        });*/
         return v;
     }
 
@@ -94,6 +138,7 @@ public class VegagramPhotoFragment extends Fragment {
             e.printStackTrace();
         }
 
+        post_facebook = cbFacebook_checkbox.isChecked();
         boolean post_vegagram = cbVegagram_checkbox.isChecked();
         String postedDate = (String) android.text.format.DateFormat.format("yyyy-MM-dd", new Date());
 
@@ -114,6 +159,13 @@ public class VegagramPhotoFragment extends Fragment {
 
             }
         });
+
+        SharePhoto photo  = new SharePhoto.Builder().setBitmap(image).build();
+        SharePhotoContent content = new SharePhotoContent.Builder().addPhoto(photo).build();
+
+        if(post_facebook){
+            shareDialog.show(content);
+        }
 
         getActivity().getSupportFragmentManager().popBackStack();
     }
@@ -149,6 +201,9 @@ public class VegagramPhotoFragment extends Fragment {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             ((VegagramActivity)getActivity()).createPhotoTakenFragement(imageBitmap);
+        }else{
+            super.onActivityResult(requestCode, resultCode, data);
+            callbackManager.onActivityResult(requestCode, resultCode, data);
         }
     }
 }

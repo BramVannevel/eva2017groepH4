@@ -96,7 +96,7 @@ public class VegagramListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_vegagram_list,container,false);
-        Log.i(TAG,"oncreateview called");
+
         setHasOptionsMenu(true);
         ButterKnife.bind(this,v);
 
@@ -118,7 +118,7 @@ public class VegagramListFragment extends Fragment {
             }
         });
 
-        adapter = new VegagramAdapter(allPosts,getContext());
+        adapter = new VegagramAdapter(allPosts,getContext(),false);
         rv.setAdapter(adapter);
         llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);
@@ -210,8 +210,10 @@ public class VegagramListFragment extends Fragment {
     public void updateUI(boolean showAll){
         if(showAll){
             adapter.setPosts(allPosts);
+            adapter.setPrPosts(false);
         }else{
             adapter.setPosts(userPosts);
+            adapter.setPrPosts(true);
         }
         adapter.notifyDataSetChanged();
     }
@@ -305,7 +307,6 @@ public class VegagramListFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Log.i(TAG,"on destroy called");
         if(!compositeDisposable.isDisposed()){
             compositeDisposable.dispose();
         }
