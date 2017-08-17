@@ -3,10 +3,17 @@
     <string name="facebook_app_id">492346584450224</string>
     <string name="fb_login_protocol_scheme">fb492346584450224</string>
     <string name="google_android_map_api_key">AIzaSyBOWlVQ5OLX9XM9T4JboBKlNgClRsWznI0</string>
+    <string name="streetview_api_key">AIzaSyBy1W27MKbrzbn54k1s49s5wfGku_hhV5w</string>
+
+    <string name="streetview_api_url">https://maps.googleapis.com/maps/api/streetview?size=600x300&amp;location=%1$s&amp;pitch=-0.76&amp;key=AIzaSyBy1W27MKbrzbn54k1s49s5wfGku_hhV5w</string>
 
     <string name="app_name">EVA</string>
-
-
+    <string name="login">LOGIN</string>
+    <string name="email">Email</string>
+    <string name="paswoord">Paswoord</string>
+    <string name="repeat_paswoord">Herhaal paswoord</string>
+    <string name="sign_up">Registreer</string>
+    <string name="registreer"><u>Nog geen account?</u></string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="start_maps_route">Toon routebeschrijving</string>
     <string name="bel">Bel </string>
@@ -14,7 +21,7 @@
     <string name="hours_remaining"> uren resterend!</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-<string name="new_challenge">Nieuwe uitdaging in </string>
+    <string name="new_challenge">Nieuwe uitdaging in </string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
@@ -58,4 +65,5 @@
     <string name="google_maps_error">Google maps couldn\'t load that adress :(</string>
     <string name="error">An error occured, try again later!</string>
     <string name="loading">Ophalen ...</string>
+    <string name="error_login">invalid username or password</string>
 </resources>

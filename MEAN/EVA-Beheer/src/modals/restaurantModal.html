@@ -1,0 +1,29 @@
+ <div>
+    <h4 class="content__centerText">Nieuw Restaurant</h4>
+
+    <form class="content__centerContent">
+      <div class="form-group content__centerContent">
+        <input type="text" class="form-control content__create-input" placeholder="Naam*" ng-model="restaurantNaam">
+      </div>
+      <div class="form-group content__centerContent">
+        <input type="text" class="form-control content__create-input" placeholder="Telefoon" ng-model="restaurantTelefoon">
+      </div>
+      <div class="form-group content__centerContent">
+        <input type="text" class="form-control content__create-input" placeholder="Straat" ng-model="restaurantStraat">
+      </div>
+      <div class="form-group content__centerContent">
+        <input type="text" class="form-control content__create-input" placeholder="Huisnummer" ng-model="restaurantHuisnummer">
+      </div>
+      <div class="form-group content__centerContent">
+        <input type="text" class="form-control content__create-input" placeholder="Stad*" ng-model="restaurantStad">
+      </div>
+      <div class="form-group content__centerContent">
+        <input type="text" class="form-control content__create-input" placeholder="Postcode*" ng-model="restaurantPostcode">
+      </div>
+    </form>
+
+    <div class="content__centerText">
+      <button class="btn btn-default content__voegToe-button" ng-click="cancelModal()">Annuleer</button>
+      <button class="btn content__generalButtonSettings content__voegToe-button" ng-click="ok()">Opslaan</button>
+    </div>
+  </div>

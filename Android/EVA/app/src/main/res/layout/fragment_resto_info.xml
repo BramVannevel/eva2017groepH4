@@ -1,4 +1,5 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,23 +9,28 @@
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <RelativeLayout
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:id="@+id/imvFoto"
+            android:scaleType="centerCrop"
+            />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="10dp"
-        android:id="@+id/rlt">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:id="@+id/imvFoto"
-            android:alpha="0.6"
-            />
+        android:layout_below="@+id/rlt"
+        android:id="@+id/llt"
+        android:background="@color/evaGroen"
+        android:padding="@dimen/resto_margin"
+        >
 
         <TextView
             android:layout_width="match_parent"
@@ -32,7 +38,7 @@
             android:textSize="@dimen/resto_title"
             android:id="@+id/naamResto"
             android:textStyle="bold"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black" />
 
         <TextView
             android:layout_width="match_parent"
@@ -42,64 +48,76 @@
             android:id="@+id/adressResto"
             android:layout_alignParentBottom="true"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@+id/rlt"
+        android:layout_below="@id/llt"
         android:layout_margin="@dimen/resto_margin"
-        android:id="@+id/llt"
+        android:orientation="horizontal"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
         >
+
+        <ImageButton
+            android:id="@+id/tel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:layout_weight="0.5"
+            android:src="@drawable/ic_phone"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            />
+
+
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/website"
+            android:src="@drawable/ic_web"
+            android:layout_weight="0.5"
+            android:background="@android:color/transparent"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             android:layout_marginTop="@dimen/resto_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/omschrijving"/>
-        <com.google.android.gms.maps.MapView
-            android:layout_height="150dp"
-            android:layout_width="match_parent"
-            android:id="@+id/mapView"
-            android:padding="3dp"
-            android:background="@drawable/custom_background"
 
-            />
+
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/llt"
-        android:layout_margin="@dimen/resto_margin"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/tel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="textStart"
-            android:background="@drawable/arrow_call"
-            android:paddingLeft="45dp"
-            android:alpha="0.5"
-            />
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/route_arrow"
-            android:alpha="0.5"
-            android:paddingLeft="45dp"
-            android:textAlignment="textStart"
-            android:text="@string/start_maps_route"
-            android:id="@+id/routeBeschrijving"/>
-    </LinearLayout>
-
 
 </LinearLayout>
 
 </ScrollView>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:src="@drawable/ic_maps"
+        app:layout_anchor="@id/imvFoto"
+        app:layout_anchorGravity="bottom|right|end"/>
 
 
-</RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>
 

@@ -6,6 +6,7 @@ import com.projecten3.eva.Model.Authenticate;
 import com.projecten3.eva.Model.Challenges;
 import com.projecten3.eva.Model.Post;
 import com.projecten3.eva.Model.Posts;
+import com.projecten3.eva.Model.Register;
 import com.projecten3.eva.Model.Restaurant;
 
 import java.util.ArrayList;
@@ -29,7 +30,6 @@ import retrofit2.http.Path;
  * retrofit service class that contains all the calls in one place
  */
 public interface ApiService {
-
     /**
      * login network call, post a username and password to retrieve the token
      * @param username
@@ -39,6 +39,17 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/user/authenticate")
     Observable<Authenticate> authenticate(@Field("name") String username, @Field("password") String password);
+
+
+    /**
+     * sign up a new account
+     * @param username
+     * @param password
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/user/signup")
+    Observable<Register> signUp(@Field("name") String username, @Field("password") String password);
 
     /**
      * get call to return all the restaurants

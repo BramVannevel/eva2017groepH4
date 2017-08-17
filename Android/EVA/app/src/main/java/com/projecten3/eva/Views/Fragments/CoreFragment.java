@@ -17,6 +17,7 @@ import com.projecten3.eva.Interfaces.OnCoreButtonCLickedInterface;
 import com.projecten3.eva.Model.CoreButtons;
 import com.projecten3.eva.R;
 import com.projecten3.eva.Views.RestoActivity;
+import com.projecten3.eva.Views.VegagramActivity;
 
 import java.util.ArrayList;
 
@@ -81,7 +82,7 @@ public class CoreFragment extends Fragment {
                 startActivity(new Intent(this.getActivity(), ChallengeActivity.class));
                 break;
             case 1 :
-                Log.i(TAG,"NOT YET IMPLEMENTED, clicked on 2");
+                startActivity(new Intent(this.getActivity(), VegagramActivity.class));
                 break;
             case 2 :
                 Log.i(TAG,"NOT YET IMPLEMENTED, clicked on 3");
