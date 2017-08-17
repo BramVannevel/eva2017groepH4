@@ -17,7 +17,8 @@ var router = express.Router();
 
 /**
 * Add een vegagramPost
-* Upload onder andere een afbeelding naar de server (in de map uploads)
+* Upload onder andere een afbeelding naar de server (in de map public/vegagramUploads) --> in public zodat het niet mee gebundeld wordt door webpack.
+* Anders kan de applicatie er niet meer aan om afbeeldingen op te slaan en op te halen.
 * Multipart form data gebruiken met als form-data:
 * Key: fileToUpload, Value: binary file
 * Saved de imageName samen met het userId van de user die de upload deed in het VegagramPost database model

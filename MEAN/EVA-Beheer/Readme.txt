@@ -73,7 +73,7 @@ https://evabeheer.herokuapp.com/vegagram/uploads
 
 **een vegagram post bevat onder andere de image naam, deze kan gebruikt worden om het binaire bestand op te halen
 
-AFBEELDING VAN EEN VEGAGRAM POST OPHALEN AAN DE HAND VAN DE VERKREGEN NAAM EVAN DE IMAGE [GET]
+AFBEELDING VAN EEN VEGAGRAM POST OPHALEN AAN DE HAND VAN DE VERKREGEN NAAM VAN DE IMAGE [GET]**
 https://evabeheer.herokuapp.com/uploads/naamVanDeImage
 
 EEN VEGAGRAM POST VERWIJDEREN [DEL] (bijhorende image wordt ook van server verwijderd)
