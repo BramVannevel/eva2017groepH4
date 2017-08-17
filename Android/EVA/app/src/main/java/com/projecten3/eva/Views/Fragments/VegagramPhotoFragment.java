@@ -94,11 +94,12 @@ public class VegagramPhotoFragment extends Fragment {
             e.printStackTrace();
         }
 
+        boolean post_vegagram = cbVegagram_checkbox.isChecked();
         String postedDate = (String) android.text.format.DateFormat.format("yyyy-MM-dd", new Date());
 
         RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("fileToUpload", file.getName(), requestFile);
-        Call<Void> call = EvaApiBuilder.getInstance().uploadVegagramPost(body,true,0,postedDate);
+        Call<Void> call = EvaApiBuilder.getInstance().uploadVegagramPost(body,post_vegagram,0,postedDate);
 
         call.enqueue(new Callback<Void>() {
             @Override
