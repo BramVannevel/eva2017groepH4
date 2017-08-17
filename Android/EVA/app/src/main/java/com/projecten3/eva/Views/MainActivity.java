@@ -1,7 +1,6 @@
 package com.projecten3.eva.Views;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,34 +8,20 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 import com.projecten3.eva.Adapters.ChallengeDaysAdapter;
-import com.projecten3.eva.Data.ApiService;
-import com.projecten3.eva.Data.EvaApiBuilder;
+import com.projecten3.eva.Data.DbHelper;
 import com.projecten3.eva.Factory.DaysOfWeekFactory;
 import com.projecten3.eva.Model.Day;
-import com.projecten3.eva.Model.Restaurant;
 import com.projecten3.eva.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
-import java.util.concurrent.Callable;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.observers.DisposableObserver;
-import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
     private final String TAG = getClass().getSimpleName();
@@ -45,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private Unbinder unbinder;
     private int currentDay;
+    private DbHelper dbHelper;
 
     @BindView(R.id.rv_core_layout)
     RecyclerView rvDays;
@@ -74,13 +60,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onError(FacebookException exception) {
                 // App code
-                Log.i(TAG, "onerror");
+                Log.i(TAG, "onerror"
             }
         });*/
 
+        dbHelper = new DbHelper(this);
         unbinder = ButterKnife.bind(this);
 
-        checkDaysLoggedInRow();
+        ArrayList<Day> al = new ArrayList<>();
+        al = dbHelper.getAll();
+        for (Day d : al) {
+            Log.e("dayentr", d.getWhichDayOfTheChallenge() + " " + d.getCompleted());
+        }
         initMainUI();
     }
 
@@ -96,24 +87,28 @@ public class MainActivity extends AppCompatActivity {
      * @return
      */
     private ArrayList<Day> initChallengeDays(){
-        ArrayList<Day> days = new ArrayList<>();
-        for(int i = 1; i < 21; i++){
-            Calendar c = Calendar.getInstance();
-            c.setTime(new Date());
-            Log.e("currentDayInitChall",String.valueOf(currentDay));
-            c.add(Calendar.DAY_OF_YEAR, i-currentDay);
-            int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-            Log.e("dayOfweek---",String.valueOf(dayOfWeek));
-            days.add(new Day(getShortenedDayOfWeek(dayOfWeek),i,false));
-            for(Day d : days){
-                if(d.getWhichDayOfTheChallenge()<currentDay){
-                    Log.e("dayofchallengeKl",d.getDayOfTheWeek() + String.valueOf(d.getWhichDayOfTheChallenge()) + "completed");
-                    //image van d vervangen door een checkmark
 
-                }
+        ArrayList<Day> days = new ArrayList<>();
+        Log.e("currentday", String.valueOf(currentDay));
+        if(checkDaysLoggedInRow()){
+            Log.e("MainActivity", "initChallenges if");
+            days = dbHelper.getAll();
+        } else {
+            dbHelper.dropTable();
+            Log.e("MainActivity", "initChallenges else");
+            for (int i = 1; i < 21; i++) {
+                Calendar c = Calendar.getInstance();
+                c.setTime(new Date());
+                Log.e("currentDayInitChall", String.valueOf(currentDay));
+                c.add(Calendar.DAY_OF_YEAR, i - currentDay);
+                int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+                Log.e("dayOfweek---", String.valueOf(dayOfWeek));
+                days.add(new Day(getShortenedDayOfWeek(dayOfWeek), i, 0));
+                dbHelper.insertProgress(getShortenedDayOfWeek(dayOfWeek), String.valueOf(i), "0");
             }
 
         }
+        Log.e("currentday", String.valueOf(currentDay));
         return days;
     }
 
@@ -127,29 +122,35 @@ public class MainActivity extends AppCompatActivity {
         return getResources().getString(factory.getShortNameFromDayOfWeek(day));
     }
 
-    private void checkDaysLoggedInRow(){
+    private boolean checkDaysLoggedInRow(){
 
+        boolean daysinRow = false;
         SharedPreferences sharedPreferences = getSharedPreferences("days", Context.MODE_PRIVATE);
 
 
         Calendar c = Calendar.getInstance();
         int today = c.get(Calendar.DAY_OF_YEAR);
         int lastDay = sharedPreferences.getInt("daysDate",0);
-        currentDay = sharedPreferences.getInt("daysInRow",0);
-
+        currentDay = sharedPreferences.getInt("daysInRow",1);
+        Log.i("today -------", String.valueOf(today));
+        Log.i("last day -------", String.valueOf(lastDay));
         if (lastDay == today -1){
             currentDay +=1;
             sharedPreferences.edit().putInt("daysDate",today).commit();
             sharedPreferences.edit().putInt("daysInRow",currentDay).commit();
+            daysinRow = true;
 
         } else if(lastDay == today){
             //niks doen, nog dezelfde dag
+            daysinRow = true;
         }else {
             currentDay = 1;
             sharedPreferences.edit().putInt("daysDate",today).commit();
             sharedPreferences.edit().putInt("daysInRow",currentDay).commit();
+            daysinRow = false;
 
         }
+        return daysinRow;
     }
     @Override
     protected void onDestroy() {

@@ -8,10 +8,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.projecten3.eva.Model.DatabaseEntry;
+import com.projecten3.eva.Model.Day;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Desktop Ben on 15/08/2017.
@@ -19,19 +18,20 @@ import java.util.List;
 
 public class DbHelper extends SQLiteOpenHelper {
 
-    private String[] allColumns = {COLUMN_CHALLENGE,COLUMN_STATE,COLUMN_DAY};
+    private String[] allColumns = {COLUMN_DAYOFTHEWEEK,COLUMN_STATE,COLUMN_DAY};
     private SQLiteDatabase db;
     // If you change the database schema, you must increment the database version.
-    public static final int DATABASE_VERSION = 7;
+    public static final int DATABASE_VERSION = 14;
     public static final String DATABASE_NAME = "progress.db";
 
     public static final String TABLE_PROGRESS = "progress";
-    public static final String COLUMN_CHALLENGE = "challenge";
+    public static final String COLUMN_DAYOFTHEWEEK = "dayOfTheWeek";
     public static final String COLUMN_STATE = "state";
     public static final String COLUMN_DAY = "day";
 
-    private static final String DB_CREATE = "create table " + TABLE_PROGRESS + "(" + COLUMN_CHALLENGE + " text not null, " + COLUMN_DAY + " text not null, " +
-            COLUMN_STATE + " text not null );";
+    private static final String DB_CREATE = "create table " + TABLE_PROGRESS + "(" + COLUMN_DAYOFTHEWEEK + " text not null, " + COLUMN_DAY + " integer not null, " +
+            COLUMN_STATE + " integer not null );";
+    private static final String DB_DROP = "drop table " + TABLE_PROGRESS + ";";
 
     public DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -42,7 +42,6 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public void open() throws SQLException {
         db = this.getWritableDatabase();
-        //deleteAll();
 
     }
 
@@ -62,29 +61,26 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
 
-    public boolean createProgress(String id, String state, String day){
-        SQLiteDatabase db = this.getWritableDatabase();
+    public void dropTable(){
+        db = this.getWritableDatabase();
+        try {
+            db.execSQL("delete from " + TABLE_PROGRESS);
 
-        ContentValues values = new ContentValues();
-
-        values.put(COLUMN_CHALLENGE,id);
-        values.put(COLUMN_DAY,day);
-        values.put(COLUMN_STATE,state);
-        db.insert(TABLE_PROGRESS,null,values);
-        return true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 
-    public ArrayList<DatabaseEntry> getAll() {
-        ArrayList<DatabaseEntry> array_list = new ArrayList<>();
+    public ArrayList<Day> getAll() {
+        ArrayList<Day> array_list = new ArrayList<>();
 
-        //hp = new HashMap();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res =  db.rawQuery( "select * from progress", null );
         res.moveToFirst();
 
         while(res.isAfterLast() == false){
-            DatabaseEntry post = cursorToData(res);
+            Day post = cursorToData(res);
             array_list.add(post);
             res.moveToNext();
         }
@@ -94,7 +90,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public boolean insertProgress (String id, String day, String state) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_CHALLENGE,id);
+        contentValues.put(COLUMN_DAYOFTHEWEEK,id);
         contentValues.put(COLUMN_DAY,day);
         contentValues.put(COLUMN_STATE,state);
 
@@ -102,31 +98,37 @@ public class DbHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    private DatabaseEntry cursorToData(Cursor cursor) {
-        DatabaseEntry post = new DatabaseEntry();
+    private Day cursorToData(Cursor cursor) {
+        Day post = new Day();
 
-        post.challenge = cursor.getString(0);
-        post.day = cursor.getString(1);
-        post.state = cursor.getString(2);
+        post.setDayOfTheWeek(cursor.getString(0));
+        post.setWhichDayOfTheChallenge(cursor.getInt(1));
+        post.setCompleted(cursor.getInt(2));
 
         return post;
     }
 
-
-    public boolean updateProgress (String id, String day, String state) {
+    public boolean updateState(String day, int state){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_CHALLENGE, id);
-        contentValues.put(COLUMN_DAY, day);
         contentValues.put(COLUMN_STATE, state);
-        db.update(TABLE_PROGRESS, contentValues, "challenge = ? ", new String[] { id } );
+        db.update(TABLE_PROGRESS, contentValues, "day = ?", new String[] { day });
         return true;
     }
 
-    public Cursor getData(String id) {
+    public Day getDay(int dag){
+        Day day = new Day();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from progress where challenge = '" + id + "';", null );
-        return res;
+        Cursor res = db.rawQuery("select * from progress where day = '" + dag + "';", null);
+
+        if(res.moveToFirst()){
+            Log.e("cursor","niet empty");
+        } else {
+            Log.e("cursor","empty");
+        }
+        day = cursorToData(res);
+        return day;
     }
+
 
 }

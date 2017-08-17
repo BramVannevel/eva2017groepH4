@@ -30,11 +30,15 @@ public class ChallengeDaysAdapter extends RecyclerView.Adapter<ChallengeDaysAdap
 
     @Override
     public void onBindViewHolder(ChallengeViewHolder holder, int position) {
+
         TextView dayOfTheWeek = holder.dayOfTHeWeek;
         TextView nrOfDay = holder.nrOfDay;
 
         dayOfTheWeek.setText(days.get(position).getDayOfTheWeek());
         nrOfDay.setText(Integer.toString(days.get(position).getWhichDayOfTheChallenge()));
+        if (days.get(position).getCompleted() == 2){
+            nrOfDay.setBackgroundResource(R.drawable.ic_check_circle);
+        }
     }
 
     @Override

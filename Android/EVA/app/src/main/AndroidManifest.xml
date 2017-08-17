@@ -47,8 +47,6 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-
-
         <activity android:name=".Views.VegagramActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
