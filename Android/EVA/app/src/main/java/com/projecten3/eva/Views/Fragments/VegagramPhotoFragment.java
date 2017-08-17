@@ -27,6 +27,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import butterknife.BindView;
@@ -84,7 +86,7 @@ public class VegagramPhotoFragment extends Fragment {
             file.createNewFile();
 
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            image.compress(Bitmap.CompressFormat.JPEG, 0, bos);
+            image.compress(Bitmap.CompressFormat.JPEG, 100, bos);
             byte[] bitmapdata = bos.toByteArray();
 
             FileOutputStream fos = new FileOutputStream(file);
@@ -95,15 +97,17 @@ public class VegagramPhotoFragment extends Fragment {
             e.printStackTrace();
         }
 
+        String postedDate = (String) android.text.format.DateFormat.format("yyyy-MM-dd", new Date());
+
         RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("fileToUpload", file.getName(), requestFile);
-        Call<Void> call = EvaApiBuilder.getInstance().uploadVegagramPost(body,true,0,new Date());
+        Call<Void> call = EvaApiBuilder.getInstance().uploadVegagramPost(body,true,0,postedDate);
 
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                if (!response.isSuccessful()) {
-                    //error
+                if (response.isSuccessful()) {
+                    getActivity().onBackPressed();
                 }
             }
 

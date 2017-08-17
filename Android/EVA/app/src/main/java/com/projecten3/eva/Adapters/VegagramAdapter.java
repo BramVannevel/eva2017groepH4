@@ -1,6 +1,7 @@
 package com.projecten3.eva.Adapters;
 
 import android.content.Context;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.projecten3.eva.Data.EvaApiBuilder;
 import com.projecten3.eva.Model.Post;
 import com.projecten3.eva.Model.Restaurant;
 import com.projecten3.eva.R;
@@ -29,6 +31,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 import static com.facebook.FacebookSdk.getClientToken;
@@ -56,15 +62,15 @@ public class VegagramAdapter extends RecyclerView.Adapter<VegagramAdapter.Vegagr
 
     @Override
     public void onBindViewHolder(VegagramViewHolder holder, final int position) {
-        /*Glide.with(context)
-                .load(restos.get(i).getFoto())
+        Glide.with(context)
+                .load("https://evabeheer.herokuapp.com/vegagram/uploads/" + posts.get(position).getImageName())
                 .centerCrop()
-                .into(restoViewHolder.imvResto);*/
-        //DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
+                .into(holder.photograph);
+
         String formatted_date;
+        Post post = posts.get(position);
 
-
-        formatted_date = posts.get(position).getPosted() != null ? (String) android.text.format.DateFormat.format("yyyy-MM-dd HH:mm", posts.get(position).getPosted()) :  null;
+        formatted_date = (String) android.text.format.DateFormat.format("yyyy-MM-dd HH:mm", posts.get(position).getPosted());
 
 
         holder.date_posted.setText(formatted_date);
@@ -149,7 +155,22 @@ public class VegagramAdapter extends RecyclerView.Adapter<VegagramAdapter.Vegagr
                     //share code
                     return true;
                 case R.id.delete_photo:
+                    Call<ResponseBody> call = EvaApiBuilder.getInstance().deleteVegagramPost(posts.get(position).getId());
 
+                    call.enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            if (response.isSuccessful()) {
+                                posts.remove(position);
+                                notifyDataSetChanged();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                        }
+                    });
                     return true;
                 default:
             }

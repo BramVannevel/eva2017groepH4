@@ -13,14 +13,17 @@ import java.util.Date;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 
 /**
  * retrofit service class that contains all the calls in one place
@@ -56,7 +59,7 @@ public interface ApiService {
 
     @Multipart
     @POST("/vegagram/")
-    Call<Void> uploadVegagramPost(@Part MultipartBody.Part fileToUpload, @Part("isPublic") boolean isPublic, @Part("likes") int likes, @Part("posted") Date date);
+    Call<Void> uploadVegagramPost(@Part MultipartBody.Part fileToUpload, @Part("isPublic") boolean isPublic, @Part("likes") int likes, @Part("posted") String date);
 
     @GET("/vegagram/useruploads")
     Observable<Posts> getUserPosts();
@@ -64,6 +67,9 @@ public interface ApiService {
     @GET("/vegagram/uploads")
     Observable<Posts> getAllPosts();
 
-    @GET("uploads/")
-    Observable<Image> getImage();
+    @GET("/vegagram/uploads/{naam}")
+    Call<ResponseBody> getImage(@Field("naam") String naam);
+
+    @DELETE("/vegagram/{id}")
+    Call<ResponseBody> deleteVegagramPost(@Path("id") String id);
 }

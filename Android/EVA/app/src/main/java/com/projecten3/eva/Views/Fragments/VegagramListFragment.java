@@ -4,6 +4,7 @@ package com.projecten3.eva.Views.Fragments;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.media.Image;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -43,6 +45,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -51,8 +57,8 @@ public class VegagramListFragment extends Fragment {
     public static final String TAG = "VegagramListFragment";
     static final int REQUEST_IMAGE_CAPTURE = 1;
     public static final int PERMISSION_REQUEST = 200;
-    private CompositeDisposable compositeDisposableAll = new CompositeDisposable();
-    private CompositeDisposable compositeDisposableUser = new CompositeDisposable();
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private boolean currentList = true;
 
     private ArrayList<Post> allPosts;
     private ArrayList<Post> userPosts;
@@ -65,22 +71,42 @@ public class VegagramListFragment extends Fragment {
     @BindView(R.id.take_picture)
     FloatingActionButton photo_button;
 
+    @BindView(R.id.swipeRefresh)
+    SwipeRefreshLayout swipeRefreshLayout;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(savedInstanceState != null && savedInstanceState.containsKey("posts")){
+            allPosts = savedInstanceState.getParcelableArrayList("posts");
+        }else{
+            allPosts = new ArrayList<>();
+        }
+
+        if(savedInstanceState != null && savedInstanceState.containsKey("userPosts")){
+            allPosts = savedInstanceState.getParcelableArrayList("userPosts");
+        }else{
+            userPosts = new ArrayList<>();
+        }
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_vegagram_list,container,false);
-        setHasOptionsMenu(true);
 
+        setHasOptionsMenu(true);
         ButterKnife.bind(this,v);
-        allPosts = new ArrayList<>();
-        userPosts = new ArrayList<>();
 
         getAllPosts();
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshItem();
+            }
+        });
 
 
         photo_button.setOnClickListener(new View.OnClickListener() {
@@ -92,12 +118,30 @@ public class VegagramListFragment extends Fragment {
             }
         });
 
-        //mockData();
         adapter = new VegagramAdapter(allPosts,getContext());
         rv.setAdapter(adapter);
         llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);
         return v;
+    }
+
+    void refreshItem(){
+        if(currentList == true){
+            getAllPosts();
+        }else{
+            getUserPosts();
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        if(allPosts.size() > 0) {
+            outState.putParcelableArrayList("posts", allPosts);
+        }
+        if(userPosts.size() > 0) {
+            outState.putParcelableArrayList("userPosts", allPosts);
+        }
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -111,10 +155,12 @@ public class VegagramListFragment extends Fragment {
         switch((item.getItemId())){
             case R.id.public_photos:
                 Log.i(TAG,"clicked on public");
+                currentList = true;
                 updateUI(true);
                 return true;
             case R.id.private_photos:
                 Log.i(TAG,"clicked on private");
+                currentList = false;
                 if(userPosts.size() == 0){
                     getUserPosts();
                 }else{
@@ -123,20 +169,6 @@ public class VegagramListFragment extends Fragment {
                 return true;
             default: return super.onOptionsItemSelected(item);
         }
-    }
-
-    private void mockData(){
-        Post post1 = new Post(null,new Date(), 100, false);
-        Post post2 = new Post(null,new Date(), 110, false);
-        Post post3 = new Post(null,new Date(), 20, false);
-        Post post4 = new Post(null,new Date(), 1692, false);
-        Post post5 = new Post(null,new Date(), 2, false);
-
-        allPosts.add(post1);
-        allPosts.add(post2);
-        allPosts.add(post3);
-        allPosts.add(post4);
-        allPosts.add(post5);
     }
 
     public void takePicture(){
@@ -180,16 +212,13 @@ public class VegagramListFragment extends Fragment {
             adapter.setPosts(allPosts);
         }else{
             adapter.setPosts(userPosts);
+            swipeRefreshLayout.setRefreshing(false);
         }
         adapter.notifyDataSetChanged();
     }
 
-    public void retrieveImages(){
-
-    }
-
     private void getAllPosts() {
-        compositeDisposableAll.add(getObservablePosts()
+        compositeDisposable.add(getObservablePosts()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<Posts>() {
@@ -197,8 +226,7 @@ public class VegagramListFragment extends Fragment {
                     public void onNext(Posts value) {
                         Log.i("onNext","retrieved 200 status");
                         allPosts = value.getPosts();
-                        Log.i(TAG,"wow");
-                        updateUI(true);
+
                     }
 
                     @Override
@@ -211,6 +239,8 @@ public class VegagramListFragment extends Fragment {
                     @Override
                     public void onComplete() {
                         Log.i("onComplete","Completed the call");
+                        updateUI(true);
+                        swipeRefreshLayout.setRefreshing(false);
                     }
                 }));
     }
@@ -232,7 +262,7 @@ public class VegagramListFragment extends Fragment {
     }
 
     private void getUserPosts() {
-        compositeDisposableUser.add(getObservableUserPosts()
+        compositeDisposable.add(getObservableUserPosts()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<Posts>() {
@@ -276,8 +306,8 @@ public class VegagramListFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if(!compositeDisposableAll.isDisposed()){
-            compositeDisposableAll.dispose();
+        if(!compositeDisposable.isDisposed()){
+            compositeDisposable.dispose();
         }
     }
 }
