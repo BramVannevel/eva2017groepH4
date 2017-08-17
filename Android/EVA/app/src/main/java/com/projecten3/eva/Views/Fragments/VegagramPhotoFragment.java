@@ -55,9 +55,6 @@ public class VegagramPhotoFragment extends Fragment {
     @BindView(R.id.facebook_check)
     CheckBox cvFacebook_checkbox;
 
-    @BindView(R.id.link_challenge_check)
-    CheckBox cbChallenge_checkbox;
-
     @BindView(R.id.photograph_taken)
     ImageView imvPhotograph_taken;
 
@@ -107,7 +104,7 @@ public class VegagramPhotoFragment extends Fragment {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    getActivity().onBackPressed();
+
                 }
             }
 
@@ -116,6 +113,8 @@ public class VegagramPhotoFragment extends Fragment {
 
             }
         });
+
+        getActivity().getSupportFragmentManager().popBackStack();
     }
 
     @OnClick(R.id.retake_photo)

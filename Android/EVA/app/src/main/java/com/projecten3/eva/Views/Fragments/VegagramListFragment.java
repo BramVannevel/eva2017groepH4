@@ -108,7 +108,6 @@ public class VegagramListFragment extends Fragment {
             }
         });
 
-
         photo_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -212,7 +211,6 @@ public class VegagramListFragment extends Fragment {
             adapter.setPosts(allPosts);
         }else{
             adapter.setPosts(userPosts);
-            swipeRefreshLayout.setRefreshing(false);
         }
         adapter.notifyDataSetChanged();
     }
@@ -226,21 +224,20 @@ public class VegagramListFragment extends Fragment {
                     public void onNext(Posts value) {
                         Log.i("onNext","retrieved 200 status");
                         allPosts = value.getPosts();
-
+                        updateUI(true);
+                        swipeRefreshLayout.setRefreshing(false);
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         Log.e("onError","with error: \n");
                         e.printStackTrace();
-                        //Toast.makeText(getBaseContext(),R.string.error,Toast.LENGTH_SHORT).show();
+                        swipeRefreshLayout.setRefreshing(false);
                     }
 
                     @Override
                     public void onComplete() {
                         Log.i("onComplete","Completed the call");
-                        updateUI(true);
-                        swipeRefreshLayout.setRefreshing(false);
                     }
                 }));
     }
@@ -271,13 +268,14 @@ public class VegagramListFragment extends Fragment {
                         Log.i("onNext","retrieved 200 status");
                         userPosts = value.getPosts();
                         updateUI(false);
+                        swipeRefreshLayout.setRefreshing(false);
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         Log.e("onError","with error: \n");
                         e.printStackTrace();
-                        //Toast.makeText(getBaseContext(),R.string.error,Toast.LENGTH_SHORT).show();
+                        swipeRefreshLayout.setRefreshing(false);
                     }
 
                     @Override
