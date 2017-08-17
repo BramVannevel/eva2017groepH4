@@ -11,6 +11,7 @@ var multer = require('multer'),
 bodyParser = require('body-parser'),
 path = require('path');
 fs = require('fs');
+var appRoot = require('app-root-path');
 
 var router = express.Router();
 
@@ -21,7 +22,7 @@ var router = express.Router();
 * Key: fileToUpload, Value: binary file
 * Saved de imageName samen met het userId van de user die de upload deed in het VegagramPost database model
 */
-router.post('/', passport.authenticate('jwt', { session: false }), multer({ dest: './src/server/vegagram/uploads/'}).single('fileToUpload'), function(req,res){
+router.post('/', passport.authenticate('jwt', { session: false }), multer({ dest: './public/vegagramUploads/'}).single('fileToUpload'), function(req,res){
   var token = getToken(req.headers);
   if (token) {
     var decoded = jwt.decode(token, config.secret);
@@ -92,7 +93,7 @@ router.get('/uploads/:id', passport.authenticate('jwt', { session: false }), fun
     var decoded = jwt.decode(token, config.secret);
     var id = req.params.id;
     console.log(id);
-    res.sendFile('./uploads/'+ id, { root : __dirname});
+    res.sendFile('./public/vegagramUploads/'+ id, { root : '' + appRoot});
   } else {
     return res.status(403).send({ success: false, msg: 'No token provided.' });
   }
@@ -109,7 +110,7 @@ router.delete('/:id', passport.authenticate('jwt', { session: false }),function(
 
       VegagramPost.findOne({_id: mongoose.Types.ObjectId(id)}, function(err, post) {
         if(err) {return;}
-        fs.unlink('./src/server/vegagram/uploads/' + post.imageName, function(err) {
+        fs.unlink('./public/vegagramUploads/' + post.imageName, function(err) {
           if(err) throw err;
           post.remove(function (err) {});
           res.send('Post deleted and image deleted from server');
