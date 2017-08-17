@@ -55,9 +55,7 @@ public class VegagramActivity extends AppCompatActivity {
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
-        fragmentTransaction.replace(R.id.fragment_vegagram,vegagramPhotoFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+        fragmentTransaction.add(R.id.fragment_vegagram,vegagramPhotoFragment).addToBackStack(null).commit();
 
     }
 
