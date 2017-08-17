@@ -1,15 +1,16 @@
-package com.projecten3.eva;
+package com.projecten3.eva.Views;
 
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
+
+import com.projecten3.eva.Interfaces.OnFragmentSwitch;
+import com.projecten3.eva.R;
+import com.projecten3.eva.Model.Restaurant;
+import com.projecten3.eva.Views.Fragments.RestoInfoFragment;
+import com.projecten3.eva.Views.Fragments.RestoListFragment;
 
 public class RestoActivity extends AppCompatActivity implements OnFragmentSwitch {
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

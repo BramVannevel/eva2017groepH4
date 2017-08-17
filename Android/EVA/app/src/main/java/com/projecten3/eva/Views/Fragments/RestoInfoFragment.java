@@ -1,11 +1,7 @@
-package com.projecten3.eva;
+package com.projecten3.eva.Views.Fragments;
 
 
-import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
@@ -22,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.CameraUpdate;
@@ -30,16 +27,13 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.projecten3.eva.R;
+import com.projecten3.eva.Model.Restaurant;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 import butterknife.BindView;
@@ -71,10 +65,10 @@ public class RestoInfoFragment extends Fragment {
     @BindView(R.id.fab)
     FloatingActionButton fab;
 
-
-
+    /**
+     * required empty constructor for fragments
+     */
     public RestoInfoFragment() {
-        // Required empty public constructor
     }
 
 
@@ -111,27 +105,27 @@ public class RestoInfoFragment extends Fragment {
         System.out.println(getString(R.string.streetview_api_url));
         naam.setText(resto.getNaam());
 
-        Glide.with(getContext())
-                .load(getString(R.string.streetview_api_url,resto.getLocation().replace(" ","")))
+       /* Glide.with(getContext())
+                .load(getString(R.string.streetview_api_url,resto.().replace(" ","")))
                 .into(foto);
         adressResto.setText(resto.getLocation());
 
         omschrijving.setText(resto.getOmschrijving());
 
-
+*/
     }
 
     @OnClick(R.id.tel)
     public void belRestaurent(){
         Intent intent = new Intent(Intent.ACTION_DIAL);
-        intent.setData(Uri.parse("tel:"+resto.getTelefoonNr()));
+        intent.setData(Uri.parse("tel:"+resto.getTelefoon()));
         startActivity(intent);
     }
 
     @OnClick(R.id.fab)
     public void openRoute(){
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                Uri.parse("https://www.google.com/maps/dir/?api=1&destination="+resto.getLocation()));
+                Uri.parse("https://www.google.com/maps/dir/?api=1&destination="+resto.getAdres().getStraat()));
         startActivity(intent);
 
     }

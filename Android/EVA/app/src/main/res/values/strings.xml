@@ -17,5 +17,53 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="start_maps_route">Toon routebeschrijving</string>
     <string name="bel">Bel </string>
+    <string name="title_activity_core">CoreActivity</string>
+    <string name="hours_remaining"> uren resterend!</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="new_challenge">Nieuwe uitdaging in </string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 
+    <string name="take_picture">Neem foto</string>
+    <string name="link_challenge">Link challenge</string>
+    <string name="share_vegagram">Share on Vegagram</string>
+    <string name="share_facebook">Share on Facebook</string>
+    <string name="save">Save</string>
+    <string name="retake">Retake</string>
+
+    <string name="show_public">Public posts</string>
+    <string name="show_private">Private posts</string>
+    <string name="delete_post">Delete post</string>
+    <string name="reward_dialog">Proficiat! Aan deze dag zat een beloning vast! U kunt uw belonging ophalen bij de volgende workshop!</string>
+    <string name="claim">Bevestig</string>
+    <string name="veganistisch_eten">Door in dit restaurant te eten maakt u een bewuste keuze voor het welzijn van mens, dier en planeet.
+        Hiertoe streven wij ernaar om in het geheel af te zien van het gebruik van dieren en producten van dierlijke herkomst</string>
+
+    <!--Days of the week (short)-->
+    <string name="monday">Ma</string>
+    <string name="tuesday">Di</string>
+    <string name="wednesday">Woe</string>
+    <string name="thursday">Do</string>
+    <string name="friday">Vrij</string>
+    <string name="saturday">Za</string>
+    <string name="sunday">Zo</string>
+    <string name="not_found">-</string>
+
+    <!--Difficulty levels-->
+    <string name="easy">Makkelijk</string>
+    <string name="medium">Gemiddeld</string>
+    <string name="hard">Moeilijk</string>
+
+    <!--Core buttons-->
+    <string name="todays_challenge">Todays\' challenge</string>
+    <string name="vegagram">Vegagram</string>
+    <string name="tips_and_tricks">Tips and Tricks</string>
+    <string name="nearby_restaurants">Nearby restaurants</string>
+
+    <!--ERROR MESSAGES-->
+    <string name="google_maps_error">Google maps couldn\'t load that adress :(</string>
+    <string name="error">An error occured, try again later!</string>
+    <string name="loading">Ophalen ...</string>
+    <string name="error_login">invalid username or password</string>
 </resources>

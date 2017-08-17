@@ -1,69 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
     android:orientation="vertical"
-    android:paddingLeft="24dp"
-    android:paddingRight="24dp"
-    android:paddingTop="64dp">
-
-    <TextView
+    tools:context="com.projecten3.eva.Views.MainActivity">
+    <!--<com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
         android:layout_width="wrap_content"
-        android:layout_height="72dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="24dp"
-        android:text="@string/app_name"
-        android:textColor="@color/eva_white"
-        android:textSize="32sp"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/input_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress" />
-
-    <EditText
-        android:id="@+id/input_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:hint="@string/paswoord"
-        android:inputType="textPassword" />
-
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:background="@color/colorPrimaryDark"
-        android:padding="12dp"
-        android:text="@string/login"
-        android:textAlignment="center"
-        android:textColor="@color/eva_white" />
-
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/fb_btn_login"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="24dp"
-        android:layout_marginTop="24dp"
-        android:background="@color/fb_blue" />
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp" />-->
 
-    <Button
-        android:id="@+id/btn_sign_up"
+    <android.support.v7.widget.RecyclerView
+        android:background="@drawable/day_cardview_background"
+        android:id="@+id/rv_core_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:gravity="center"
-        android:text="@string/registreer"
-        android:background="?android:attr/selectableItemBackground"
-        android:textColor="@color/light_grey"
-        android:textSize="16sp" />
+        android:layout_height="80dp"/>
+
+    <fragment android:name="com.projecten3.eva.Views.Fragments.CoreFragment"
+        android:id="@+id/core_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>
