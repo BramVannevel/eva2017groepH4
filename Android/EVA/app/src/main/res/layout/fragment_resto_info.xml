@@ -101,13 +101,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/omschrijving"/>
 
-        <com.google.android.gms.maps.MapView
-            android:layout_height="150dp"
-            android:layout_width="match_parent"
-            android:id="@+id/mapView"
-            android:padding="3dp"
-            android:background="@drawable/custom_background"
-            />
 
     </LinearLayout>
 
@@ -121,7 +114,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:clickable="true"
-        android:src="@android:drawable/arrow_up_float"
+        android:src="@drawable/ic_maps"
         app:layout_anchor="@id/imvFoto"
         app:layout_anchorGravity="bottom|right|end"/>
 
