@@ -77,6 +77,7 @@ public class VegagramListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i("listfragment","oncreate called");
 
         if(savedInstanceState != null && savedInstanceState.containsKey("posts")){
             allPosts = savedInstanceState.getParcelableArrayList("posts");
@@ -95,7 +96,7 @@ public class VegagramListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_vegagram_list,container,false);
-
+        Log.i(TAG,"oncreateview called");
         setHasOptionsMenu(true);
         ButterKnife.bind(this,v);
 
@@ -304,6 +305,7 @@ public class VegagramListFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        Log.i(TAG,"on destroy called");
         if(!compositeDisposable.isDisposed()){
             compositeDisposable.dispose();
         }
