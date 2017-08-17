@@ -1,7 +1,6 @@
 package com.projecten3.eva.Views.Fragments;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -14,29 +13,36 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.Manifest;
 
 import com.projecten3.eva.Adapters.VegagramAdapter;
+import com.projecten3.eva.Data.ApiService;
+import com.projecten3.eva.Data.EvaApiBuilder;
 import com.projecten3.eva.Model.Post;
+import com.projecten3.eva.Model.Posts;
 import com.projecten3.eva.R;
 import com.projecten3.eva.Views.VegagramActivity;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.concurrent.Callable;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -45,8 +51,11 @@ public class VegagramListFragment extends Fragment {
     public static final String TAG = "VegagramListFragment";
     static final int REQUEST_IMAGE_CAPTURE = 1;
     public static final int PERMISSION_REQUEST = 200;
+    private CompositeDisposable compositeDisposableAll = new CompositeDisposable();
+    private CompositeDisposable compositeDisposableUser = new CompositeDisposable();
 
-    private List<Post> posts;
+    private ArrayList<Post> allPosts;
+    private ArrayList<Post> userPosts;
     private VegagramAdapter adapter;
     protected RecyclerView.LayoutManager llm;
 
@@ -68,7 +77,11 @@ public class VegagramListFragment extends Fragment {
         setHasOptionsMenu(true);
 
         ButterKnife.bind(this,v);
-        posts = new ArrayList<>();
+        allPosts = new ArrayList<>();
+        userPosts = new ArrayList<>();
+
+        getAllPosts();
+
 
         photo_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,8 +92,8 @@ public class VegagramListFragment extends Fragment {
             }
         });
 
-        mockData();
-        adapter = new VegagramAdapter(posts,getContext());
+        //mockData();
+        adapter = new VegagramAdapter(allPosts,getContext());
         rv.setAdapter(adapter);
         llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);
@@ -97,10 +110,16 @@ public class VegagramListFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch((item.getItemId())){
             case R.id.public_photos:
-
+                Log.i(TAG,"clicked on public");
+                updateUI(true);
                 return true;
             case R.id.private_photos:
-
+                Log.i(TAG,"clicked on private");
+                if(userPosts.size() == 0){
+                    getUserPosts();
+                }else{
+                    updateUI(false);
+                }
                 return true;
             default: return super.onOptionsItemSelected(item);
         }
@@ -113,11 +132,11 @@ public class VegagramListFragment extends Fragment {
         Post post4 = new Post(null,new Date(), 1692, false);
         Post post5 = new Post(null,new Date(), 2, false);
 
-        posts.add(post1);
-        posts.add(post2);
-        posts.add(post3);
-        posts.add(post4);
-        posts.add(post5);
+        allPosts.add(post1);
+        allPosts.add(post2);
+        allPosts.add(post3);
+        allPosts.add(post4);
+        allPosts.add(post5);
     }
 
     public void takePicture(){
@@ -156,18 +175,109 @@ public class VegagramListFragment extends Fragment {
         }
     }
 
-    private class likedOnClickListener implements View.OnClickListener{
-        private final Context context;
-
-        public likedOnClickListener(Context context){
-            this.context = context;
+    public void updateUI(boolean showAll){
+        if(showAll){
+            adapter.setPosts(allPosts);
+        }else{
+            adapter.setPosts(userPosts);
         }
+        adapter.notifyDataSetChanged();
+    }
 
-        @Override
-        public void onClick(View view) {
-            int position = rv.getChildAdapterPosition(view);
+    public void retrieveImages(){
 
-            posts.get(position).addLike();
+    }
+
+    private void getAllPosts() {
+        compositeDisposableAll.add(getObservablePosts()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<Posts>() {
+                    @Override
+                    public void onNext(Posts value) {
+                        Log.i("onNext","retrieved 200 status");
+                        allPosts = value.getPosts();
+                        Log.i(TAG,"wow");
+                        updateUI(true);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e("onError","with error: \n");
+                        e.printStackTrace();
+                        //Toast.makeText(getBaseContext(),R.string.error,Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.i("onComplete","Completed the call");
+                    }
+                }));
+    }
+
+    /**
+     * an observable get request that only launches when it has a subscriber that needs it.
+     * .defer docs: http://reactivex.io/documentation/operators/defer.html
+     * this creates a new observable for every subscriber, and is easily cancable on screen rotation, back press, ...
+     * @return
+     */
+    private Observable<Posts> getObservablePosts() {
+        return Observable.defer(new Callable<ObservableSource<? extends Posts>>() {
+            @Override
+            public ObservableSource<? extends Posts> call() {
+                ApiService service = EvaApiBuilder.getInstance();
+                return service.getAllPosts();
+            }
+        });
+    }
+
+    private void getUserPosts() {
+        compositeDisposableUser.add(getObservableUserPosts()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<Posts>() {
+                    @Override
+                    public void onNext(Posts value) {
+                        Log.i("onNext","retrieved 200 status");
+                        userPosts = value.getPosts();
+                        updateUI(false);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e("onError","with error: \n");
+                        e.printStackTrace();
+                        //Toast.makeText(getBaseContext(),R.string.error,Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.i("onComplete","Completed the call");
+                    }
+                }));
+    }
+
+    /**
+     * an observable get request that only launches when it has a subscriber that needs it.
+     * .defer docs: http://reactivex.io/documentation/operators/defer.html
+     * this creates a new observable for every subscriber, and is easily cancable on screen rotation, back press, ...
+     * @return
+     */
+    private Observable<Posts> getObservableUserPosts() {
+        return Observable.defer(new Callable<ObservableSource<? extends Posts>>() {
+            @Override
+            public ObservableSource<? extends Posts> call() {
+                ApiService service = EvaApiBuilder.getInstance();
+                return service.getUserPosts();
+            }
+        });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if(!compositeDisposableAll.isDisposed()){
+            compositeDisposableAll.dispose();
         }
     }
 }

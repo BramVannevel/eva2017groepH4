@@ -28,11 +28,7 @@
             android:value="@string/facebook_app_id" />
 
         <activity android:name=".Views.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity
@@ -51,10 +47,16 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        </activity>
+
+
         <activity android:name=".Views.VegagramActivity">
-           
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+
         <activity
             android:name=".Views.RestoActivity"
             android:parentActivityName=".Views.MainActivity"></activity>

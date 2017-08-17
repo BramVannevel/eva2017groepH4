@@ -22,6 +22,7 @@ import com.projecten3.eva.Views.Fragments.VegagramListFragment;
 import org.w3c.dom.Text;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -42,6 +43,10 @@ public class VegagramAdapter extends RecyclerView.Adapter<VegagramAdapter.Vegagr
         this.posts = posts;
     }
 
+    public void setPosts(ArrayList<Post> posts){
+        this.posts = posts;
+    }
+
     @Override
     public VegagramViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_vegagram,viewGroup,false);
@@ -56,8 +61,11 @@ public class VegagramAdapter extends RecyclerView.Adapter<VegagramAdapter.Vegagr
                 .centerCrop()
                 .into(restoViewHolder.imvResto);*/
         //DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
+        String formatted_date;
 
-        String formatted_date = (String) android.text.format.DateFormat.format("yyyy-MM-dd HH:mm", posts.get(position).getPosted());
+
+        formatted_date = posts.get(position).getPosted() != null ? (String) android.text.format.DateFormat.format("yyyy-MM-dd HH:mm", posts.get(position).getPosted()) :  null;
+
 
         holder.date_posted.setText(formatted_date);
         holder.likes.setText(String.valueOf(posts.get(position).getLikes()));
