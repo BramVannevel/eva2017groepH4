@@ -1,0 +1,191 @@
+\chapter{Use Cases}
+\label{Use Cases}
+
+In dit hoofdstuk wordt besproken welke use cases het team heeft geïmplementeerd voor zowel de beheerderskant, als de Android applicatie.
+
+\section{Use cases - Android}
+
+\paragraph{Registreer en Log in}
+Aangezien de app met gebruiker gegenereerde content werkt heeft de app de mogelijkheid tot inloggen en registreren. Als gebruiker kan ik inloggen indien ik al een account heb of registreren in de app als ik dit wens. Eens ingelogd blijft de gebruiker ook ingelogd, zo moet iemand niet altijd inloggen als hij wenst gebruik te maken van de app. Er wordt ook feedback gegeven bij foutmeldingen van zowel de login als de registreer.
+
+Use case registreer
+\begin{enumerate}
+	\item Als gebruiker wens ik een nieuw account aan te maken.
+	\item Als gebruiker wens ik direct ingelogd te zijn na registratie.
+		\begin{enumerate}
+		\item Als gebruiker wil ik feedback zien als het registreren mislukt is.
+	\end{enumerate}
+	\item Als gebruiker wens ik ingelogd te blijven na registratie.
+\end{enumerate}
+
+
+Use case registreer
+\begin{enumerate}
+	\item Als gebruiker wens ik in te loggen.
+	\begin{enumerate}
+		\item Als gebruiker wil ik feedback zien als het inloggen mislukt is.
+	\end{enumerate}
+	\item Als gebruiker wens ik ingelogd te blijven.
+\end{enumerate}
+
+\paragraph{Restaurants}
+
+De eerste Use case waar het team aan begonnen is, is het kunnen opzoeken van vegitarische restaurants. Hierbij moeten ze een korte beschrijving zien van het restaurant, de naam en locatie met de mogelijkheid tot het openen van Google maps. Hier gebruiken we een master - detail flow voor. Zo ziet de gebruiker een overzichtelijke lijst van de restaurants en kan doorklikken tot een detail scherm. De, verkorte, use case is dus als volgt.
+
+\begin{enumerate}
+	\item Als gebruiker wens ik een lijst van restaurants te zien.
+	\item Als gebruiker wens ik meer details te zien van een specifiek restaurant.
+	\item Als gebruiker wens ik te kunnen navigeren naar een restaurant..
+	 \begin{enumerate}
+		\item als gebruiker wens ik dit in een dual pane layout te zien.
+	\end{enumerate}
+\end{enumerate}
+
+\paragraph{Challenges}
+
+Het hoofddoel van de app is mensen aanzetten tot vegitarisch eten door middel van 21 dagen lang een aantal uitdagingen te vervolledigen met betrekking tot een vegitarische levensstijl. Dit lost het team op door dagelijks een uitdaging aan te bieden aan de gebruiker, die deze dan kan starten. Ook is er de mogelijkheid tot een andere uitdaging door middel van een ''ik wil een andere uitdaging'' knop. Dit geeft de gebruiker wat meer vrijheid en kan zo een uitdaging die hij/zij minder ziet zitten vervangen door een andere. Het is wel zo dat de uitdagingen 21 opeenvolgende dagen moeten zijn. Vervolledigt hij één dag geen uitdaging moet de gebruiker opnieuw beginnen. Zo zetten we ze toch aan elke dag zelf maar gewoon eens te kijken. Een gebruiker kan ook hulp krijgen bij een uitdaging. Of als er geen uitdaging is die hij/zij wenst uit te voeren een optie tot te skippen. Het hoofdscherm toont alle dagen die al vervolledigd zijn tot nu toe, in kalender vorm. Ook ziet de gebruiker zijn vooruitgang tot de volgende beloning. De, verkorte, use case is als volgt.
+
+ \begin{enumerate}
+ 	\item Als gebruiker wens ik de uitdaging te bekijken van vandaag.
+ 	\item Als gebruiker wens ik meer uitleg te zien bij de uitdaging.
+ 	\item Als gebruiker wens ik de uitdaging te starten.
+ 	 	 \begin{enumerate}
+ 		\item als gebruiker wens ik een andere uitdaging te krijgen.
+ 		\item als gebruiker wens ik de huidige uitdaging te stoppen.
+ 	\end{enumerate}
+ \item als gebruiker wens ik de moeilijkheidsgraad te zien van de huidige challenge.
+ \item als gebruiker wens ik mijn huidige progressie te zien door middel van een dag.
+ \item als gebruiker wens ik te zien wanneer mijn volgende beloning er is.
+ \end{enumerate}
+
+\paragraph{Vegagram}
+
+Ons paradepaardje, en persoonlijke toevoeging aan het idee van uitdagingen is een sociaal media gebaseerde foto-deel activiteit. Hierbij kunnen gebruikers foto's nemen in app, deze bekijken of hij al dan niet geslaagd is om dan te beslissen hem te uploaden naar vegagram, niet up te loaden en terug te keren of opnieuw een foto te trekken. Als er een foto geupload wordt moet de gebruiker kiezen of hij deze foto publiek wenst of enkel privé. Indien deze publiek is kunnen alle andere gebruikers van Vegagram de foto bekijken en "vind ik leuk"-en. Ook kunnen gebruikers hun eigen afbeeldingen delen op Facebook met een omschrijving bij. Dit heeft als hoofddoel het aanzetten van vegitarischer eten door sociale druk.. Personen kunnen zo alles delen op Facebook en andere individuen aanzetten tot het gebruik van de app of een veganistischere mindset. onderstaand de verkorte use case.
+
+ \begin{enumerate}
+	\item Als gebruiker wens ik alle posts in Vegagram te zien
+	\item Als gebruiker wens ik een afbeelding leuk te vinden
+		\begin{enumerate}
+		\item als gebruiker wens ik een afbeelding niet meer leuk te vinden.
+	\end{enumerate}
+	\item Als gebruiker wens alle beschikbare info te zien met betrekking tot de afbeelding.
+	\item als gebruiker wens ik zelf een post te maken.
+	\item als gebruiker wens ik zelf een afbeelding te uploaden.
+		\begin{enumerate}
+		\item als gebruiker wens ik de genomen afbeelding te annuleren.
+		\item als gebruiker wens ik de genomen afbeelding te annuleren en een nieuwe te maken
+	\end{enumerate}
+	\item als gebruiker wens ik mijn eigen post te zien in Vegagram.
+\end{enumerate}
+
+\section{Use Cases - MEAN}
+\paragraph{Log in}
+
+Aangezien de webapplicatie beheerders nodig heeft die content uploaden, controleren, wijzigen,...
+is er de mogelijkheid voor een beheerder om in te loggen. Deze login is niet verbonden aan de 
+android applicatie, aangezien een registratie in de android app de rol user oplevert. Als deze 
+login mislukt wordt er feedback gegeven. De, verkorte, use case is als volgt.
+
+\begin{enumerate}
+	\item Als beheerder wens ik in te loggen.
+	\begin{enumerate}
+		\item als beheerder wil ik feedback zien als het inloggen mislukt is.
+	\end{enumerate}
+	\item Als beheerder wens ik ingelogd te blijven.
+	\begin{enumerate}
+	\item Als beheerder wens ik uit te loggen.
+	\end{enumerate}
+\end{enumerate}
+
+\paragraph{Restaurants}
+
+Indien we in de android app een lijst willen tonen van de vegetarische restaurants moeten we deze
+lijst voorzien door middel van een webapplicatie. Enkel een beheerder kan restaurants toevoegen 
+aan de lijst, voorzien van een naam, telefoonnummer en adres(straat, huisnr, postcode, stad). 
+Verder kan een beheerder ook restaurants verwijderen uit de lijst, of aanpassen. 
+De, verkorte, use case is als volgt.
+
+\begin{enumerate}
+	\item Als beheerder wens ik een lijst te zien met de verschillende restaurants.
+	\begin{enumerate}
+		\item als beheerder wens ik te filteren in de lijst
+	\end{enumerate}
+	\item Als beheerder wens ik een restaurant toe te voegen.
+	\item Als beheerder wens ik een restaurant te wijzigen.
+	\item Als beheerder wens ik een restaurant te verwijderen.
+	\begin{enumerate}
+		\item Als beheerder wens ik punt 2, 3 en 4 te kunnen annuleren.
+	\end{enumerate}
+\end{enumerate}
+
+\paragraph{Challenges}
+
+Om gebruikers 21 dagen lang vegetarisch te laten eten maken we gebruik van challenges die een
+extra aanmoediging zijn om elke dag opnieuw voor vegetarische maaltijden te kiezen. Als een 
+beheerder in de webapplicatie ingelogd is wenst hij zich te kunnen navigeren naar de 
+challenges, en hiervan een lijst te zien. Enkel een beheerder kan een challenge toevoegen,
+voorzien van een titel, omschrijving, dag. En optioneel: een restaurant, gerecht en reward.
+challenges kunnen ook verwijdert of gewijzigd worden.
+De, verkorte, use case is als volgt.
+
+
+\begin{enumerate}
+	\item Als beheerder wens ik een lijst te zien met de verschillende challenges.
+	\begin{enumerate}
+		\item als beheerder wens ik te filteren in de lijst
+	\end{enumerate}
+	\item Als beheerder wens ik een challenge toe te voegen.
+	\item Als beheerder wens ik een challenge te wijzigen.
+	\item Als beheerder wens ik een challenge te verwijderen.
+	\begin{enumerate}
+		\item Als beheerder wens ik punt 2, 3 en 4 te kunnen annuleren.
+	\end{enumerate}
+\end{enumerate}
+
+
+\paragraph{Categorieen}
+
+Aangezien we met gerechten werken wensen we deze te kunnen onderverdelen in verschillende
+categorieÎn. Een ingelogde beheerder moet een lijst van de categorieÎn kunnen raadplegen,
+hier kan hij dan een categorie aan toevoegen of verwijderen. De, verkorte, use case is als
+volgt.
+
+\begin{enumerate}
+	\item Als beheerder wens ik een lijst te zien met de verschillende categorieën.
+	\begin{enumerate}
+		\item als beheerder wens ik te filteren in de lijst
+	\end{enumerate}
+	\item Als beheerder wens ik een categorieën toe te voegen.
+	\item Als beheerder wens ik een categorieën te wijzigen.
+	\item Als beheerder wens ik een categorieën te verwijderen.
+	\begin{enumerate}
+		\item Als beheerder wens ik punt 2, 3 en 4 te kunnen annuleren.
+	\end{enumerate}
+\end{enumerate}
+
+\paragraph{Gerechten}
+
+Als we mensen willen aanzetten om vegetarisch te eten hebben we natuurlijk vegetarische
+gerechten nodig, deze kunnen dan omvat worden in een challenge om de gebruikers extra te
+motiveren. Na het inloggen kan een beheerder zich navigeren naar een pagina waar hij een lijst
+met gerechten te zien krijgt. De beheerder kan dan kiezen om een gerecht toe te voegen, voorzien
+van een naam, categorie, mogelijke allergenen, en een omschrijving. Er kan ook gekozen worden
+om een gerecht te verwijderen of te wijzigen. De, verkorte, use case is als volgt.
+
+\begin{enumerate}
+	\item Als beheerder wens ik een lijst te zien met de verschillende gerechten.
+	\begin{enumerate}
+		\item als beheerder wens ik te filteren in de lijst
+	\end{enumerate}
+	\item Als beheerder wens ik een gerechten toe te voegen.
+	\item Als beheerder wens ik een gerechten te wijzigen.
+	\item Als beheerder wens ik een gerechten te verwijderen.
+	\begin{enumerate}
+		\item Als beheerder wens ik punt 2, 3 en 4 te kunnen annuleren.
+	\end{enumerate}
+\end{enumerate}
+
+
+
+
+

@@ -1,0 +1,70 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\select@language {dutch}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {1}Inleiding}{7}{chapter.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {2}Plan van aanpak}{9}{chapter.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {3}Applicatie}{11}{chapter.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.1}Android}{11}{section.3.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.2}MEAN}{12}{section.3.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {4}Use Cases}{13}{chapter.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.1}Use cases - Android}{13}{section.4.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{Registreer en Log in}{13}{section*.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{Restaurants}{14}{section*.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{Challenges}{14}{section*.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{Vegagram}{14}{section*.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.2}Use Cases - MEAN}{15}{section.4.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{Log in}{15}{section*.7}
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{Restaurants}{15}{section*.8}
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{Challenges}{16}{section*.9}
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{Categorieen}{16}{section*.10}
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{Gerechten}{16}{section*.11}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {5}Diagrammen}{19}{chapter.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.1}Android App Class Diagram}{19}{section.5.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.2}Deployment Diagram}{20}{section.5.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.3}Entity Relationship Diagram}{20}{section.5.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.4}Structuur MEAN}{22}{section.5.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {6}Best Practices}{23}{chapter.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.1}Android}{25}{section.6.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.2}MEAN}{26}{section.6.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {7}Analyse}{29}{chapter.7}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.1}Sprints}{29}{section.7.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{Sprint 1}{30}{section*.12}
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{Sprint 2}{32}{section*.13}
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{Sprint 3}{34}{section*.14}
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{Sprint 4}{36}{section*.15}
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{Sprint 5}{38}{section*.16}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\leavevmode {\color {maincolor}Bibliografie}}{41}{chapter*.17}
+\contentsfinish 

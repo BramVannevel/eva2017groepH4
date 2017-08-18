@@ -1,0 +1,71 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.8 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \sortlist[entry]{apa/global/}
+    \entry{dashboard}{online}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,hash=2938c7f7e560ed972f8a4f68e80ff834}{%
+           family={Dashboard},
+           familyi={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{2938c7f7e560ed972f8a4f68e80ff834}
+      \strng{fullhash}{2938c7f7e560ed972f8a4f68e80ff834}
+      \strng{authornamehash}{2938c7f7e560ed972f8a4f68e80ff834}
+      \strng{authorfullhash}{2938c7f7e560ed972f8a4f68e80ff834}
+      \field{sortinit}{D}
+      \field{sortinithash}{d10b5413de1f3d197b20897dd0d565bb}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Beheerderskant}
+      \field{year}{2017}
+      \field{dateera}{ce}
+      \verb{url}
+      \verb https://evabeheer.herokuapp.com/
+      \endverb
+    \endentry
+    \entry{eva_video}{online}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,hash=4ba389f6e8a3692d46102e09d396ddc2}{%
+           family={EVA},
+           familyi={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{4ba389f6e8a3692d46102e09d396ddc2}
+      \strng{fullhash}{4ba389f6e8a3692d46102e09d396ddc2}
+      \strng{authornamehash}{4ba389f6e8a3692d46102e09d396ddc2}
+      \strng{authorfullhash}{4ba389f6e8a3692d46102e09d396ddc2}
+      \field{sortinit}{E}
+      \field{sortinithash}{07bbd5a529b5beaa311df5be05b874bc}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Opdracht Projecten 3}
+      \field{year}{2017}
+      \field{dateera}{ce}
+      \verb{url}
+      \verb https://www.youtube.com/watch?v=D6S3MS4Xh6c
+      \endverb
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
+

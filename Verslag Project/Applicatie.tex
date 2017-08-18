@@ -1,0 +1,41 @@
+\chapter{Applicatie}
+\label{ch:app}
+
+GITHUB REPOSITORY: https://github.com/BramVannevel/eva2017groepH4
+
+Onze github repository bestaat uit twee subrepositories, genaamd Android en MEAN. In dit hoofdstuk overlopen we bondig de architectuur van beide applicaties. 
+
+\section{Android}
+Als men de mappenstructuur van de Android applicatie bekijkt is direct duidelijk wat waar thuishoort. Dit is al één van de best practices die gehanteerd wordt binnen dit project. De structuur ziet er als volgt uit:
+
+\begin{itemize}
+	\item Adapters
+	\item Data
+	\item Factory
+	\item Helper
+	\item Interfaces
+	\item Model
+	\item Views
+	\begin{itemize}
+		\item Fragments
+		\item Activities
+	\end{itemize}
+\end{itemize} 
+
+Verder wordt binnen de Android applicatie gebruik gemaakt van een SQLite databank voor het opslaan van de gebruiker zijn vooruitgang. En wordt gebruik gemaakt van zeer gangbare en goed gedocumenteerde thrid party libraries, zoals Retrofit, OkHTTP, RXJava, Recyclerview, Cardview, etc.
+
+\section{MEAN}
+Voor de beheerderskant maken we gebruik van de MEAN-stack. Dit betekent dus dat er gebruik gemaakt wordt van een MongoDB, Express middleware, Angular Frontend en Node als runtime builder.
+
+de mappenstructuur van het dashboard ziet er zo uit:
+
+\begin{itemize}
+	\item controllers
+\item 	css	
+	\item factoriesAndServices	
+	\item filters	
+\item	img	
+\item	modals	
+\item	pages	
+\item	server
+\end{itemize}
