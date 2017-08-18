@@ -123,7 +123,7 @@ public class RestoInfoFragment extends Fragment {
     @OnClick(R.id.fab)
     public void openRoute(){
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                Uri.parse("https://www.google.com/maps/dir/?api=1&destination="+resto.getAdres().getStraat()));
+                Uri.parse("https://www.google.com/maps/dir/?api=1&destination="+ resto.getAdres().getStraat() + "+" + resto.getAdres().getHuisnummer() + " + " + resto.getAdres().getStad()));
         startActivity(intent);
 
     }
