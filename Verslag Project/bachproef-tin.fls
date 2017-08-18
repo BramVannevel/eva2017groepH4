@@ -436,6 +436,8 @@ INPUT ./img/backlog_week5.png
 INPUT img/burndown_week5.png
 INPUT ./img/burndown_week5.png
 INPUT ./img/burndown_week5.png
+INPUT Conclusie.tex
+INPUT Conclusie.tex
 INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/ot1ztmcm.fd
 INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/ot1ztmcm.fd
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/adobe/times/zptmcm7t.tfm

@@ -66,5 +66,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {paragraph}{Sprint 5}{38}{section*.16}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\leavevmode {\color {maincolor}Bibliografie}}{41}{chapter*.17}
+\contentsline {chapter}{\numberline {8}Conclusie}{41}{chapter.8}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\leavevmode {\color {maincolor}Bibliografie}}{43}{chapter*.17}
 \contentsfinish 

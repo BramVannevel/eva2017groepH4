@@ -1,0 +1,6 @@
+PWD /Users/sanderbrugge/Desktop/projecten/eva2017groepH4/Verslag Project
+INPUT /usr/local/texlive/2017/texmf.cnf
+INPUT /usr/local/texlive/2017/texmf-dist/web2c/texmf.cnf
+INPUT /usr/local/texlive/2017/texmf-var/web2c/pdftex/pdflatex.fmt
+INPUT besluit.tex
+OUTPUT besluit.log
