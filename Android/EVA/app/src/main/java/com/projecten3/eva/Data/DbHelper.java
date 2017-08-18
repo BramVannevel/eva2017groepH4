@@ -21,7 +21,7 @@ public class DbHelper extends SQLiteOpenHelper {
     private String[] allColumns = {COLUMN_DAYOFTHEWEEK,COLUMN_STATE,COLUMN_DAY};
     private SQLiteDatabase db;
     // If you change the database schema, you must increment the database version.
-    public static final int DATABASE_VERSION = 14;
+    public static final int DATABASE_VERSION = 16;
     public static final String DATABASE_NAME = "progress.db";
 
     public static final String TABLE_PROGRESS = "progress";

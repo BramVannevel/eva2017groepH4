@@ -5,7 +5,7 @@
     <string name="google_android_map_api_key">AIzaSyBOWlVQ5OLX9XM9T4JboBKlNgClRsWznI0</string>
     <string name="streetview_api_key">AIzaSyBy1W27MKbrzbn54k1s49s5wfGku_hhV5w</string>
 
-    <string name="streetview_api_url">https://maps.googleapis.com/maps/api/streetview?size=600x300&amp;location=%1$s&amp;pitch=-0.76&amp;key=AIzaSyBy1W27MKbrzbn54k1s49s5wfGku_hhV5w</string>
+    <string name="streetview_api_url">https://maps.googleapis.com/maps/api/streetview?size=%2$sx%3$s&amp;location=%1$s&amp;pitch=-0.76&amp;key=AIzaSyBy1W27MKbrzbn54k1s49s5wfGku_hhV5w</string>
 
     <string name="app_name">EVA</string>
     <string name="login">LOGIN</string>

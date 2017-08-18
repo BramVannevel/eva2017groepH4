@@ -8,6 +8,7 @@ import com.projecten3.eva.Model.Post;
 import com.projecten3.eva.Model.Posts;
 import com.projecten3.eva.Model.Register;
 import com.projecten3.eva.Model.Restaurant;
+import com.projecten3.eva.Model.Restaurants;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -56,7 +57,7 @@ public interface ApiService {
      * @return
      */
     @GET("/restaurants/list")
-    Observable<ArrayList<Restaurant>> getRestaurants();
+    Observable<Restaurants> getRestaurants();
 
     /**
      * get challenges from the backend

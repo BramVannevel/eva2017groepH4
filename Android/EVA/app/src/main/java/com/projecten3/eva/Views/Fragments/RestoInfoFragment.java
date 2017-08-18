@@ -100,19 +100,17 @@ public class RestoInfoFragment extends Fragment {
 
     public void setContent(Restaurant resto){
 
+        String streetViewLocation = resto.getAdres().getStraat() + resto.getAdres().getHuisnummer() + "," + resto.getAdres().getStad();
         this.resto = resto;
-
-        System.out.println(getString(R.string.streetview_api_url));
+        System.out.println(getString(R.string.streetview_api_url, streetViewLocation,"600","400"));
         naam.setText(resto.getNaam());
 
-       /* Glide.with(getContext())
-                .load(getString(R.string.streetview_api_url,resto.().replace(" ","")))
+        Glide.with(getContext())
+                .load(getString(R.string.streetview_api_url, streetViewLocation,"600","400"))
                 .into(foto);
-        adressResto.setText(resto.getLocation());
+        adressResto.setText(resto.getAdres().getStraat() + " " + resto.getAdres().getHuisnummer() + "\n" + resto.getAdres().getPostcode() + " " + resto.getAdres().getStad());
 
-        omschrijving.setText(resto.getOmschrijving());
 
-*/
     }
 
     @OnClick(R.id.tel)

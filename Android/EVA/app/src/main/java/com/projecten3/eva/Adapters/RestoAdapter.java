@@ -39,10 +39,15 @@ public class RestoAdapter extends RecyclerView.Adapter<RestoAdapter.RestoViewHol
 
     @Override
     public void onBindViewHolder(RestoViewHolder restoViewHolder, int i){
+        String streetViewLocation = restos.get(i).getAdres().getStraat() + restos.get(i).getAdres().getHuisnummer() + "," + restos.get(i).getAdres().getStad();
        /* Glide.with(context)
                 .load(restos.get(i).getFoto())
                 .centerCrop()
                 .into(restoViewHolder.imvResto);*/
+        Glide.with(context)
+                .load(context.getString(R.string.streetview_api_url, streetViewLocation,"400","400"))
+                .into(restoViewHolder.imvResto);
+
 
         restoViewHolder.restoNaam.setText(restos.get(i).getNaam());
         restoViewHolder.restoOmschrijving.setText(R.string.veganistisch_eten);

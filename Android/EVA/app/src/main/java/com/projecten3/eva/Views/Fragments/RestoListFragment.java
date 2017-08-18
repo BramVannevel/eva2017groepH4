@@ -11,24 +11,41 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.projecten3.eva.Data.ApiService;
+import com.projecten3.eva.Data.EvaApiBuilder;
+import com.projecten3.eva.Helpers.FilterChallengesForToday;
 import com.projecten3.eva.Interfaces.OnFragmentSwitch;
 import com.projecten3.eva.Model.Adres;
+import com.projecten3.eva.Model.Challenges;
+import com.projecten3.eva.Model.Restaurants;
 import com.projecten3.eva.R;
 import com.projecten3.eva.Model.Restaurant;
 import com.projecten3.eva.Adapters.RestoAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class RestoListFragment extends Fragment {
+
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private Unbinder unbinder;
 
     public static final String TAG = "RestoListFragment";
 
@@ -59,24 +76,20 @@ public class RestoListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_resto_list,container,false);
 
-        ButterKnife.bind(this,v);
+        unbinder = ButterKnife.bind(this,v);
         restos = new ArrayList<>();
 
-        mockData();
+        //mockData();
+        getRestaurants();
+        initUI();
+        return v;
+    }
+
+    private void initUI(){
         adapter = new RestoAdapter(restos,getContext());
         rv.setAdapter(adapter);
         llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);
-        return v;
-    }
-
-    private void mockData(){
-        //voorlopige mock data tot we API hebben
-        Restaurant r1 = new Restaurant("1","Gouden fazant","123456", new Adres("werkstraat","9","Gent","9000"));
-        Restaurant r2 = new Restaurant("1","Gouden fazant","123456", new Adres("werkstraat","9","Gent","9000"));
-         restos.add(r1);
-        restos.add(r2);
-        Log.e(TAG,restos.get(0).getNaam());
     }
 
     private class MainOnClickListener implements View.OnClickListener {
@@ -101,6 +114,56 @@ public class RestoListFragment extends Fragment {
         }
 
 
+    }
+
+    private void getRestaurants() {
+        compositeDisposable.add(getObservableRestaurants()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<Restaurants>() {
+                    @Override
+                    public void onNext(Restaurants value) {
+                        Log.i("onNext","retrieved 200 status");
+                            restos.addAll(value.getRestaurants());
+                        adapter.notifyDataSetChanged();
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e("onError","with error: \n");
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.i("onComplete","Completed the call");
+                        for (Restaurant r : restos){
+                            Log.e("restoo", r.getNaam());
+
+                        }
+                    }
+                }));
+    }
+
+    private Observable<Restaurants> getObservableRestaurants() {
+        return Observable.defer(new Callable<ObservableSource<? extends Restaurants>>() {
+            @Override
+            public ObservableSource<? extends Restaurants> call() {
+                ApiService service = EvaApiBuilder.getInstance();
+                return service.getRestaurants();
+            }
+        });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(!compositeDisposable.isDisposed()){
+            compositeDisposable.dispose();
+        }
+        if(unbinder != null)
+            unbinder.unbind();
     }
 
 }
