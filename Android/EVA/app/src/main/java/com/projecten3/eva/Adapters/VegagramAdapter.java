@@ -1,6 +1,7 @@
 package com.projecten3.eva.Adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
@@ -80,6 +81,7 @@ public class VegagramAdapter extends RecyclerView.Adapter<VegagramAdapter.Vegagr
 
         holder.date_posted.setText(formatted_date);
         holder.likes.setText(String.valueOf(getPost(position).getLikes()));
+
         if(prPosts) {
             holder.photo_menu_button.setOnClickListener(new View.OnClickListener() {
 
@@ -92,6 +94,8 @@ public class VegagramAdapter extends RecyclerView.Adapter<VegagramAdapter.Vegagr
                     popup.show();
                 }
             });
+        }else{
+            holder.photo_menu_button.setVisibility(View.INVISIBLE);
         }
         holder.like_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,7 +163,7 @@ public class VegagramAdapter extends RecyclerView.Adapter<VegagramAdapter.Vegagr
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                             if (response.isSuccessful()) {
-                                posts.remove(position);
+                                remove(position);
                                 notifyDataSetChanged();
                             }
                         }
@@ -169,7 +173,6 @@ public class VegagramAdapter extends RecyclerView.Adapter<VegagramAdapter.Vegagr
 
                         }
                     });
-                    remove(position);
                     return true;
                 default:
             }
