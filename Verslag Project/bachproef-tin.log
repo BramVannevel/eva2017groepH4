@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.8.16)  18 AUG 2017 18:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.8.16)  18 AUG 2017 18:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2052,6 +2052,12 @@ File: img/EvaAndroid.jpg Graphic file (type jpg)
 <use img/EvaAndroid.jpg>
 Package pdftex.def Info: img/EvaAndroid.jpg used on input line 10.
 (pdftex.def)             Requested size: 284.52756pt x 158.49136pt.
+
+Overfull \hbox (67.13922pt too wide) in paragraph at lines 14--15
+\T1/ptm/m/n/12 (-20) https://github.com/BramVannevel/eva2017groepH4/blob/master
+/Verslag%20Project/img/EvaAndroid.jpg 
+ []
+
 Package babel Info: Redefining dutch shorthand "|
 (babel)             in language  on input line 16.
 Package babel Info: Redefining dutch shorthand "~
@@ -2595,7 +2601,7 @@ xlive/2017/texmf-dist/fonts/type1/urw/avantgar/uagd8a.pfb></usr/local/texlive/2
 017/texmf-dist/fonts/type1/urw/avantgar/uagk8a.pfb></usr/local/texlive/2017/tex
 mf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2017/texmf-dist/fo
 nts/type1/urw/times/utmr8a.pfb>
-Output written on bachproef-tin.pdf (47 pages, 2537919 bytes).
+Output written on bachproef-tin.pdf (47 pages, 2538008 bytes).
 PDF statistics:
  533 PDF objects out of 1000 (max. 8388607)
  408 compressed objects within 5 object streams
