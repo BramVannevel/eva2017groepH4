@@ -1,16 +1,16 @@
 # Fdb version 3
-["biber bachproef-tin"] 1502884104 "bachproef-tin.bcf" "bachproef-tin.bbl" "bachproef-tin" 1503074989
-  "bachproef-tin.bcf" 1503074989 102708 0e628d4dc00f607bbc291ea5915fbfee ""
+["biber bachproef-tin"] 1502884104 "bachproef-tin.bcf" "bachproef-tin.bbl" "bachproef-tin" 1503076476
+  "bachproef-tin.bcf" 1503076229 102708 0e628d4dc00f607bbc291ea5915fbfee ""
   "bachproef-tin.bib" 1502882746 269 296e3671e0a27a621e109aa20895d994 ""
   (generated)
-  "bachproef-tin.bbl"
   "bachproef-tin.blg"
-["makeindex bachproef-tin.idx"] 1502877349 "bachproef-tin.idx" "bachproef-tin.ind" "bachproef-tin" 1503074989
-  "bachproef-tin.idx" 1503074985 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "bachproef-tin.bbl"
+["makeindex bachproef-tin.idx"] 1502877349 "bachproef-tin.idx" "bachproef-tin.ind" "bachproef-tin" 1503076476
+  "bachproef-tin.idx" 1503076225 0 d41d8cd98f00b204e9800998ecf8427e ""
   (generated)
   "bachproef-tin.ilg"
   "bachproef-tin.ind"
-["pdflatex"] 1503074985 "bachproef-tin.tex" "bachproef-tin.pdf" "bachproef-tin" 1503074989
+["pdflatex"] 1503076225 "bachproef-tin.tex" "bachproef-tin.pdf" "bachproef-tin" 1503076476
   "/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc" 1480098666 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2017/texmf-dist/fonts/map/fontname/texfonts.map" 1480098670 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2017/texmf-dist/fonts/tfm/adobe/avantgar/pagd8r.tfm" 1480098688 4840 6a894dde946186de9a64269f0edd24e5 ""
@@ -230,14 +230,14 @@
   "Applicatie.tex" 1503073433 1402 81d7caf9cd6225eb035fbc89b3d02d61 ""
   "Conclusie.tex" 1503074959 2595 29151e13e8df189b2790a262d919befa ""
   "analyse.tex" 1503072964 6939 b5c9feb95a6aeb8a80484d74cb3e087d ""
-  "bachproef-tin.aux" 1503074989 13490 a38ff30bc322a64cc2538e89523489ab ""
+  "bachproef-tin.aux" 1503076229 13490 a38ff30bc322a64cc2538e89523489ab ""
   "bachproef-tin.bbl" 1502884105 2251 9907caed02d7f22fad4c920129f2f715 "biber bachproef-tin"
   "bachproef-tin.ind" 1502877349 0 d41d8cd98f00b204e9800998ecf8427e "makeindex bachproef-tin.idx"
-  "bachproef-tin.lof" 1503074989 2145 74e1e9327726ee4e79f2cafc5c9be0a4 ""
-  "bachproef-tin.lot" 1503074989 621 2e00c60dbdd0b9ffa8001b931e576b4f ""
-  "bachproef-tin.run.xml" 1503074989 2452 d3abf1dc46bb825fe7dfe18e3904221e ""
+  "bachproef-tin.lof" 1503076229 2145 74e1e9327726ee4e79f2cafc5c9be0a4 ""
+  "bachproef-tin.lot" 1503076229 621 2e00c60dbdd0b9ffa8001b931e576b4f ""
+  "bachproef-tin.run.xml" 1503076229 2452 d3abf1dc46bb825fe7dfe18e3904221e ""
   "bachproef-tin.tex" 1503074932 3157 083e6383200c31c53b07010f090d72ff ""
-  "bachproef-tin.toc" 1503074989 3554 bb095d6bbcebea274c68c2664a7f42e1 ""
+  "bachproef-tin.toc" 1503076229 3554 bb095d6bbcebea274c68c2664a7f42e1 ""
   "bestpractices.tex" 1503073773 8572 1bcc0df0e49b285dfc2d0f4d6c0688a9 ""
   "diagrammen.tex" 1503074723 2733 d76cff36b8ad086d204ad16962c190e6 ""
   "img/DeploymentDiagram.png" 1503052644 166079 4244dc7befd694f2a8d2a1ed9627488a ""
@@ -261,15 +261,15 @@
   "inleiding.tex" 1503072210 1378 c6aaa6e9c4730eb713dfffd0d23a9fcd ""
   "planvanaanpak.tex" 1503073276 2973 13cb6a2de27896b804eb200cec1b8376 ""
   "structure.tex" 1503052741 23803 d4401e30fa891f6aa0c6e8389eb09b30 ""
-  "use_cases.tex" 1503074244 10068 001d7384d86cd4d99ec0149f7af7868e ""
+  "use_cases.tex" 1503076209 10084 6d9cf7b788c3b1b9bae8c8cbd8ef870b ""
   "voorwoord.tex" 1502877748 761 3f01bd4207c91ebd61c9ce3b48030242 ""
   (generated)
-  "bachproef-tin.aux"
-  "bachproef-tin.pdf"
-  "bachproef-tin.run.xml"
   "bachproef-tin.bcf"
-  "bachproef-tin.idx"
-  "bachproef-tin.lot"
-  "bachproef-tin.lof"
+  "bachproef-tin.pdf"
   "bachproef-tin.toc"
+  "bachproef-tin.aux"
+  "bachproef-tin.lof"
+  "bachproef-tin.lot"
   "bachproef-tin.log"
+  "bachproef-tin.idx"
+  "bachproef-tin.run.xml"
