@@ -1,6 +1,8 @@
 package com.projecten3.eva.Adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.PopupMenu;
@@ -15,6 +17,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.facebook.share.model.SharePhoto;
+import com.facebook.share.model.SharePhotoContent;
+import com.facebook.share.widget.ShareDialog;
 import com.projecten3.eva.Data.EvaApiBuilder;
 import com.projecten3.eva.Model.Post;
 import com.projecten3.eva.Model.Restaurant;
@@ -43,15 +48,20 @@ public class VegagramAdapter extends RecyclerView.Adapter<VegagramAdapter.Vegagr
 
     private Context context;
     private List<Post> posts;
+    private boolean prPosts;
+    private static String link = "https://evabeheer.herokuapp.com/vegagram/uploads/";
 
-    public VegagramAdapter(List<Post> posts, Context context){
+    public VegagramAdapter(List<Post> posts, Context context, boolean prPosts){
         this.context = context;
         this.posts = posts;
+        this.prPosts = prPosts;
     }
 
     public void setPosts(ArrayList<Post> posts){
         this.posts = posts;
     }
+
+    public void setPrPosts(boolean pr){ this.prPosts = pr;}
 
     @Override
     public VegagramViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
@@ -63,35 +73,34 @@ public class VegagramAdapter extends RecyclerView.Adapter<VegagramAdapter.Vegagr
     @Override
     public void onBindViewHolder(VegagramViewHolder holder, final int position) {
         Glide.with(context)
-                .load("https://evabeheer.herokuapp.com/vegagram/uploads/" + posts.get(position).getImageName())
+                .load(link + posts.get(position).getImageName())
                 .centerCrop()
                 .into(holder.photograph);
 
-        String formatted_date;
-        Post post = posts.get(position);
-
-        formatted_date = (String) android.text.format.DateFormat.format("yyyy-MM-dd HH:mm", posts.get(position).getPosted());
-
+        String formatted_date = (String) android.text.format.DateFormat.format("yyyy-MM-dd HH:mm", posts.get(position).getPosted());
 
         holder.date_posted.setText(formatted_date);
-        holder.likes.setText(String.valueOf(posts.get(position).getLikes()));
-        holder.photo_menu_button.setOnClickListener(new View.OnClickListener(){
+        holder.likes.setText(String.valueOf(getPost(position).getLikes()));
 
-            @Override
-            public void onClick(View view) {
-                PopupMenu popup = new PopupMenu(view.getContext(), view);
-                MenuInflater inflater = popup.getMenuInflater();
-                inflater.inflate(R.menu.photo_menu, popup.getMenu());
-                popup.setOnMenuItemClickListener(new MyMenuItemClickListener(position));
-                popup.show();
-            }
-        });
+        if(prPosts) {
+            holder.photo_menu_button.setOnClickListener(new View.OnClickListener() {
 
+                @Override
+                public void onClick(View view) {
+                    PopupMenu popup = new PopupMenu(view.getContext(), view);
+                    MenuInflater inflater = popup.getMenuInflater();
+                    inflater.inflate(R.menu.photo_menu, popup.getMenu());
+                    popup.setOnMenuItemClickListener(new MyMenuItemClickListener(position));
+                    popup.show();
+                }
+            });
+        }else{
+            holder.photo_menu_button.setVisibility(View.INVISIBLE);
+        }
         holder.like_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                posts.get(position).addLike();
-                notifyDataSetChanged();
+                likePost(position);
             }
         });
 
@@ -112,7 +121,7 @@ public class VegagramAdapter extends RecyclerView.Adapter<VegagramAdapter.Vegagr
     }
 
     public void likePost(int position){
-        posts.get(position).addLike();
+        getPost(position).addLike();
         notifyDataSetChanged();
     }
 
@@ -147,13 +156,6 @@ public class VegagramAdapter extends RecyclerView.Adapter<VegagramAdapter.Vegagr
         @Override
         public boolean onMenuItemClick(MenuItem menuItem) {
             switch (menuItem.getItemId()) {
-
-                case R.id.item_share_facebook:
-                    //share code
-                    return true;
-                case R.id.item_share_vegagram:
-                    //share code
-                    return true;
                 case R.id.delete_photo:
                     Call<ResponseBody> call = EvaApiBuilder.getInstance().deleteVegagramPost(posts.get(position).getId());
 
@@ -161,7 +163,7 @@ public class VegagramAdapter extends RecyclerView.Adapter<VegagramAdapter.Vegagr
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                             if (response.isSuccessful()) {
-                                posts.remove(position);
+                                remove(position);
                                 notifyDataSetChanged();
                             }
                         }
