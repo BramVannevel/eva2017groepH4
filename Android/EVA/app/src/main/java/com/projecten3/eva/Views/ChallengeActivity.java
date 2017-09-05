@@ -144,7 +144,7 @@ public class ChallengeActivity extends AppCompatActivity {
     }
 
     private void setDaysTillReward() {
-        LayoutInflater inflater = getLayoutInflater();
+        /*LayoutInflater inflater = getLayoutInflater();
         for(int i=0; i <= 4; i++) {
             View icon = inflater.inflate(R.layout.days_till_reward_check, null);
             TextView iconView = (TextView) icon.findViewById(R.id.reward_completed_or_not);
@@ -154,7 +154,7 @@ public class ChallengeActivity extends AppCompatActivity {
                 iconView.setBackground(ContextCompat.getDrawable(getBaseContext(), R.drawable.ic_remove_circle));
 
             daysTillReward.addView(icon);
-        }
+        }*/
     }
 
     public void checkChallengeAlreadyStarted(){

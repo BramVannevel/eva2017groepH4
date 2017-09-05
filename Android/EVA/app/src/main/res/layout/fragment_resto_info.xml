@@ -17,7 +17,7 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="150dp"
             android:id="@+id/imvFoto"
             android:scaleType="centerCrop"
             />
@@ -62,11 +62,11 @@
 
         <ImageButton
             android:id="@+id/tel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="@android:color/transparent"
             android:layout_weight="0.5"
-            android:src="@drawable/ic_phone"
+            android:src="@drawable/ic_phone_vector"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
             android:layout_marginLeft="50dp"
@@ -76,10 +76,10 @@
 
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:id="@+id/website"
-            android:src="@drawable/ic_web"
+            android:src="@drawable/ic_public_vector"
             android:layout_weight="0.5"
             android:background="@android:color/transparent"
             android:adjustViewBounds="true"
@@ -94,6 +94,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimaryDark"/>
 
         <TextView
             android:layout_marginTop="@dimen/resto_margin"
