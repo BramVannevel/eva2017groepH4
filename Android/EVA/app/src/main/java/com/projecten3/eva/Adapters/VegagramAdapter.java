@@ -94,6 +94,7 @@ public class VegagramAdapter extends RecyclerView.Adapter<VegagramAdapter.Vegagr
                     popup.show();
                 }
             });
+            holder.photo_menu_button.setVisibility(View.VISIBLE);
         }else{
             holder.photo_menu_button.setVisibility(View.INVISIBLE);
         }

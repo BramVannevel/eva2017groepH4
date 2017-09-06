@@ -135,10 +135,10 @@ public class VegagramListFragment extends Fragment {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        if(allPosts.size() > 0) {
+        if(allPosts != null && allPosts.size() > 0) {
             outState.putParcelableArrayList("posts", allPosts);
         }
-        if(userPosts.size() > 0) {
+        if(userPosts != null && userPosts.size() > 0) {
             outState.putParcelableArrayList("userPosts", allPosts);
         }
         super.onSaveInstanceState(outState);
